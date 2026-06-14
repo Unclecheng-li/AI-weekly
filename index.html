@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 周报速递 - AI城</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <div class="newspaper">
+        <!-- Hero -->
+        <div class="index-hero">
+            <div class="newspaper-subtitle">AI城 · 人工智能</div>
+            <a id="latest-link" href="#" style="color:inherit;text-decoration:none;">
+                <h1 class="newspaper-title">AI 周报速递</h1>
+            </a>
+            <div class="newspaper-subtitle">ARTIFICIAL INTELLIGENCE WEEKLY EXPRESS</div>
+            <p>每周精选全球 AI 动态，覆盖大模型、LLM、AI Coding、AI Agent、Skill 及相关方向</p>
+            <a href="https://github.com/Unclecheng-li/ai-weekly" target="_blank" rel="noopener"
+               style="display:inline-flex;align-items:center;gap:10px;margin-top:20px;padding:12px 28px;
+                      background:var(--accent-gold);color:var(--ink-black);font-size:0.95em;font-weight:700;
+                      letter-spacing:2px;text-decoration:none;transition:all 0.3s ease;
+                      box-shadow:0 4px 15px rgba(201,162,39,0.4);"
+               onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 25px rgba(201,162,39,0.6)'"
+               onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 15px rgba(201,162,39,0.4)'">
+                <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                    0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15
+                    -.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87
+                    .51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12
+                    0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82
+                    2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65
+                    3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013
+                    0 0016 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+                GitHub仓库地址：欢迎 Star ⭐
+            </a>
+        </div>
+
+        <!-- Latest Edition Banner -->
+        <div id="latest-banner" class="keywords-banner">
+            <strong>最新一期：</strong><span id="latest-text"></span>
+        </div>
+
+        <!-- Archive -->
+        <h3 class="section-header" style="margin:30px 40px 20px;">历史存档</h3>
+        <div id="archive-grid" class="archive-grid"></div>
+        <div id="pagination" class="pagination"></div>
+
+        <!-- Footer -->
+        <footer class="newspaper-footer">
+            <div class="footer-logo">AI城 · AI周报</div>
+            <a href="https://github.com/Unclecheng-li/ai-weekly" target="_blank" rel="noopener"
+               style="display:inline-flex;align-items:center;gap:8px;margin:10px 0;color:var(--accent-gold);
+                      font-size:0.85em;letter-spacing:1px;text-decoration:none;opacity:0.9;transition:opacity 0.3s;"
+               onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.9'">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                    0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15
+                    -.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87
+                    .51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12
+                    0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82
+                    2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65
+                    3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013
+                    0 0016 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+                GitHub仓库地址：欢迎 Star ⭐
+            </a>
+            <p class="footer-disclaimer">
+                每周精选 · 值得关注 | 由 AI城 自动化工作流生成
+                <br>
+                本站内容基于公开信息整理，仅供参考
+            </p>
+        </footer>
+    </div>
+
+    <script>
+    (function() {
+        // ============================================================
+        // 存档数据 — 每次新增周报时在此数组头部追加一条即可
+        // 不再依赖 index.json，本地 file:// 协议也能正常显示
+        // ============================================================
+        var ARCHIVE_DATA = [
+            {
+                "date": "2026-06-14",
+                "weekday": "星期六",
+                "keywords": "Claude 5上线72小时遭美国政府禁令全球下架 · 智谱GLM-5.2宣布完全开源 · 微信开放小程序接入AI生态 · 高德发布3D原生城市世界模型ABot-Earth0.5 · OpenAI收购Ona · 月之暗面估值300亿美元"
+            }
+        ];
+
+        // ============================================================
+        // 分页配置
+        // ============================================================
+        var PER_PAGE = 12;
+        var currentPage = 1;
+
+        // 日期格式化：2026-06-05 -> 2026年6月5日
+        function formatDateCN(dateStr) {
+            var parts = dateStr.split('-');
+            return parts[0] + '年' + parseInt(parts[1]) + '月' + parseInt(parts[2]) + '日';
+        }
+
+        // 生成单张存档卡片
+        function createCard(item, isLatest) {
+            var card = document.createElement('a');
+            card.href = 'weekly/' + item.date + '.html';
+            card.className = 'archive-card' + (isLatest ? ' latest' : '');
+            card.innerHTML =
+                (isLatest ? '<span class="card-tag">LATEST</span>' : '') +
+                '<div class="card-date">' + formatDateCN(item.date) + ' ' + item.weekday + '</div>' +
+                '<div class="card-keywords">' + (item.keywords || '') + '</div>';
+            return card;
+        }
+
+        // 渲染当前页的卡片
+        function renderPage(page) {
+            var grid = document.getElementById('archive-grid');
+            grid.innerHTML = '';
+
+            var start = (page - 1) * PER_PAGE;
+            var end = Math.min(start + PER_PAGE, ARCHIVE_DATA.length);
+            var totalPages = Math.ceil(ARCHIVE_DATA.length / PER_PAGE);
+
+            for (var i = start; i < end; i++) {
+                // isLatest 仅在第一页且是第一条数据时为 true
+                var isLatest = (page === 1 && i === 0);
+                grid.appendChild(createCard(ARCHIVE_DATA[i], isLatest));
+            }
+
+            renderPagination(page, totalPages);
+        }
+
+        // 渲染分页控件
+        function renderPagination(page, totalPages) {
+            var container = document.getElementById('pagination');
+            container.innerHTML = '';
+
+            if (totalPages <= 1) return;
+
+            var arrowL = '<svg viewBox="0 0 16 16"><path d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>';
+            var arrowR = '<svg viewBox="0 0 16 16"><path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>';
+
+            // 上一页
+            var prev = document.createElement('button');
+            prev.className = 'page-btn' + (page <= 1 ? ' disabled' : '');
+            prev.innerHTML = arrowL;
+            prev.title = '上一页';
+            if (page > 1) prev.onclick = function() { goToPage(page - 1); };
+            container.appendChild(prev);
+
+            // 页码按钮
+            var pages = getPageNumbers(page, totalPages);
+            for (var i = 0; i < pages.length; i++) {
+                if (pages[i] === '...') {
+                    var dots = document.createElement('span');
+                    dots.className = 'page-btn disabled';
+                    dots.textContent = '...';
+                    container.appendChild(dots);
+                } else {
+                    var btn = document.createElement('button');
+                    btn.className = 'page-btn' + (pages[i] === page ? ' active' : '');
+                    btn.textContent = pages[i];
+                    var p = pages[i];
+                    if (p !== page) btn.onclick = (function(pp) { return function() { goToPage(pp); }; })(p);
+                    container.appendChild(btn);
+                }
+            }
+
+            // 下一页
+            var next = document.createElement('button');
+            next.className = 'page-btn' + (page >= totalPages ? ' disabled' : '');
+            next.innerHTML = arrowR;
+            next.title = '下一页';
+            if (page < totalPages) next.onclick = function() { goToPage(page + 1); };
+            container.appendChild(next);
+
+            // 页码信息
+            var info = document.createElement('span');
+            info.className = 'pagination-info';
+            info.textContent = '第 ' + page + ' / ' + totalPages + ' 页 · 共 ' + ARCHIVE_DATA.length + ' 期';
+            container.appendChild(info);
+        }
+
+        // 计算要显示的页码数组（带省略号）
+        function getPageNumbers(current, total) {
+            if (total <= 7) {
+                var arr = [];
+                for (var i = 1; i <= total; i++) arr.push(i);
+                return arr;
+            }
+            var pages = [1];
+            if (current > 3) pages.push('...');
+            for (var s = Math.max(2, current - 1); s <= Math.min(total - 1, current + 1); s++) {
+                pages.push(s);
+            }
+            if (current < total - 2) pages.push('...');
+            pages.push(total);
+            return pages;
+        }
+
+        function goToPage(page) {
+            currentPage = page;
+            renderPage(page);
+            // 滚动到存档区域顶部
+            var grid = document.getElementById('archive-grid');
+            grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // --- 初始化 ---
+        var bannerText = document.getElementById('latest-text');
+        var latestLink = document.getElementById('latest-link');
+
+        if (!ARCHIVE_DATA || ARCHIVE_DATA.length === 0) {
+            document.getElementById('archive-grid').innerHTML = '<div class="empty-msg">暂无存档</div>';
+            return;
+        }
+
+        // 按日期降序排列
+        ARCHIVE_DATA.sort(function(a, b) { return b.date.localeCompare(a.date); });
+
+        // 更新最新一期横幅
+        var latest = ARCHIVE_DATA[0];
+        bannerText.textContent = formatDateCN(latest.date) + ' — ' + (latest.keywords || '');
+        latestLink.href = 'weekly/' + latest.date + '.html';
+
+        // 渲染第一页
+        renderPage(1);
+    })();
+    </script>
+</body>
+</html>

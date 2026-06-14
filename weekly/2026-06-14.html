@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 周报速递 - 2026年6月第2周</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: #f5f0e8;
+            color: #1a1a1a;
+            line-height: 1.8;
+        }
+
+        .newspaper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fffef9;
+            box-shadow: 0 0 40px rgba(0,0,0,0.15);
+            min-height: 100vh;
+        }
+
+        /* 头部 - 报头 */
+        .masthead {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 20px 40px;
+            text-align: center;
+            border-bottom: 8px double #c41e3a;
+        }
+
+        .masthead-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .masthead h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 72px;
+            font-weight: 900;
+            letter-spacing: 12px;
+            margin: 10px 0;
+            text-shadow: 2px 2px 0 #c41e3a;
+        }
+
+        .masthead-subtitle {
+            font-size: 18px;
+            letter-spacing: 8px;
+            color: #ddd;
+            margin-top: 5px;
+        }
+
+        /* 导航条 */
+        .nav-bar {
+            background: #c41e3a;
+            color: white;
+            padding: 10px 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-bar span {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .nav-bar span:hover {
+            opacity: 0.8;
+        }
+
+        /* 头条区域 */
+        .headline-section {
+            padding: 30px 40px;
+            border-bottom: 3px solid #1a1a1a;
+        }
+
+        .headline-banner {
+            background: #c41e3a;
+            color: white;
+            display: inline-block;
+            padding: 5px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .headline-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+
+        .headline-subtitle {
+            font-size: 20px;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .headline-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        /* 主内容区 - 多栏布局 */
+        .content-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+            padding: 0 40px;
+        }
+
+        .column {
+            padding: 25px 20px;
+            border-right: 1px solid #ddd;
+        }
+
+        .column:last-child {
+            border-right: none;
+        }
+
+        .column-header {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #c41e3a;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        .article {
+            margin-bottom: 25px;
+        }
+
+        .article-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .article-meta {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .article-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .article-text::first-letter {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 36px;
+            font-weight: 700;
+            float: left;
+            line-height: 1;
+            margin-right: 8px;
+            color: #c41e3a;
+        }
+
+        /* 重要新闻卡片 */
+        .news-card {
+            background: #f8f5ee;
+            border-left: 4px solid #c41e3a;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .news-card-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #c41e3a;
+        }
+
+        .news-card-text {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        /* 数据区域 */
+        .data-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+            margin: 30px 0;
+        }
+
+        .data-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #c41e3a;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .data-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .data-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 42px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .data-label {
+            font-size: 13px;
+            color: #aaa;
+            margin-top: 8px;
+        }
+
+        /* 时间线 */
+        .timeline-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .timeline-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #c41e3a;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-left: 25px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: #c41e3a;
+            border-radius: 50%;
+            border: 3px solid #fffef9;
+        }
+
+        .timeline-date {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        /* 开闭源象限图 */
+        .quadrant-section {
+            padding: 30px 40px;
+            background: #f8f5ee;
+        }
+
+        .quadrant-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .quadrant-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 3px;
+            background: #1a1a1a;
+            padding: 3px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quadrant-cell {
+            background: #fffef9;
+            padding: 20px;
+            position: relative;
+        }
+
+        .quadrant-label {
+            position: absolute;
+            font-size: 10px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .quadrant-label.top-left { top: 5px; left: 10px; }
+        .quadrant-label.top-right { top: 5px; right: 10px; }
+        .quadrant-label.bottom-left { bottom: 5px; left: 10px; }
+        .quadrant-label.bottom-right { bottom: 5px; right: 10px; }
+
+        .quadrant-item {
+            display: inline-block;
+            background: #c41e3a;
+            color: white;
+            padding: 5px 12px;
+            font-size: 12px;
+            margin: 5px;
+            font-weight: 500;
+        }
+
+        .quadrant-item.blue { background: #185FA5; }
+        .quadrant-item.green { background: #3B6D11; }
+        .quadrant-item.amber { background: #BA7517; }
+
+        /* 微信生态架构图 */
+        .architecture-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .architecture-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .architecture-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .arch-box {
+            background: #f8f5ee;
+            border: 2px solid #1a1a1a;
+            padding: 15px 20px;
+            min-width: 180px;
+            text-align: center;
+        }
+
+        .arch-box-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+        }
+
+        .arch-box-items {
+            font-size: 13px;
+            color: #444;
+            text-align: left;
+        }
+
+        .arch-box-items div {
+            padding: 3px 0;
+            border-bottom: 1px dotted #ddd;
+        }
+
+        .arch-box-items div:last-child {
+            border-bottom: none;
+        }
+
+        .arch-arrow {
+            font-size: 24px;
+            color: #c41e3a;
+            align-self: center;
+        }
+
+        /* 下周关注 */
+        .preview-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+        }
+
+        .preview-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 20px;
+        }
+
+        .preview-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .preview-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-left: 3px solid #c41e3a;
+        }
+
+        .preview-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .preview-text {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* 底部 - 出处 */
+        .sources-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .sources-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .source-category {
+            margin-bottom: 15px;
+        }
+
+        .source-category-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #c41e3a;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #c41e3a;
+            padding-bottom: 5px;
+        }
+
+        .source-link {
+            font-size: 12px;
+            color: #185FA5;
+            text-decoration: none;
+            display: block;
+            padding: 3px 0;
+            line-height: 1.5;
+        }
+
+        .source-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: #1a1a1a;
+            color: #aaa;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .footer-brand {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            color: #c41e3a;
+            margin-bottom: 5px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .masthead h1 { font-size: 48px; letter-spacing: 8px; }
+            .content-area { grid-template-columns: 1fr; }
+            .column { border-right: none; border-bottom: 1px solid #ddd; }
+            .data-grid { grid-template-columns: repeat(2, 1fr); }
+            .preview-list { grid-template-columns: 1fr; }
+            .sources-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper">
+        <!-- 报头 -->
+        <header class="masthead">
+            <div class="masthead-top">
+                <span>2026年6月14日 星期六</span>
+                <span>第24期 · 总第108期</span>
+                <span>农历丙午年 五月初十</span>
+            </div>
+            <h1>AI 周报速递</h1>
+            <div class="masthead-subtitle">ARTIFICIAL INTELLIGENCE WEEKLY EXPRESS</div>
+        </header>
+
+        <!-- 导航条 -->
+        <nav class="nav-bar">
+            <span>头版头条</span>
+            <span>深度报道</span>
+            <span>数据洞察</span>
+            <span>开源动态</span>
+            <span>资本风向</span>
+            <span>技术前沿</span>
+        </nav>
+
+        <!-- 头条 -->
+        <section class="headline-section">
+            <div class="headline-banner">重磅头条</div>
+            <h2 class="headline-title">Claude 5上线72小时遭美国政府禁令<br>全球下架 AI监管进入新纪元</h2>
+            <p class="headline-subtitle">Anthropic第五代模型Fable 5在商业化窗口期遭遇政府级阻击，美国商务部长签署出口管制信函，禁止"外国人"访问该模型。这是前沿AI模型首次在上线后被政府强制停服，标志着AI地缘政治博弈全面升级。</p>
+            <div class="headline-meta">
+                <span>📅 2026年6月9日-12日</span>
+                <span>📍 Anthropic · 美国商务部</span>
+                <span>🏷️ AI监管 · 地缘政治 · 前沿模型</span>
+            </div>
+        </section>
+
+        <!-- 三栏内容 -->
+        <div class="content-area">
+            <!-- 左栏 -->
+            <div class="column">
+                <div class="column-header">开源新势力</div>
+
+                <div class="article">
+                    <h3 class="article-title">智谱GLM-5.2宣布完全开源 正面回应Claude 5禁令</h3>
+                    <div class="article-meta">📅 6月13日 · 来源：澎湃新闻/IT之家</div>
+                    <p class="article-text">在Anthropic限制前沿模型访问的同一周，智谱宣布其最强模型GLM-5.2全量开放并遵循MIT协议开源。智谱CEO唐杰明确将此次发布与"Claude 5禁令"挂钩，称要坚持"激进开放"。GLM-5.2支持真正可用的1M上下文窗口，定位为国内最强的Coding模型主引擎。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">TensorZero融资后当晚闭源</div>
+                    <p class="news-card-text">开源LLMOps平台TensorZero获得730万美元种子轮融资后，当晚即将GitHub仓库设为只读，在Hacker News上11小时内获得231分，引发开源社区哗然。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">OpenAI推出Codex for Open Source计划</h3>
+                    <div class="article-meta">📅 6月11日 · 来源：搜狐科技</div>
+                    <p class="article-text">OpenAI将Codex算力资源倾斜给开源项目维护者，同时宣布收购初创公司Ona，为Codex打造安全预配置云环境，解决长任务运行的稳定性和安全性问题。</p>
+                </div>
+            </div>
+
+            <!-- 中栏 -->
+            <div class="column">
+                <div class="column-header">生态新格局</div>
+
+                <div class="article">
+                    <h3 class="article-title">微信开放小程序接入AI生态 12亿用户迎来智能服务</h3>
+                    <div class="article-meta">📅 6月8日 · 来源：科创板日报/新浪财经</div>
+                    <p class="article-text">微信开放平台正式发布《开发者接入微信AI生态指南》，小程序开发者可便捷接入"微信AI"生态。提供自动模式和开发模式两种接入方式，接入后的小程序可被微信AI主动推荐和调用。腾讯股价当日拉升近5%。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">高德发布3D原生城市世界模型</div>
+                    <p class="news-card-text">高德发布全球首个3D原生城市世界模型ABot-Earth0.5，覆盖190多个国家和地区。输入一张卫星图，10分钟生成公里级3D城市场景，效率提升1000倍，成本压缩至1%。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">腾讯发布LearnBuddy学习智能体</h3>
+                    <div class="article-meta">📅 6月8日 · 来源：AITOP100</div>
+                    <p class="article-text">腾讯发布Buddy家族首款行业专用智能体LearnBuddy，打造"师生+AI"协同学习新模式。教师可将课件生成AI专家分身，学生可获得7×24小时在线伴学服务，已在大连理工大学率先落地。</p>
+                </div>
+            </div>
+
+            <!-- 右栏 -->
+            <div class="column">
+                <div class="column-header">资本与市场</div>
+
+                <div class="article">
+                    <h3 class="article-title">月之暗面启动新一轮融资 估值半年暴涨至300亿美元</h3>
+                    <div class="article-meta">📅 6月8日 · 来源：掘金/AITOP100</div>
+                    <p class="article-text">AI初创企业月之暗面（Kimi）正式启动新一轮融资，计划募集最高20亿美元，估值将达300亿美元。半年内进行第三轮融资，估值从40亿美元暴涨至300亿美元，市销率高达150倍。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">国产大模型周调用量领跑全球</div>
+                    <p class="news-card-text">最新监测显示，国产大模型周调用量达14.19万亿Token，连续六周超越美国位居全球首位。全球榜单前四名均被国产模型占据，DeepSeek-V4-Flash登顶榜首。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">OpenAI计划改版ChatGPT转向全能超级应用</h3>
+                    <div class="article-meta">📅 6月8日 · 来源：AITOP100</div>
+                    <p class="article-text">OpenAI计划对ChatGPT进行史上最大规模改版，整合Codex编程工具、AI智能体能力及第三方应用，目标从聊天工具转型为全能超级应用。集中资源发力核心产品，暂缓Sora等支线项目。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据区域 -->
+        <section class="data-section">
+            <h2 class="data-title">本周关键数据</h2>
+            <div class="data-grid">
+                <div class="data-item">
+                    <div class="data-number">72</div>
+                    <div class="data-label">Claude 5上线小时数<br>即遭全球下架</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">300</div>
+                    <div class="data-label">月之暗面最新估值<br>（亿美元）</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">1M</div>
+                    <div class="data-label">GLM-5.2支持的<br>上下文窗口</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">12亿</div>
+                    <div class="data-label">微信AI生态<br>潜在用户规模</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 时间线 -->
+        <section class="timeline-section">
+            <h2 class="timeline-title">📅 本周事件时间线</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">6月8日 周日</div>
+                    <div class="timeline-content">
+                        • 微信开放平台发布AI生态接入指南<br>
+                        • 高德发布3D原生城市世界模型ABot-Earth0.5<br>
+                        • 月之暗面启动20亿美元融资，估值300亿<br>
+                        • 国产大模型周调用量连续六周超越美国
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">6月9日 周一</div>
+                    <div class="timeline-content">
+                        • Anthropic发布Claude 5 (Fable 5/Mythos 5)<br>
+                        • Fable 5在SWE-Bench Pro达到80.3%<br>
+                        • 微信AI生态消息推动腾讯股价拉升5%
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">6月11日 周三</div>
+                    <div class="timeline-content">
+                        • OpenAI宣布收购初创公司Ona<br>
+                        • Codex迎来安全云升级<br>
+                        • 推出"Codex for Open Source"计划
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">6月12日 周四</div>
+                    <div class="timeline-content">
+                        • 美国商务部长签署禁令信函<br>
+                        • Claude 5遭全球下架，回退至Opus 4.8<br>
+                        • Anthropic承诺"正在努力恢复访问"
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">6月13日 周五</div>
+                    <div class="timeline-content">
+                        • 智谱宣布GLM-5.2全量开放并MIT开源<br>
+                        • TensorZero融资后当晚闭源引争议<br>
+                        • 2026智源大会开幕
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 开闭源象限图 -->
+        <section class="quadrant-section">
+            <h2 class="quadrant-title">📊 开源 vs 闭源：本周格局演变</h2>
+            <div class="quadrant-grid">
+                <div class="quadrant-cell">
+                    <span class="quadrant-label top-left">高价值 · 低开放</span>
+                    <span class="quadrant-item">Claude 5 (被禁)</span>
+                </div>
+                <div class="quadrant-cell">
+                    <span class="quadrant-label top-right">高价值 · 高开放</span>
+                    <span class="quadrant-item blue">GLM-5.2 (MIT开源)</span>
+                    <span class="quadrant-item green">微信AI生态</span>
+                </div>
+                <div class="quadrant-cell">
+                    <span class="quadrant-label bottom-left">低价值 · 低开放</span>
+                    <span class="quadrant-item amber">TensorZero (闭源)</span>
+                </div>
+                <div class="quadrant-cell">
+                    <span class="quadrant-label bottom-right">低价值 · 高开放</span>
+                    <span class="quadrant-item blue">Codex for OSS</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 微信生态架构图 -->
+        <section class="architecture-section">
+            <h2 class="architecture-title">🏗️ 微信AI生态架构</h2>
+            <div class="architecture-diagram">
+                <div class="arch-box">
+                    <div class="arch-box-title">开发者</div>
+                    <div class="arch-box-items">
+                        <div>小程序开发者</div>
+                        <div>企业团队</div>
+                        <div>个人开发者</div>
+                    </div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">
+                    <div class="arch-box-title">接入层</div>
+                    <div class="arch-box-items">
+                        <div>自动模式 (零代码)</div>
+                        <div>开发模式 (可定制)</div>
+                        <div>审核机制</div>
+                    </div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">
+                    <div class="arch-box-title">微信AI核心</div>
+                    <div class="arch-box-items">
+                        <div>服务推荐引擎</div>
+                        <div>自然语言理解</div>
+                        <div>跨应用调度</div>
+                    </div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">
+                    <div class="arch-box-title">12亿用户</div>
+                    <div class="arch-box-items">
+                        <div>聊天界面</div>
+                        <div>小程序页面</div>
+                        <div>支付系统</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 下周关注 -->
+        <section class="preview-section">
+            <h2 class="preview-title">🔮 下周关注</h2>
+            <div class="preview-list">
+                <div class="preview-item">
+                    <div class="preview-number">01</div>
+                    <div class="preview-text"><strong>Claude 5恢复进展</strong><br>Anthropic承诺"正在努力尽快恢复访问权限"，关注是否解禁及条件</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">02</div>
+                    <div class="preview-text"><strong>GLM-5.2开源效果</strong><br>下周正式开源后的社区反馈和评测数据</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">03</div>
+                    <div class="preview-text"><strong>微信AI生态灰度</strong><br>用户侧灰度节奏、首批可调用类目、支付权限边界</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">04</div>
+                    <div class="preview-text"><strong>智源大会成果</strong><br>6月12-13日智源大会发布的技术成果落地情况</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">05</div>
+                    <div class="preview-text"><strong>欧盟AI法案</strong><br>8月2日生效前的企业合规准备进度</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 出处 -->
+        <section class="sources-section">
+            <h2 class="sources-title">📚 相关出处</h2>
+            <div class="sources-grid">
+                <div class="source-category">
+                    <div class="source-category-title">Claude 5 发布与禁令</div>
+                    <a href="https://www.sohu.com/a/1034572313_122132398" class="source-link">Anthropic发布Claude五代模型 - 搜狐</a>
+                    <a href="https://tech.ifeng.com/c/8tvADE8llDk" class="source-link">特朗普出手！Claude Fable 5与Mythos 5全停了 - 凤凰科技</a>
+                    <a href="https://finance.sina.com.cn/tech/roll/2026-06-13/doc-inicfreu9725031.shtml" class="source-link">突发！Anthropic全球停用Claude 5 - 新浪财经</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">智谱GLM-5.2开源</div>
+                    <a href="https://www.zgeo.com.cn/news/zhipu-glm-5-2-open-source" class="source-link">智谱GLM-5.2全量开放并开源 - 智脑网</a>
+                    <a href="https://www.thepaper.cn/newsDetail_forward_33374813" class="source-link">Anthropic最强模型被禁后，智谱宣布GLM5.2全量开放 - 澎湃新闻</a>
+                    <a href="https://www.ithome.com/0/963/855.htm" class="source-link">智谱：GLM-5.2将面向GLM Coding Plan全量用户开放 - IT之家</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">微信AI生态</div>
+                    <a href="https://news.qq.com/rain/a/20260609A09SLG00" class="source-link">腾讯开放微信AI生态接入 - 科创板日报</a>
+                    <a href="https://finance.sina.com.cn/roll/2026-06-09/doc-iniavmyp4977661.shtml" class="source-link">微信AI生态正式对外开放 - 新浪财经</a>
+                    <a href="https://news.qq.com/rain/a/20260609A03YP900" class="source-link">微信AI这一步，正在重排中国AI的入口战 - 腾讯新闻</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">高德ABot-Earth</div>
+                    <a href="https://finance.sina.com.cn/tech/digi/2026-06-08/doc-iniasmvs5596428.shtml" class="source-link">高德发布3D原生城市世界模型ABot-Earth0.5 - 新浪科技</a>
+                    <a href="https://news.qq.com/rain/a/20260608A04V0N00" class="source-link">全球首个3D原生城市世界模型 - 腾讯新闻</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">OpenAI收购Ona</div>
+                    <a href="https://www.sohu.com/a/1035453538_121956424" class="source-link">OpenAI收购Ona，Codex迎来安全云升级 - 搜狐</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">TensorZero争议</div>
+                    <a href="https://www.amazingindex.com/article/3e13d8993b3463e788d0910d192caff3" class="source-link">融资730万美元后闭源引争议 - AmazingIndex</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">月之暗面融资</div>
+                    <a href="https://juejin.cn/post/7648866670524661795" class="source-link">2026年6月8日AI重要新闻 - 掘金</a>
+                    <a href="https://www.aitop100.cn/ai-daily-2026-06-08" class="source-link">每日AI资讯-2026年6月08日 - AITOP100</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">综合分析</div>
+                    <a href="https://www.digitalnerds.in/posts/ai-breakthroughs-june-2026-google-turbo-quant-agentic-meta-restructuring" class="source-link">AI Breakthroughs in June 2026 - DigitalNerds</a>
+                    <a href="https://kersai.com/june-2026-ai-news-anthropic-spacex-google-business-impact/" class="source-link">June 2026 AI News - Kersai</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="footer-brand">AI 周报速递</div>
+            <div>编辑：AI 自动生成 | 数据截止：2026年6月14日 12:00</div>
+            <div style="margin-top: 5px;">© 2026 AI城 · 专注AI领域深度报道</div>
+        </footer>
+    </div>
+</body>
+</html>
