@@ -4,11 +4,11 @@
 
 > 每周一份 AI 领域深度简报，覆盖大模型、LLM、AI Coding、AI Agent、Skill 及相关方向。AI 生成，人工校验，自动发布。
 
-[![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub_Pages-blue)](https://unclecheng-li.github.io/ai-weekly/)
+[![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub_Pages-blue)](https://unclecheng-li.github.io/AI-weekly/)
 [![Status](https://img.shields.io/badge/Status-Weekly-green)](#运行方式)
 [![Auto](https://img.shields.io/badge/Automation-WorkBuddy-orange)](#技术栈)
 
-**在线阅读**：https://unclecheng-li.github.io/ai-weekly/
+**在线阅读**：https://unclecheng-li.github.io/AI-weekly/
 
 </div>
 
@@ -75,7 +75,7 @@ HTML 页面用了报纸风格的排版，支持移动端和打印。
 ## 项目结构
 
 ```text
-ai-weekly/
+AI-weekly/
 ├── index.html              # 首页（存档列表，数据内联）
 ├── assets/
 │   └── style.css           # 公共样式（报纸风格）
@@ -91,8 +91,8 @@ ai-weekly/
 ## 本地预览
 
 ```bash
-git clone https://github.com/Unclecheng-li/ai-weekly.git
-cd ai-weekly
+git clone https://github.com/Unclecheng-li/AI-weekly.git
+cd AI-weekly
 
 # 直接用浏览器打开
 open index.html        # macOS

@@ -113,4 +113,4 @@ git push origin main
 echo "    推送完成！"
 
 echo ""
-echo "✅ 部署成功！访问 https://unclecheng-li.github.io/ai-weekly/ 查看更新"
+echo "✅ 部署成功！访问 https://unclecheng-li.github.io/AI-weekly/ 查看更新"
