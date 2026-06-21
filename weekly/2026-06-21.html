@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 周报速递 - 2026年6月第3周</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: #f5f0e8;
+            color: #1a1a1a;
+            line-height: 1.8;
+        }
+
+        .newspaper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fffef9;
+            box-shadow: 0 0 40px rgba(0,0,0,0.15);
+            min-height: 100vh;
+        }
+
+        /* 头部 - 报头 */
+        .masthead {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 20px 40px;
+            text-align: center;
+            border-bottom: 8px double #c41e3a;
+        }
+
+        .masthead-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .masthead h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 72px;
+            font-weight: 900;
+            letter-spacing: 12px;
+            margin: 10px 0;
+            text-shadow: 2px 2px 0 #c41e3a;
+        }
+
+        .masthead-subtitle {
+            font-size: 18px;
+            letter-spacing: 8px;
+            color: #ddd;
+            margin-top: 5px;
+        }
+
+        /* 导航条 */
+        .nav-bar {
+            background: #c41e3a;
+            color: white;
+            padding: 10px 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-bar span {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .nav-bar span:hover {
+            opacity: 0.8;
+        }
+
+        /* 头条区域 */
+        .headline-section {
+            padding: 30px 40px;
+            border-bottom: 3px solid #1a1a1a;
+        }
+
+        .headline-banner {
+            background: #c41e3a;
+            color: white;
+            display: inline-block;
+            padding: 5px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .headline-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+
+        .headline-subtitle {
+            font-size: 20px;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .headline-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        /* 主内容区 - 多栏布局 */
+        .content-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+            padding: 0 40px;
+        }
+
+        .column {
+            padding: 25px 20px;
+            border-right: 1px solid #ddd;
+        }
+
+        .column:last-child {
+            border-right: none;
+        }
+
+        .column-header {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #c41e3a;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        .article {
+            margin-bottom: 25px;
+        }
+
+        .article-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .article-meta {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .article-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .article-text::first-letter {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 36px;
+            font-weight: 700;
+            float: left;
+            line-height: 1;
+            margin-right: 8px;
+            color: #c41e3a;
+        }
+
+        /* 重要新闻卡片 */
+        .news-card {
+            background: #f8f5ee;
+            border-left: 4px solid #c41e3a;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .news-card-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #c41e3a;
+        }
+
+        .news-card-text {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        /* 数据区域 */
+        .data-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+            margin: 30px 0;
+        }
+
+        .data-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #c41e3a;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .data-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .data-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 42px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .data-label {
+            font-size: 13px;
+            color: #aaa;
+            margin-top: 8px;
+        }
+
+        /* 时间线 */
+        .timeline-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .timeline-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #c41e3a;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-left: 25px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: #c41e3a;
+            border-radius: 50%;
+            border: 3px solid #fffef9;
+        }
+
+        .timeline-date {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        /* 象限图 */
+        .quadrant-section {
+            padding: 30px 40px;
+            background: #f8f5ee;
+        }
+
+        .quadrant-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .quadrant-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 3px;
+            background: #1a1a1a;
+            padding: 3px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quadrant-cell {
+            background: #fffef9;
+            padding: 20px;
+            position: relative;
+        }
+
+        .quadrant-label {
+            position: absolute;
+            font-size: 10px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .quadrant-label.top-left { top: 5px; left: 10px; }
+        .quadrant-label.top-right { top: 5px; right: 10px; }
+        .quadrant-label.bottom-left { bottom: 5px; left: 10px; }
+        .quadrant-label.bottom-right { bottom: 5px; right: 10px; }
+
+        .quadrant-item {
+            display: inline-block;
+            background: #c41e3a;
+            color: white;
+            padding: 5px 12px;
+            font-size: 12px;
+            margin: 5px;
+            font-weight: 500;
+        }
+
+        .quadrant-item.blue { background: #185FA5; }
+        .quadrant-item.green { background: #3B6D11; }
+        .quadrant-item.amber { background: #BA7517; }
+
+        /* AI coding竞争格局 */
+        .competition-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .competition-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .competition-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .competition-item {
+            background: #f8f5ee;
+            border: 2px solid #1a1a1a;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .competition-item-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+        }
+
+        .competition-item-content {
+            font-size: 13px;
+            color: #444;
+            text-align: left;
+        }
+
+        .competition-item-content div {
+            padding: 3px 0;
+            border-bottom: 1px dotted #ddd;
+        }
+
+        .competition-item-content div:last-child {
+            border-bottom: none;
+        }
+
+        /* 融资对比图 */
+        .funding-section {
+            padding: 30px 40px;
+            background: #f8f5ee;
+        }
+
+        .funding-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .funding-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .funding-item {
+            background: #fffef9;
+            border: 2px solid #1a1a1a;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .funding-item-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+        }
+
+        .funding-item-amount {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 36px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .funding-item-unit {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .funding-item-detail {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        /* 下周关注 */
+        .preview-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+        }
+
+        .preview-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 20px;
+        }
+
+        .preview-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .preview-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-left: 3px solid #c41e3a;
+        }
+
+        .preview-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .preview-text {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* 底部 - 出处 */
+        .sources-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .sources-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .source-category {
+            margin-bottom: 15px;
+        }
+
+        .source-category-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #c41e3a;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #c41e3a;
+            padding-bottom: 5px;
+        }
+
+        .source-link {
+            font-size: 12px;
+            color: #185FA5;
+            text-decoration: none;
+            display: block;
+            padding: 3px 0;
+            line-height: 1.5;
+        }
+
+        .source-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: #1a1a1a;
+            color: #aaa;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .footer-brand {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            color: #c41e3a;
+            margin-bottom: 5px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .masthead h1 { font-size: 48px; letter-spacing: 8px; }
+            .content-area { grid-template-columns: 1fr; }
+            .column { border-right: none; border-bottom: 1px solid #ddd; }
+            .data-grid { grid-template-columns: repeat(2, 1fr); }
+            .preview-list { grid-template-columns: 1fr; }
+            .sources-grid { grid-template-columns: 1fr; }
+            .competition-grid { grid-template-columns: 1fr; }
+            .funding-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper">
+        <!-- 报头 -->
+        <header class="masthead">
+            <div class="masthead-top">
+                <span>2026年6月21日 星期六</span>
+                <span>第25期 · 总第109期</span>
+                <span>农历丙午年 五月十七</span>
+            </div>
+            <h1>AI 周报速递</h1>
+            <div class="masthead-subtitle">ARTIFICIAL INTELLIGENCE WEEKLY EXPRESS</div>
+        </header>
+
+        <!-- 导航条 -->
+        <nav class="nav-bar">
+            <span>头版头条</span>
+            <span>深度报道</span>
+            <span>数据洞察</span>
+            <span>开源动态</span>
+            <span>资本风向</span>
+            <span>技术前沿</span>
+        </nav>
+
+        <!-- 头条 -->
+        <section class="headline-section">
+            <div class="headline-banner">重磅头条</div>
+            <h2 class="headline-title">SpaceX 600亿美元收购Cursor<br>AI coding进入超级整合时代</h2>
+            <p class="headline-subtitle">SpaceX在完成IPO仅两天后，宣布以600亿美元全股票收购AI编程工具Cursor，这是SpaceX与xAI合并后整合AI能力的关键一步。双方过去几个月已在共同训练模型，新模型将很快在Cursor和Grok Build中发布。</p>
+            <div class="headline-meta">
+                <span>📅 2026年6月16日</span>
+                <span>📍 SpaceX · Cursor · xAI</span>
+                <span>🏷️ AI coding · 资本整合 · 超级应用</span>
+            </div>
+        </section>
+
+        <!-- 三栏内容 -->
+        <div class="content-area">
+            <!-- 左栏 -->
+            <div class="column">
+                <div class="column-header">资本整合</div>
+
+                <div class="article">
+                    <h3 class="article-title">DeepSeek融资超74亿美元 成国内最具价值AI初创</h3>
+                    <div class="article-meta">📅 6月16日 · 来源：华尔街日报</div>
+                    <p class="article-text">DeepSeek首轮融资超过74亿美元，公司估值超过500亿美元，成为中国最具价值的AI初创公司。创始人梁文锋个人出资约30亿美元，是本轮最大单一出资方。腾讯、宁德时代、京东、网易等参与投资但无投票权。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">智谱IPO拟募资150亿元</div>
+                    <p class="news-card-text">证监会北京监管局披露智谱华章科创板IPO辅导验收，拟发行股份占发行后总股本2%-8%，预计募资约150亿元：120亿投入GLM系列下一代基座模型研发，20亿升级MaaS平台，10亿补充流动资金。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">林俊旸新公司卜拉格亮相 首轮估值135亿元</h3>
+                    <div class="article-meta">📅 6月17日 · 来源：量子位</div>
+                    <p class="article-text">前阿里Qwen负责人林俊旸创办的AI实验室完成首轮数亿美元融资，投后估值约20亿美元（约135亿元人民币）。高榕创投与红杉中国联合领投各1亿美元，腾讯跟投2000万美元。公司聚焦世界模型和具身大脑方向。</p>
+                </div>
+            </div>
+
+            <!-- 中栏 -->
+            <div class="column">
+                <div class="column-header">开源新势力</div>
+
+                <div class="article">
+                    <h3 class="article-title">智谱GLM-5.2开源登顶 国产开源首次跻身全球御三家</h3>
+                    <div class="article-meta">📅 6月18日 · 来源：量子位</div>
+                    <p class="article-text">智谱开源GLM-5.2在Artificial Analysis Intelligence Index v4.1以51分登顶开源模型榜首（全球第二），仅次Claude Fable 5之下；在Design Arena（衡量模型「品味」）取得全球第一。支持真正可用的1M上下文，MIT协议。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">美团发布General 365评测集</div>
+                    <p class="news-card-text">美团LongCat团队发布针对复杂推理能力的评测基准General 365。实测中，Gemini 3 Pro准确率最高，仅为62.8%，绝大多数主流模型未达60分及格线。为大模型的"认知深度"树立了新标尺。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">美团用Agent评测思路管理AI Coding</h3>
+                    <div class="article-meta">📅 6月18日 · 来源：AIToolly</div>
+                    <p class="article-text">在AI生成代码占比超过90%的背景下，美团技术团队采用Agent评测思路进行管理。具体方法包括技术债梳理、Rule建设、重构SOP及Pre-PR机制。成功将31万行代码的大规模重构从高成本专项转变为日常动作。</p>
+                </div>
+            </div>
+
+            <!-- 右栏 -->
+            <div class="column">
+                <div class="column-header">产品与应用</div>
+
+                <div class="article">
+                    <h3 class="article-title">苹果Siri AI升级 迟到两年的AI助手补课</h3>
+                    <div class="article-meta">📅 6月15日 · 来源：Business Insider</div>
+                    <p class="article-text">苹果在WWDC26大会上发布全新Siri AI，用户可以和它进行真正意义上的"来回对话"，语音体验也做了大幅升级。但由于欧盟和中国的监管要求，Siri AI在这两个市场暂时都不会同步上线。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">蚂蚁集团测试AI版支付宝</div>
+                    <p class="news-card-text">蚂蚁集团正在测试AI智能体版本支付宝，引入AI助手"阿宝"。用户可通过语音/文字完成支付、理财、生活服务等操作，AI支付系统累计处理3亿笔智能体交易。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">字节豆包上线任务模式</h3>
+                    <div class="article-meta">📅 6月16日 · 来源：CSDN</div>
+                    <p class="article-text">字节跳动豆包上线任务模式，支持多轮搜索、浏览器自动化、多模态生成，可自动拆解复杂目标并完成PPT、网页等内容制作。标志着AI助手从聊天工具向任务执行平台转型。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据区域 -->
+        <section class="data-section">
+            <h2 class="data-title">本周关键数据</h2>
+            <div class="data-grid">
+                <div class="data-item">
+                    <div class="data-number">600</div>
+                    <div class="data-label">SpaceX收购Cursor<br>（亿美元）</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">74</div>
+                    <div class="data-label">DeepSeek融资额<br>（亿美元）</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">51</div>
+                    <div class="data-label">GLM-5.2登顶<br>开源榜首分数</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">62.8%</div>
+                    <div class="data-label">General 365评测<br>最高准确率</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 时间线 -->
+        <section class="timeline-section">
+            <h2 class="timeline-title">📅 本周事件时间线</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">6月15日 周日</div>
+                    <div class="timeline-content">
+                        • 苹果WWDC26发布全新Siri AI<br>
+                        • AI内容标注新规全面生效<br>
+                        • 华为HDC展示鸿蒙小艺智能体
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">6月16日 周一</div>
+                    <div class="timeline-content">
+                        • SpaceX宣布600亿美元收购Cursor<br>
+                        • DeepSeek融资超74亿美元，估值500亿<br>
+                        • OpenAI财务文件泄露，年亏损数十亿<br>
+                        • 蚂蚁集团测试AI版支付宝
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">6月17日 周二</div>
+                    <div class="timeline-content">
+                        • 智谱科创板IPO拟募资150亿元<br>
+                        • 林俊旸新公司卜拉格亮相，估值135亿<br>
+                        • 中国筹建世界人工智能合作组织
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">6月18日 周三</div>
+                    <div class="timeline-content">
+                        • 智谱GLM-5.2开源登顶全球榜单<br>
+                        • 美团发布General 365评测集<br>
+                        • 美团用Agent评测思路管理AI Coding<br>
+                        • 诺贝尔奖得主John Jumper加入Anthropic
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">6月20日 周五</div>
+                    <div class="timeline-content">
+                        • 皮尤民调：63%美国人认为AI发展过快<br>
+                        • 仅16%美国人看好AI社会影响<br>
+                        • 《大西洋月刊》推出AI音乐训练数据搜索库
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI coding竞争格局 -->
+        <section class="competition-section">
+            <h2 class="competition-title">🏗️ AI coding赛道竞争格局</h2>
+            <div class="competition-grid">
+                <div class="competition-item">
+                    <div class="competition-item-title">SpaceX + Cursor</div>
+                    <div class="competition-item-content">
+                        <div>收购价：600亿美元</div>
+                        <div>整合模式：硬件+软件+AI垂直整合</div>
+                        <div>协同效应：xAI补足编码模型短板</div>
+                        <div>目标：抗衡Claude Code和Copilot</div>
+                    </div>
+                </div>
+                <div class="competition-item">
+                    <div class="competition-item-title">Anthropic + Claude</div>
+                    <div class="competition-item-content">
+                        <div>企业采用率：41%领先OpenAI</div>
+                        <div>技术优势：SWE-Bench Pro 80.3%</div>
+                        <div>安全布局：Project Glasswing漏洞挖掘</div>
+                        <div>挑战：Fable 5禁令影响全球化</div>
+                    </div>
+                </div>
+                <div class="competition-item">
+                    <div class="competition-item-title">GitHub + Copilot</div>
+                    <div class="competition-item-content">
+                        <div>集成Claude和Codex Agent</div>
+                        <div>计费模式：6月1日起按Token计费</div>
+                        <div>争议：重度用户成本上涨</div>
+                        <div>生态优势：开发者基数最大</div>
+                    </div>
+                </div>
+                <div class="competition-item">
+                    <div class="competition-item-title">智谱 + GLM-5.2</div>
+                    <div class="competition-item-content">
+                        <div>开源榜首：51分全球第二</div>
+                        <div>编程能力：逼近Claude Opus 4.8</div>
+                        <div>协议：MIT，降低商业门槛</div>
+                        <div>生态：华为开发工具内置免费通道</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 融资对比 -->
+        <section class="funding-section">
+            <h2 class="funding-title">💰 2026年6月主要AI公司融资情况</h2>
+            <div class="funding-grid">
+                <div class="funding-item">
+                    <div class="funding-item-title">DeepSeek</div>
+                    <div class="funding-item-amount">74</div>
+                    <div class="funding-item-unit">亿美元</div>
+                    <div class="funding-item-detail">首轮融资，估值超500亿美元，创始人梁文锋个人出资30亿美元，腾讯、宁德时代等参投</div>
+                </div>
+                <div class="funding-item">
+                    <div class="funding-item-title">智谱IPO</div>
+                    <div class="funding-item-amount">150</div>
+                    <div class="funding-item-unit">亿元人民币</div>
+                    <div class="funding-item-detail">科创板IPO，120亿投入基座模型研发，20亿升级MaaS平台，10亿补充流动资金</div>
+                </div>
+                <div class="funding-item">
+                    <div class="funding-item-title">卜拉格</div>
+                    <div class="funding-item-amount">13.5</div>
+                    <div class="funding-item-unit">亿元人民币</div>
+                    <div class="funding-item-detail">林俊旸创办，高榕创投与红杉中国领投，腾讯跟投，聚焦世界模型和具身大脑</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 下周关注 -->
+        <section class="preview-section">
+            <h2 class="preview-title">🔮 下周关注</h2>
+            <div class="preview-list">
+                <div class="preview-item">
+                    <div class="preview-number">01</div>
+                    <div class="preview-text"><strong>SpaceX收购Cursor后续</strong><br>交易预计第三季度完成，关注新模型发布时间和xAI整合进展</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">02</div>
+                    <div class="preview-text"><strong>DeepSeek融资落地</strong><br>74亿美元融资的具体用途和算力扩张计划</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">03</div>
+                    <div class="preview-text"><strong>GLM-5.2开源生态</strong><br>社区反馈、开发者采用情况和商业应用案例</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">04</div>
+                    <div class="preview-text"><strong>2026世界人工智能大会</strong><br>7月上海举办，超300款AI产品展示，关注政策信号</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">05</div>
+                    <div class="preview-text"><strong>AI coding商业模式</strong><br>Copilot按量计费后用户留存和竞品动态</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 出处 -->
+        <section class="sources-section">
+            <h2 class="sources-title">📚 相关出处</h2>
+            <div class="sources-grid">
+                <div class="source-category">
+                    <div class="source-category-title">SpaceX收购Cursor</div>
+                    <a href="https://x.com/SpaceX/status/2066873915717136548" class="source-link">SpaceX官方公告</a>
+                    <a href="https://arstechnica.com/ai/2026/06/spacex-will-acquire-coding-tool-cursor-to-compete-with-anthropic-openai/" class="source-link">Ars Technica报道</a>
+                    <a href="https://techcrunch.com/2026/06/16/spacex-to-acquire-cursor-for-60b-in-stock-days-after-blockbuster-ipo/" class="source-link">TechCrunch报道</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">DeepSeek融资</div>
+                    <a href="https://www.wsj.com/tech/ai/deepseek-becomes-chinas-most-valuable-ai-startup-after-over-7-4-billion-fundraise-78ef64c0" class="source-link">华尔街日报报道</a>
+                    <a href="https://xueqiu.com/1077174092/395192257" class="source-link">雪球报道</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">智谱GLM-5.2开源</div>
+                    <a href="https://www.qbitai.com/2026/06/436085.html" class="source-link">量子位报道</a>
+                    <a href="https://artificialanalysis.ai/" class="source-link">Artificial Analysis评测</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">美团评测与实践</div>
+                    <a href="https://aitoolly.com/zh/ai-news/2026-06-18" class="source-link">AIToolly报道</a>
+                    <a href="https://tech.meituan.com/" class="source-link">美团技术博客</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">苹果Siri AI</div>
+                    <a href="https://www.businessinsider.com/apple-new-siri-ai-chatbot-app-wwdc-2026-6" class="source-link">Business Insider报道</a>
+                    <a href="https://www.apple.com/apple-events/" class="source-link">苹果WWDC26官方发布</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">综合分析</div>
+                    <a href="https://blog.csdn.net/ld326/article/details/162046603" class="source-link">2026年6月16日全球AI前沿动态</a>
+                    <a href="https://yuanshenjian.cn/ai/briefings/2026-06-17" class="source-link">AI简报·2026-06-17</a>
+                    <a href="https://www.sohu.com/a/1035397029_122893087" class="source-link">2026年6月AI巨头混战周报</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="footer-brand">AI 周报速递</div>
+            <div>编辑：AI 自动生成 | 数据截止：2026年6月21日 12:00</div>
+            <div style="margin-top: 5px;">© 2026 AI城 · 专注AI领域深度报道</div>
+        </footer>
+    </div>
+</body>
+</html>
