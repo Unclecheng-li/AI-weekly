@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 周报速递 - 2026年6月第4周</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: #f5f0e8;
+            color: #1a1a1a;
+            line-height: 1.8;
+        }
+
+        .newspaper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fffef9;
+            box-shadow: 0 0 40px rgba(0,0,0,0.15);
+            min-height: 100vh;
+        }
+
+        /* 头部 - 报头 */
+        .masthead {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 20px 40px;
+            text-align: center;
+            border-bottom: 8px double #c41e3a;
+        }
+
+        .masthead-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .masthead h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 72px;
+            font-weight: 900;
+            letter-spacing: 12px;
+            margin: 10px 0;
+            text-shadow: 2px 2px 0 #c41e3a;
+        }
+
+        .masthead-subtitle {
+            font-size: 18px;
+            letter-spacing: 8px;
+            color: #ddd;
+            margin-top: 5px;
+        }
+
+        /* 导航条 */
+        .nav-bar {
+            background: #c41e3a;
+            color: white;
+            padding: 10px 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-bar span {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .nav-bar span:hover {
+            opacity: 0.8;
+        }
+
+        /* 头条区域 */
+        .headline-section {
+            padding: 30px 40px;
+            border-bottom: 3px solid #1a1a1a;
+        }
+
+        .headline-banner {
+            background: #c41e3a;
+            color: white;
+            display: inline-block;
+            padding: 5px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .headline-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+
+        .headline-subtitle {
+            font-size: 20px;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .headline-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        /* 主内容区 - 多栏布局 */
+        .content-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+            padding: 0 40px;
+        }
+
+        .column {
+            padding: 25px 20px;
+            border-right: 1px solid #ddd;
+        }
+
+        .column:last-child {
+            border-right: none;
+        }
+
+        .column-header {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #c41e3a;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        .article {
+            margin-bottom: 25px;
+        }
+
+        .article-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .article-meta {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .article-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .article-text::first-letter {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 36px;
+            font-weight: 700;
+            float: left;
+            line-height: 1;
+            margin-right: 8px;
+            color: #c41e3a;
+        }
+
+        /* 重要新闻卡片 */
+        .news-card {
+            background: #f8f5ee;
+            border-left: 4px solid #c41e3a;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .news-card-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #c41e3a;
+        }
+
+        .news-card-text {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        /* 数据区域 */
+        .data-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+            margin: 30px 0;
+        }
+
+        .data-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #c41e3a;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .data-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .data-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 42px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .data-label {
+            font-size: 13px;
+            color: #aaa;
+            margin-top: 8px;
+        }
+
+        /* 时间线 */
+        .timeline-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .timeline-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #c41e3a;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-left: 25px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: #c41e3a;
+            border-radius: 50%;
+            border: 3px solid #fffef9;
+        }
+
+        .timeline-date {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        /* 象限图 */
+        .quadrant-section {
+            padding: 30px 40px;
+            background: #f8f5ee;
+        }
+
+        .quadrant-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .quadrant-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 3px;
+            background: #1a1a1a;
+            padding: 3px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quadrant-cell {
+            background: #fffef9;
+            padding: 20px;
+            position: relative;
+        }
+
+        .quadrant-label {
+            position: absolute;
+            font-size: 10px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .quadrant-label.top-left { top: 5px; left: 10px; }
+        .quadrant-label.top-right { top: 5px; right: 10px; }
+        .quadrant-label.bottom-left { bottom: 5px; left: 10px; }
+        .quadrant-label.bottom-right { bottom: 5px; right: 10px; }
+
+        .quadrant-item {
+            display: inline-block;
+            background: #c41e3a;
+            color: white;
+            padding: 5px 12px;
+            font-size: 12px;
+            margin: 5px;
+            font-weight: 500;
+        }
+
+        .quadrant-item.blue { background: #185FA5; }
+        .quadrant-item.green { background: #3B6D11; }
+        .quadrant-item.amber { background: #BA7517; }
+
+        /* 架构图 */
+        .architecture-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .architecture-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .architecture-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .arch-box {
+            background: #f8f5ee;
+            border: 2px solid #1a1a1a;
+            padding: 15px 20px;
+            min-width: 180px;
+            text-align: center;
+        }
+
+        .arch-box-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+        }
+
+        .arch-box-items {
+            font-size: 13px;
+            color: #444;
+            text-align: left;
+        }
+
+        .arch-box-items div {
+            padding: 3px 0;
+            border-bottom: 1px dotted #ddd;
+        }
+
+        .arch-box-items div:last-child {
+            border-bottom: none;
+        }
+
+        .arch-arrow {
+            font-size: 24px;
+            color: #c41e3a;
+            align-self: center;
+        }
+
+        /* 下周关注 */
+        .preview-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+        }
+
+        .preview-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 20px;
+        }
+
+        .preview-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .preview-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-left: 3px solid #c41e3a;
+        }
+
+        .preview-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .preview-text {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* 底部 - 出处 */
+        .sources-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .sources-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .source-category {
+            margin-bottom: 15px;
+        }
+
+        .source-category-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #c41e3a;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #c41e3a;
+            padding-bottom: 5px;
+        }
+
+        .source-link {
+            font-size: 12px;
+            color: #185FA5;
+            text-decoration: none;
+            display: block;
+            padding: 3px 0;
+            line-height: 1.5;
+        }
+
+        .source-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: #1a1a1a;
+            color: #aaa;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .footer-brand {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            color: #c41e3a;
+            margin-bottom: 5px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .masthead h1 { font-size: 48px; letter-spacing: 8px; }
+            .content-area { grid-template-columns: 1fr; }
+            .column { border-right: none; border-bottom: 1px solid #ddd; }
+            .data-grid { grid-template-columns: repeat(2, 1fr); }
+            .preview-list { grid-template-columns: 1fr; }
+            .sources-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper">
+        <!-- 报头 -->
+        <header class="masthead">
+            <div class="masthead-top">
+                <span>2026年6月28日 星期日</span>
+                <span>第26期 · 总第110期</span>
+                <span>农历丙午年 五月十四</span>
+            </div>
+            <h1>AI 周报速递</h1>
+            <div class="masthead-subtitle">ARTIFICIAL INTELLIGENCE WEEKLY EXPRESS</div>
+        </header>
+
+        <!-- 导航条 -->
+        <nav class="nav-bar">
+            <span>头版头条</span>
+            <span>深度报道</span>
+            <span>数据洞察</span>
+            <span>硬件突破</span>
+            <span>地缘博弈</span>
+            <span>技术前沿</span>
+        </nav>
+
+        <!-- 头条 -->
+        <section class="headline-section">
+            <div class="headline-banner">重磅头条</div>
+            <h2 class="headline-title">OpenAI 三连发：GPT-5.5-Cyber + Patch the Planet<br>+ Jalapeño 自研芯片</h2>
+            <p class="headline-subtitle">OpenAI 一周内同时扩展网络安全版图和硬件供应链——GPT-5.5-Cyber 完整版在 CyberGym 拿下 85.6% 新纪录，Patch the Planet 在 30+ 开源项目中发现数百漏洞，首款自研推理芯片 Jalapeño 对标 Nvidia Blackwell。AI 竞争从模型能力延伸至安全基础设施和硬件供应链。</p>
+            <div class="headline-meta">
+                <span>📅 2026年6月22日-24日</span>
+                <span>📍 OpenAI · Broadcom · Trail of Bits</span>
+                <span>🏷️ 网络安全 · 自研芯片 · 开源安全</span>
+            </div>
+        </section>
+
+        <!-- 三栏内容 -->
+        <div class="content-area">
+            <!-- 左栏 -->
+            <div class="column">
+                <div class="column-header">安全与硬件</div>
+
+                <div class="article">
+                    <h3 class="article-title">GPT-5.5-Cyber 完整版发布 CyberGym 85.6% 刷新纪录</h3>
+                    <div class="article-meta">📅 6月22日 · 来源：OpenAI / 搜狐科技 / IT之家</div>
+                    <p class="article-text">OpenAI 扩展 Daybreak 网络安全计划，发布 GPT-5.5-Cyber 完整版。在 CyberGym 评测中达到 85.6%，超越标准 GPT-5.5 的 81.8% 和 Anthropic 的 Mythos 5。Trail of Bits 工程师用该模型一天内构建了覆盖数十入口点的完整模糊测试实验室——手工需要数周。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">Patch the Planet：30+ 开源项目参与</div>
+                    <p class="news-card-text">与 Trail of Bits、HackerOne 合作的开源安全倡议，cURL、Go、Python、Sigstore 等项目参与。5 天冲刺发现数百安全问题、合并数十补丁，生成可复用的模糊测试和差异测试工作流。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">Jalapeño 芯片：OpenAI 首款自研推理处理器</h3>
+                    <div class="article-meta">📅 6月24日 · 来源：Reuters / Hipther</div>
+                    <p class="article-text">OpenAI 与 Broadcom 联合发布 Jalapeño 自研推理芯片，Broadcom CEO 称其性能匹配 Nvidia Blackwell 和 Google TPU。已在内部运行 GPT-5.3-Codex-Spark 工作负载，预计年底部署。标志着 OpenAI 从"租算力"转向"控硬件"。</p>
+                </div>
+            </div>
+
+            <!-- 中栏 -->
+            <div class="column">
+                <div class="column-header">地缘与博弈</div>
+
+                <div class="article">
+                    <h3 class="article-title">中国反制 56 家美企 稀土牌精准出击</h3>
+                    <div class="article-meta">📅 6月22日 · 来源：搜狐 / 腾讯新闻 / AIToolsRecap</div>
+                    <p class="article-text">中国商务部和财政部联合反制：46 家美企被禁参与政府采购，10 家列入出口管制清单，包括美国稀土矿商 MP Materials 和 USA Rare Earth。中美 AI 对抗从模型出口管制升级至物理供应链博弈——美国管制 AI 模型，中国管制稀土原材料。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">Anthropic 指控阿里最大规模蒸馏攻击</div>
+                    <p class="news-card-text">25,000 个欺诈账户、2,880 万次交互（4月22日-6月5日）。模型知识产权保护、AI 训练合规与中美科技对抗三条线首次交织碰撞。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">SPCX 暴跌 16% SpaceX 算力经济遭质疑</h3>
+                    <div class="article-meta">📅 6月22-23日 · 来源：CNBC / 新浪财经</div>
+                    <p class="article-text">SpaceX 与 Reflection AI 签 $63 亿算力协议，但 SPCX 股价反跌 16%。分析师指出所有 Colossus 合同都有 90 天退出条款，$800 亿"承诺"收入实际脆弱。SpaceX 正从内部训练集群转型为算力基础设施商业体。</p>
+                </div>
+            </div>
+
+            <!-- 右栏 -->
+            <div class="column">
+                <div class="column-header">Agent 与落地</div>
+
+                <div class="article">
+                    <h3 class="article-title">Google Gemini 3.5 Flash 获"计算机使用"能力</h3>
+                    <div class="article-meta">📅 6月25日 · 来源：Hipther / Google</div>
+                    <p class="article-text">Google 为 Gemini 3.5 Flash 添加 Computer Use 能力，AI Agent 可与浏览器、桌面、移动环境交互执行任务。将此功能放入 Flash 而非旗舰模型，表明 Google 判断 Agent 任务需要成本效益组合而非纯粹智能巅峰。Agent 式 AI 从概念进入主流开发工具阶段。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">Anthropic 推出 Claude Tag</div>
+                    <p class="news-card-text">在 Slack 群聊中 @Claude 即可召唤 AI 参与对话，支持上下文保持和任务拆分。Claude 从聊天机器人升级为"始终在线的团队协作者"，Enterprise/Team 客户 Beta 测试中。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">Fable 5 免费窗口关闭 进入信用积分制</h3>
+                    <div class="article-meta">📅 6月23日 · 来源：Anthropic / 多家媒体</div>
+                    <p class="article-text">Claude Fable 5 的免费使用窗口于 6 月 22 日关闭，23 日起按信用积分收费：输入 $10/百万 Token，输出 $50/百万 Token，定价为 Opus 4.8 的两倍。企业客户首次将 Fable 5 纳入 AI 预算，高端模型"奢侈品化"趋势显现。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据区域 -->
+        <section class="data-section">
+            <h2 class="data-title">本周关键数据</h2>
+            <div class="data-grid">
+                <div class="data-item">
+                    <div class="data-number">85.6%</div>
+                    <div class="data-label">GPT-5.5-Cyber<br>CyberGym 得分</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">$63亿</div>
+                    <div class="data-label">SpaceX × Reflection AI<br>算力协议总价值</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">56</div>
+                    <div class="data-label">中国反制的<br>美国企业数量</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">2880万</div>
+                    <div class="data-label">阿里蒸馏攻击<br>交互次数</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 时间线 -->
+        <section class="timeline-section">
+            <h2 class="timeline-title">📅 本周事件时间线</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">6月21日 周六</div>
+                    <div class="timeline-content">
+                        • Getty Images 与 OpenAI 达成授权图库合作协议<br>
+                        • Samsung 全球部署 ChatGPT Enterprise + Codex
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">6月22日 周日</div>
+                    <div class="timeline-content">
+                        • OpenAI 扩展 Daybreak：GPT-5.5-Cyber 完整版 + Patch the Planet<br>
+                        • SpaceX 签 $63 亿 Reflection AI 算力协议<br>
+                        • 中国反制 56 家美企：稀土 + 政府采购禁令
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">6月23日 周一</div>
+                    <div class="timeline-content">
+                        • Anthropic 推出 Claude Tag（@Claude in Slack）<br>
+                        • Fable 5 免费窗口关闭，进入信用积分收费<br>
+                        • SPCX 暴跌 16%，IPO 后最大单日跌幅<br>
+                        • Claude 全平台宕机约 60-90 分钟
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">6月24日 周二</div>
+                    <div class="timeline-content">
+                        • OpenAI × Broadcom 发布 Jalapeño 自研推理芯片<br>
+                        • Anthropic 指控阿里最大规模 Claude 蒸馏攻击<br>
+                        • 中国反制消息推动港股 AI 板块分化
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">6月25日 周三</div>
+                    <div class="timeline-content">
+                        • Google Gemini 3.5 Flash 获"计算机使用"能力<br>
+                        • Qualcomm 全面转向 AI 计算平台战略<br>
+                        • 美国政府展示 AI 设计核试验飞行器
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI 安全竞争象限图 -->
+        <section class="quadrant-section">
+            <h2 class="quadrant-title">📊 AI 安全竞争格局（2026年6月第4周）</h2>
+            <div class="quadrant-grid">
+                <div class="quadrant-cell">
+                    <span class="quadrant-label top-left">高安全 · 低能力</span>
+                    <span class="quadrant-item amber">待观察</span>
+                </div>
+                <div class="quadrant-cell">
+                    <span class="quadrant-label top-right">高安全 · 高能力</span>
+                    <span class="quadrant-item">OpenAI (Daybreak)</span>
+                    <span class="quadrant-item blue">Anthropic (Glasswing)</span>
+                </div>
+                <div class="quadrant-cell">
+                    <span class="quadrant-label bottom-left">低安全 · 低能力</span>
+                    <span class="quadrant-item amber">传统安全厂商</span>
+                </div>
+                <div class="quadrant-cell">
+                    <span class="quadrant-label bottom-right">低安全 · 高能力</span>
+                    <span class="quadrant-item green">Google (Computer Use)</span>
+                    <span class="quadrant-item blue">智谱 GLM-5.2</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- OpenAI 全栈战略架构图 -->
+        <section class="architecture-section">
+            <h2 class="architecture-title">🏗️ OpenAI 全栈安全战略架构</h2>
+            <div class="architecture-diagram">
+                <div class="arch-box">
+                    <div class="arch-box-title">硬件层</div>
+                    <div class="arch-box-items">
+                        <div>Jalapeño 自研芯片</div>
+                        <div>Broadcom 代工</div>
+                        <div>对标 Blackwell/TPU</div>
+                    </div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">
+                    <div class="arch-box-title">模型层</div>
+                    <div class="arch-box-items">
+                        <div>GPT-5.5-Cyber (85.6%)</div>
+                        <div>Codex Security 插件</div>
+                        <div>Daybreak 平台</div>
+                    </div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">
+                    <div class="arch-box-title">生态层</div>
+                    <div class="arch-box-items">
+                        <div>Patch the Planet</div>
+                        <div>Trail of Bits 合作</div>
+                        <div>HackerOne 漏洞平台</div>
+                    </div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">
+                    <div class="arch-box-title">落地层</div>
+                    <div class="arch-box-items">
+                        <div>Samsung 全球部署</div>
+                        <div>Getty 授权合作</div>
+                        <div>开发者工作流嵌入</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 下周关注 -->
+        <section class="preview-section">
+            <h2 class="preview-title">🔮 下周关注</h2>
+            <div class="preview-list">
+                <div class="preview-item">
+                    <div class="preview-number">01</div>
+                    <div class="preview-text"><strong>Fable 5 商业化效果</strong><br>信用积分制运行首周，开发者对 $10/$50 定价的接受度</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">02</div>
+                    <div class="preview-text"><strong>Jalapeño 芯片测试进展</strong><br>OpenAI 内部跑 GPT-5.3-Codex-Spark 的实际性能数据</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">03</div>
+                    <div class="preview-text"><strong>中美制裁后续</strong><br>稀土管制对 AI 芯片供应链的传导效应</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">04</div>
+                    <div class="preview-text"><strong>Gemini Computer Use 生态</strong><br>开发者采用情况和安全事件报告</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">05</div>
+                    <div class="preview-text"><strong>Claude Tag 企业反馈</strong><br>Slack 深度集成的用户体验和生产力提升数据</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">06</div>
+                    <div class="preview-text"><strong>2026 世界人工智能大会</strong><br>7 月上海举办，关注政策信号和国产模型展示</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 出处 -->
+        <section class="sources-section">
+            <h2 class="sources-title">📚 相关出处</h2>
+            <div class="sources-grid">
+                <div class="source-category">
+                    <div class="source-category-title">OpenAI Daybreak + GPT-5.5-Cyber</div>
+                    <a href="https://openai.com/index/daybreak-securing-the-world/" class="source-link">OpenAI 官方：Daybreak Securing the World</a>
+                    <a href="https://finance.sina.com.cn/tech/roll/2026-06-23/doc-iniekknt9717166.shtml" class="source-link">战胜Mythos 5，GPT-5.5-Cyber完全体来了 - 新浪财经</a>
+                    <a href="https://news.qq.com/rain/a/20260623A06GD200" class="source-link">OpenAI最强"抓虫AI"刷新CyberGym纪录 - 腾讯新闻</a>
+                    <a href="https://www.51cto.com/article/847246.html" class="source-link">OpenAI推出GPT-5.5-Cyber强化版 - 51CTO</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">OpenAI Jalapeño 芯片</div>
+                    <a href="https://www.reuters.com/world/asia-pacific/openai-unveils-custom-chip-it-designed-with-broadcom-boost-its-ai-infrastructure-2026-06-24/" class="source-link">OpenAI unveils custom chip with Broadcom - Reuters</a>
+                    <a href="https://hipther.com/latest-news/2026/06/25/114099/ai-dispatch-daily-trends-and-innovations-june-25-2026-openai-jalapeno-qualcomm-ai-push-gemini-3-5-flash-clusterwareai-ai-designed-nuclear-vehicle/0/" class="source-link">AI Dispatch: OpenAI Jalapeño - Hipther</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">中国反制 56 家美企</div>
+                    <a href="https://www.sohu.com/a/1039950282_122429443" class="source-link">美国拉黑名单后中方两部门重磅出手 - 搜狐</a>
+                    <a href="https://news.qq.com/rain/a/20260622A0747300" class="source-link">56家美企被"拉黑" - 腾讯新闻</a>
+                    <a href="https://aitoolsrecap.com/Blog/ai-news-june-24-2026" class="source-link">China Blacklists 56 US Firms - AIToolsRecap</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Anthropic 指控阿里蒸馏攻击</div>
+                    <a href="https://www.reuters.com/world/china/anthropic-says-alibaba-illicitly-extracted-claude-ai-model-capabilities-2026-06-24/" class="source-link">Anthropic says Alibaba illicitly extracted Claude - Reuters</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Google Gemini Computer Use</div>
+                    <a href="https://hipther.com/latest-news/2026/06/25/114099/ai-dispatch-daily-trends-and-innovations-june-25-2026-openai-jalapeno-qualcomm-ai-push-gemini-3-5-flash-clusterwareai-ai-designed-nuclear-vehicle/0/" class="source-link">Gemini 3.5 Flash Computer Use - Hipther</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Anthropic Claude Tag</div>
+                    <a href="https://www.anthropic.com/news/introducing-claude-tag" class="source-link">Introducing Claude Tag - Anthropic</a>
+                    <a href="https://manaknightdigital.com/blog/ai-news-week-of-june-26-2026" class="source-link">AI News Of The Week June 26 - Manaknight</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">SpaceX 算力协议 + SPCX</div>
+                    <a href="https://techcrunch.com/2026/06/22/spacex-inks-compute-deal-with-reflection-ai-an-open-source-ai-lab/" class="source-link">SpaceX inks compute deal - TechCrunch</a>
+                    <a href="https://www.cnbc.com/2026/06/22/spacex-ai-colossus-data-center-reflection.html" class="source-link">SpaceX signs compute deal - CNBC</a>
+                    <a href="https://finance.sina.com.cn/stock/usstock/summary/2026-06-23/doc-inieipii8985272.shtml" class="source-link">SPCX股价暴跌 - 新浪财经</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Getty Images + Samsung</div>
+                    <a href="https://newsroom.gettyimages.com/en/getty-images/getty-images-announces-display-partnership-with-openai" class="source-link">Getty Images × OpenAI - 官方新闻</a>
+                    <a href="https://openai.com/index/samsung-electronics-chatgpt-codex-deployment/" class="source-link">Samsung ChatGPT Codex Deployment - OpenAI</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="footer-brand">AI 周报速递</div>
+            <div>编辑：AI 自动生成 | 数据截止：2026年6月28日 12:00</div>
+            <div style="margin-top: 5px;">© 2026 AI城 · 专注AI领域深度报道</div>
+        </footer>
+    </div>
+</body>
+</html>
