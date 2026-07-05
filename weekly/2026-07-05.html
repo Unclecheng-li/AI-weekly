@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI 周报速递 - 2026年7月第1周</title>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.6/dist/mermaid.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
 
@@ -618,74 +618,68 @@
         <section class="mermaid-section">
             <h2 class="mermaid-title">📅 本周事件时间线</h2>
             <div class="mermaid-block">
-                <div class="mermaid">
-                    <pre class="mermaid">
-timeline
-    title 2026年7月第1周 AI 行业时间线
-    section 6月29日
-      Anthropic Opus 4.8 / Sonnet 4.6 / Haiku 4.6 上线 Azure GB300
-      NVIDIA 公告 GB300 量产进展
-    section 6月30日
-      华为 openPangu-2.0-Flash 正式开源(920亿参数)
-      Anthropic 发布 Claude Science 科研工作台
-      Anthropic 发布 Claude Sonnet 5
-      美国商务部解除 Claude Fable 5 / Mythos 5 出口管制
-      美团 LongCat-2.0 万亿 MoE 发布
-    section 7月1日
-      Claude Fable 5 / Mythos 5 全球访问正式恢复
-      Claude Sonnet 5 全渠道开放
-      字节跳动 TRAE Work 开放预览
-      月之暗面 Kimi K3 预热
-    section 7月2日
-      快手可灵 AI 落地 30 亿美元融资(估值 180 亿美元)
-      xAI Grok 4.5 在 SpaceX/Tesla 内部测试
-      SpaceX 宣布 600 亿美元收购 Anysphere(Cursor 母公司)
-    section 7月3日
-      阿里巴巴全面禁用 Claude(7月10日生效)
-      Cursor IDE 曝出 DuneSlide 双 RCE 漏洞
-      OpenAI 提议向美国政府提供 5% 股权应对 IPO 监管
-      微软 Build 2026 收官(自研 7 款 MAI 模型)
-    section 7月4日
-      DeepSeek V4 正式版预热(7月中旬发布)
-      NVIDIA Vera Rubin 平台路线图披露
-    section 7月5日
-      港股大模型概念股震荡走强(恒指+1.28%)
-      中国"活力中国调研行"展示 AI 大模型潮玩定制
-                    </pre>
-                </div>
+                <div class="mermaid">timeline
+title 2026-07 AI Industry Weekly Timeline
+section 6月29日
+Anthropic Opus 4.8 / Sonnet 4.6 / Haiku 4.6 上线 Azure GB300 : NVIDIA 公告 GB300 量产进展
+section 6月30日
+华为 openPangu-2.0-Flash 正式开源 920亿参数 : Anthropic 发布 Claude Sonnet 5 与 Science 科研工作台
+美国商务部解除 Claude Fable 5 / Mythos 5 出口管制 : 美团 LongCat-2.0 万亿 MoE 发布
+section 7月1日
+Claude Fable 5 / Mythos 5 全球访问正式恢复 : 字节跳动 TRAE Work 开放预览
+月之暗面 Kimi K3 预热 : 微软 Build 2026 收官 7 款 MAI 模型
+section 7月2日
+快手可灵 AI 完成 30 亿美元融资 估值 180 亿美元 : xAI Grok 4.5 在 SpaceX 与 Tesla 内部测试
+SpaceX 宣布 600 亿美元收购 Anysphere 即 Cursor 母公司
+section 7月3日
+阿里巴巴全面禁用 Claude 7月10日生效 : Cursor IDE 曝出 DuneSlide 双 RCE 漏洞 CVE-2026-50548 9
+OpenAI 提议向美国政府提供 5% 股权 : DeepSeek V4 正式版预热 7月中旬发布
+section 7月4日
+港股大模型概念股震荡走强 : NVIDIA Vera Rubin 平台路线图披露
+section 7月5日
+中国活力中国调研行展示 AI 大模型潮玩定制 : 节后行业关注 Claude Sonnet 5 国内合规模型
+</div>
             </div>
 
-            <h2 class="mermaid-title">📊 AI Coding 工具安全态势</h2>
+            <h2 class="mermaid-title">📊 AI Coding 工具安全态势 (English)</h2>
             <div class="mermaid-block">
-                <div class="mermaid">
-                    <pre class="mermaid">
-quadrantChart
-    title AI Coding 工具安全态势 (2026年7月第1周)
-    x-axis "渗透率低" --> "渗透率高"
-    y-axis "安全风险低" --> "安全风险高"
-    quadrant-1 "高风险·高价值"
-    quadrant-2 "待观察"
-    quadrant-3 "低风险"
-    quadrant-4 "高价值·可控"
-    "Cursor IDE (DuneSlide CVE-2026-50548/9)": [0.95, 0.90]
-    "GitHub Copilot (浏览器代理权限)": [0.80, 0.55]
-    "Claude Code (阿里禁用)": [0.70, 0.75]
-    "TRAE Work (字节跳动)": [0.40, 0.45]
-    "OpenAI Codex (速率重置+TRACE日志)": [0.75, 0.50]
-    "Qoder (阿里自研)": [0.30, 0.35]
-                    </pre>
-                </div>
+                <div class="mermaid">quadrantChart
+title AI Coding Tools Security Posture
+x-axis Low Penetration --> High Penetration
+y-axis Low Risk --> High Risk
+quadrant-1 High Risk High Value
+quadrant-2 Watchlist
+quadrant-3 Low Risk
+quadrant-4 High Value Controllable
+Cursor IDE DuneSlide: [0.95, 0.90]
+GitHub Copilot: [0.80, 0.55]
+Claude Code Blocked: [0.70, 0.75]
+TRAE Work Bytedance: [0.40, 0.45]
+OpenAI Codex: [0.75, 0.50]
+Qoder Alibaba: [0.30, 0.35]
+</div>
+            </div>
+
+            <h2 class="mermaid-title">🥧 AI Coding 工具渗透率 (中文饼图)</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">pie showData
+title AI Coding 工具市场份额占比
+"Cursor IDE" : 30
+"GitHub Copilot" : 25
+"Claude Code" : 18
+"TRAE Work" : 12
+"OpenAI Codex" : 10
+"Qoder" : 5
+</div>
             </div>
 
             <h2 class="mermaid-title">🧠 国产 AI 格局演进</h2>
             <div class="mermaid-block">
-                <div class="mermaid">
-                    <pre class="mermaid">
-mindmap
-  root((本周国产AI<br>格局演进))
+                <div class="mermaid">mindmap
+  root((国产AI格局))
     华为系
       openPangu-2.0-Flash 开源
-      920亿参数+7大组件
+      920亿参数 7大组件
       昇腾路线全面铺开
     美团系
       LongCat-2.0 万亿MoE
@@ -697,71 +691,79 @@ mindmap
       Seed 2.0 Lite 企业级
     阿里系
       禁用Claude自研Qoder
-      Qwen3.7-Max国际盲测登顶
+      Qwen3.7-Max 国际盲测登顶
       千问合规下线拟人化Agent
     月之暗面
-      Kimi K3 预热(2.5万亿)
-      ARR 突破3亿美元
-      API 占比超70%
+      Kimi K3 预热 2.5万亿
+      ARR 突破 3亿美元
+      API 占比超 70%
     快手系
       可灵AI 30亿美元融资
-      估值180亿美元
+      估值 180亿美元
       12个月赴港IPO
-                    </pre>
-                </div>
+</div>
             </div>
 
             <h2 class="mermaid-title">🏗️ 企业 Agent 协作架构</h2>
             <div class="mermaid-block">
-                <div class="mermaid">
-                    <pre class="mermaid">
-graph LR
-    A[用户终端] --> B[接入层]
-    B --> C[微信AI<br/>A2A助手]
-    B --> D[飞书<br/>多维表格Agent]
-    B --> E[钉钉<br/>悟空]
-    B --> F[Slack<br/>Claude Tag]
-
-    C --> G[核心引擎]
-    D --> G
-    E --> G
-    F --> G
-
-    G --> H[腾讯 QClaw<br/>多Agent协作]
-    G --> I[蚂蚁 阿宝<br/>72项技能]
-    G --> J[百度 DuMate<br/>高考志愿Skill]
-
-    H --> K[场景化输出]
-    I --> K
-    J --> K
-
-    K --> L[数据分析报告]
-    K --> M[PPT汇报]
-    K --> N[异常清单]
-    K --> O[管理层摘要]
-                    </pre>
-                </div>
+                <div class="mermaid">graph LR
+A[用户终端] --> B[接入层]
+B --> C[微信AI A2A助手]
+B --> D[飞书 多维表格Agent]
+B --> E[钉钉 悟空]
+B --> F[Slack Claude Tag]
+C --> G[核心引擎]
+D --> G
+E --> G
+F --> G
+G --> H[腾讯 QClaw 多Agent协作]
+G --> I[蚂蚁 阿宝 72项技能]
+G --> J[百度 DuMate 高考志愿Skill]
+H --> K[场景化输出]
+I --> K
+J --> K
+K --> L[数据分析报告]
+K --> M[PPT汇报]
+K --> N[异常清单]
+K --> O[管理层摘要]
+</div>
             </div>
 
             <h2 class="mermaid-title">⚠️ AI 编程安全攻击链</h2>
             <div class="mermaid-block">
-                <div class="mermaid">
-                    <pre class="mermaid">
-sequenceDiagram
-    participant A as 攻击者
-    participant M as 恶意MCP服务器
-    participant C as Cursor IDE
-    participant S as 系统内核
-    A->>M: 植入提示注入载荷
-    M->>C: 用户打开恶意项目
-    Note over C: 0-click 触发
-    C->>C: CVE-2026-50548 沙箱逃逸
-    C->>C: CVE-2026-50549 符号链接路径混淆
-    C->>S: 绕过沙箱执行任意代码
-    S-->>A: 系统控制权
-    Note over A,S: 攻击链可延伸至企业内部代码库
-                    </pre>
-                </div>
+                <div class="mermaid">sequenceDiagram
+participant A as Attacker
+participant M as Malicious MCP Server
+participant C as Cursor IDE
+participant S as System Kernel
+A->>M: 植入提示注入载荷
+M->>C: 用户打开恶意项目
+Note over C: 0-click 自动触发
+C->>C: CVE-2026-50548 沙箱逃逸
+C->>C: CVE-2026-50549 符号链接路径混淆
+C->>S: 绕过沙箱执行任意代码
+S-->>A: 拿到系统控制权
+Note over A,S: 攻击链可延伸至企业内部代码库
+</div>
+            </div>
+
+            <h2 class="mermaid-title">🧩 本周 AI 大事件关系图</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">graph TD
+A1[华为 openPangu-2.0-Flash 开源] --> B1[国产模型开源潮]
+A2[美团 LongCat-2.0 万亿MoE] --> B1
+A3[阿里 全面禁用 Claude] --> B2[国产替代加速]
+A4[月之暗面 Kimi K3 预热] --> B2
+A5[Cursor IDE DuneSlide 双RCE] --> B3[AI Coding 安全危机]
+A6[Claude Sonnet 5 发布] --> B4[Anthropic 多线进攻]
+A7[Claude Fable 5 解禁] --> B4
+A8[可灵 AI 30亿融资] --> B5[视频生成资本升温]
+B1 --> C[本周核心 开源冲刺]
+B2 --> C
+B3 --> D[本周警示 安全先行]
+B4 --> E[本周亮点 模型军备]
+B5 --> F[本周风口 视频商业化]
+</div>
             </div>
         </section>
 
@@ -879,7 +881,12 @@ sequenceDiagram
             startOnLoad: true,
             theme: 'default',
             securityLevel: 'loose',
-            fontFamily: 'Noto Sans SC, sans-serif'
+            fontFamily: 'Noto Sans SC, sans-serif',
+            timeline: { useMaxWidth: true },
+            quadrantChart: { useMaxWidth: true },
+            mindmap: { useMaxWidth: true },
+            sequence: { useMaxWidth: true },
+            flowchart: { useMaxWidth: true }
         });
     </script>
 </body>
