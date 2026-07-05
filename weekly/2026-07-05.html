@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 周报速递 - 2026年6月第2周</title>
+    <title>AI 周报速递 - 2026年7月第1周</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
 
@@ -318,13 +319,14 @@
             color: #444;
         }
 
-        /* 开闭源象限图 */
-        .quadrant-section {
+        /* Mermaid 图表区域 */
+        .mermaid-section {
             padding: 30px 40px;
             background: #f8f5ee;
+            border-top: 3px solid #1a1a1a;
         }
 
-        .quadrant-title {
+        .mermaid-title {
             font-family: 'Noto Serif SC', serif;
             font-size: 28px;
             font-weight: 700;
@@ -332,51 +334,30 @@
             margin-bottom: 30px;
         }
 
-        .quadrant-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            gap: 3px;
-            background: #1a1a1a;
-            padding: 3px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .quadrant-cell {
+        .mermaid-block {
             background: #fffef9;
+            border: 2px solid #1a1a1a;
             padding: 20px;
-            position: relative;
+            margin-bottom: 25px;
+            overflow-x: auto;
         }
 
-        .quadrant-label {
-            position: absolute;
-            font-size: 10px;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .mermaid-block-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
         }
 
-        .quadrant-label.top-left { top: 5px; left: 10px; }
-        .quadrant-label.top-right { top: 5px; right: 10px; }
-        .quadrant-label.bottom-left { bottom: 5px; left: 10px; }
-        .quadrant-label.bottom-right { bottom: 5px; right: 10px; }
-
-        .quadrant-item {
-            display: inline-block;
-            background: #c41e3a;
-            color: white;
-            padding: 5px 12px;
-            font-size: 12px;
-            margin: 5px;
-            font-weight: 500;
+        .mermaid {
+            text-align: center;
+            font-family: 'Noto Sans SC', sans-serif;
         }
 
-        .quadrant-item.blue { background: #185FA5; }
-        .quadrant-item.green { background: #3B6D11; }
-        .quadrant-item.amber { background: #BA7517; }
-
-        /* 微信生态架构图 */
+        /* 架构图区域 */
         .architecture-section {
             padding: 30px 40px;
             border-top: 3px solid #1a1a1a;
@@ -388,53 +369,6 @@
             font-weight: 700;
             text-align: center;
             margin-bottom: 30px;
-        }
-
-        .architecture-diagram {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .arch-box {
-            background: #f8f5ee;
-            border: 2px solid #1a1a1a;
-            padding: 15px 20px;
-            min-width: 180px;
-            text-align: center;
-        }
-
-        .arch-box-title {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 16px;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 10px;
-            border-bottom: 2px solid #c41e3a;
-            padding-bottom: 8px;
-        }
-
-        .arch-box-items {
-            font-size: 13px;
-            color: #444;
-            text-align: left;
-        }
-
-        .arch-box-items div {
-            padding: 3px 0;
-            border-bottom: 1px dotted #ddd;
-        }
-
-        .arch-box-items div:last-child {
-            border-bottom: none;
-        }
-
-        .arch-arrow {
-            font-size: 24px;
-            color: #c41e3a;
-            align-self: center;
         }
 
         /* 下周关注 */
@@ -558,9 +492,9 @@
         <!-- 报头 -->
         <header class="masthead">
             <div class="masthead-top">
-                <span>2026年6月14日 星期六</span>
-                <span>第24期 · 总第108期</span>
-                <span>农历丙午年 五月初十</span>
+                <span>2026年7月5日 星期日</span>
+                <span>第25期 · 总第109期</span>
+                <span>农历丙午年 六月十一</span>
             </div>
             <h1>AI 周报速递</h1>
             <div class="masthead-subtitle">ARTIFICIAL INTELLIGENCE WEEKLY EXPRESS</div>
@@ -571,7 +505,7 @@
             <span>头版头条</span>
             <span>深度报道</span>
             <span>数据洞察</span>
-            <span>开源动态</span>
+            <span>国产开源</span>
             <span>资本风向</span>
             <span>技术前沿</span>
         </nav>
@@ -579,12 +513,12 @@
         <!-- 头条 -->
         <section class="headline-section">
             <div class="headline-banner">重磅头条</div>
-            <h2 class="headline-title">Claude 5上线72小时遭美国政府禁令<br>全球下架 AI监管进入新纪元</h2>
-            <p class="headline-subtitle">Anthropic第五代模型Fable 5在商业化窗口期遭遇政府级阻击，美国商务部长签署出口管制信函，禁止"外国人"访问该模型。这是前沿AI模型首次在上线后被政府强制停服，标志着AI地缘政治博弈全面升级。</p>
+            <h2 class="headline-title">国产开源三连击破局<br>Anthropic 三连击卡位企业Agent</h2>
+            <p class="headline-subtitle">华为 openPangu-2.0-Flash 920亿参数正式开源、美团 LongCat-2.0 跑出国产万亿 MoE、可灵 AI 30 亿美元刷新视频大模型融资纪录——国产阵营在模型与算力两端同时突围。Anthropic 48 小时内打出 Claude Sonnet 5 + Science 工作台 + Azure/GB300 三张牌，同步迎来 Fable 5 出口管制解除。</p>
             <div class="headline-meta">
-                <span>📅 2026年6月9日-12日</span>
-                <span>📍 Anthropic · 美国商务部</span>
-                <span>🏷️ AI监管 · 地缘政治 · 前沿模型</span>
+                <span>📅 2026年6月29日 — 7月5日</span>
+                <span>📍 华为 · Anthropic · 阿里 · 快手 · Cursor</span>
+                <span>🏷️ 国产开源 · 企业Agent · AI4S · 视频大模型</span>
             </div>
         </section>
 
@@ -592,67 +526,67 @@
         <div class="content-area">
             <!-- 左栏 -->
             <div class="column">
-                <div class="column-header">开源新势力</div>
+                <div class="column-header">国产开源新势力</div>
 
                 <div class="article">
-                    <h3 class="article-title">智谱GLM-5.2宣布完全开源 正面回应Claude 5禁令</h3>
-                    <div class="article-meta">📅 6月13日 · 来源：澎湃新闻/IT之家</div>
-                    <p class="article-text">在Anthropic限制前沿模型访问的同一周，智谱宣布其最强模型GLM-5.2全量开放并遵循MIT协议开源。智谱CEO唐杰明确将此次发布与"Claude 5禁令"挂钩，称要坚持"激进开放"。GLM-5.2支持真正可用的1M上下文窗口，定位为国内最强的Coding模型主引擎。</p>
+                    <h3 class="article-title">华为 openPangu-2.0-Flash 正式开源</h3>
+                    <div class="article-meta">📅 6月30日 · 来源：新浪科技/IT之家</div>
+                    <p class="article-text">华为按计划兑现 HDC 2026 上的开源承诺，openPangu-2.0-Flash 正式上线开源平台。模型权重、基础推理代码、训推算子全部放出，总参数 920 亿。完整开源计划共 7 大组件，将按节奏分批释放。余承东坦言"自己留的算力不够用了"——这是国产算力供需紧张的信号。</p>
                 </div>
 
                 <div class="news-card">
-                    <div class="news-card-title">TensorZero融资后当晚闭源</div>
-                    <p class="news-card-text">开源LLMOps平台TensorZero获得730万美元种子轮融资后，当晚即将GitHub仓库设为只读，在Hacker News上11小时内获得231分，引发开源社区哗然。</p>
+                    <div class="news-card-title">美团 LongCat-2.0 万亿 MoE</div>
+                    <p class="news-card-text">首个从训练到推理全链路跑在国产算力上的万亿模型，总参数 1.6 万亿、激活 48B、1M 上下文。5 万张国产卡集群支撑，匿名版"Owl Alpha"在 OpenRouter 多场景月调用量登顶。</p>
                 </div>
 
                 <div class="article">
-                    <h3 class="article-title">OpenAI推出Codex for Open Source计划</h3>
-                    <div class="article-meta">📅 6月11日 · 来源：搜狐科技</div>
-                    <p class="article-text">OpenAI将Codex算力资源倾斜给开源项目维护者，同时宣布收购初创公司Ona，为Codex打造安全预配置云环境，解决长任务运行的稳定性和安全性问题。</p>
+                    <h3 class="article-title">可灵 AI 完成 30 亿美元融资</h3>
+                    <div class="article-meta">📅 7月2日 · 来源：新京报/红星资本局</div>
+                    <p class="article-text">快手旗下北京可灵完成总额上限 30 亿美元外部增资，投后估值 180 亿美元，刷新全球视频大模型公司单轮最大融资纪录。领投方包括腾讯、阿里、百度等，12 个月内启动赴港 IPO。</p>
                 </div>
             </div>
 
             <!-- 中栏 -->
             <div class="column">
-                <div class="column-header">生态新格局</div>
+                <div class="column-header">企业Agent新格局</div>
 
                 <div class="article">
-                    <h3 class="article-title">微信开放小程序接入AI生态 12亿用户迎来智能服务</h3>
-                    <div class="article-meta">📅 6月8日 · 来源：科创板日报/新浪财经</div>
-                    <p class="article-text">微信开放平台正式发布《开发者接入微信AI生态指南》，小程序开发者可便捷接入"微信AI"生态。提供自动模式和开发模式两种接入方式，接入后的小程序可被微信AI主动推荐和调用。腾讯股价当日拉升近5%。</p>
+                    <h3 class="article-title">Anthropic 三连击：Sonnet 5 + Science + Azure/GB300</h3>
+                    <div class="article-meta">📅 6月30日-7月1日 · 来源：Anthropic 官方</div>
+                    <p class="article-text">Anthropic 在 48 小时内连续打出三张牌：Claude Sonnet 5 以 Opus 40% 价格提供接近旗舰的 Agent 能力；Claude Science 整合 60+ 科研工具、覆盖基因组学/蛋白质组学；Claude 全系列在 Microsoft Foundry + NVIDIA GB300 全面可用。</p>
                 </div>
 
                 <div class="news-card">
-                    <div class="news-card-title">高德发布3D原生城市世界模型</div>
-                    <p class="news-card-text">高德发布全球首个3D原生城市世界模型ABot-Earth0.5，覆盖190多个国家和地区。输入一张卫星图，10分钟生成公里级3D城市场景，效率提升1000倍，成本压缩至1%。</p>
+                    <div class="news-card-title">美国商务部解除 Claude Fable 5 出口管制</div>
+                    <p class="news-card-text">6月30日-7月1日，美国商务部正式撤销对 Claude Fable 5 与 Mythos 5 的出口限制，全球访问自 7月1日恢复。这是 Claude 5 上线 72 小时即遭全球下架后 18 天内实现的快速政策反转。</p>
                 </div>
 
                 <div class="article">
-                    <h3 class="article-title">腾讯发布LearnBuddy学习智能体</h3>
-                    <div class="article-meta">📅 6月8日 · 来源：AITOP100</div>
-                    <p class="article-text">腾讯发布Buddy家族首款行业专用智能体LearnBuddy，打造"师生+AI"协同学习新模式。教师可将课件生成AI专家分身，学生可获得7×24小时在线伴学服务，已在大连理工大学率先落地。</p>
+                    <h3 class="article-title">阿里全面禁用 Claude 7月10日生效</h3>
+                    <div class="article-meta">📅 7月3日 · 来源：智东西/IT之家</div>
+                    <p class="article-text">阿里内部下发通知，全面限制员工使用 Anthropic 所有 Claude 产品。范围涵盖 Sonnet、Opus、Fable 全系模型 + Claude Code 等所有 Agent 产品。官方替代方案是自研的 Qoder 桌面 Coding Agent。原因是 Claude Code 被曝存在植入后门、隐蔽标记中国用户等安全风险。</p>
                 </div>
             </div>
 
             <!-- 右栏 -->
             <div class="column">
-                <div class="column-header">资本与市场</div>
+                <div class="column-header">AI 安全新挑战</div>
 
                 <div class="article">
-                    <h3 class="article-title">月之暗面启动新一轮融资 估值半年暴涨至300亿美元</h3>
-                    <div class="article-meta">📅 6月8日 · 来源：掘金/AITOP100</div>
-                    <p class="article-text">AI初创企业月之暗面（Kimi）正式启动新一轮融资，计划募集最高20亿美元，估值将达300亿美元。半年内进行第三轮融资，估值从40亿美元暴涨至300亿美元，市销率高达150倍。</p>
+                    <h3 class="article-title">Cursor IDE 曝 DuneSlide 双 RCE 漏洞</h3>
+                    <div class="article-meta">📅 7月初 · 来源：FreeBuf/Cato AI Labs</div>
+                    <p class="article-text">Cato AI 实验室披露 Cursor IDE 中两个关键 RCE 漏洞 CVE-2026-50548 和 CVE-2026-50549，统称 DuneSlide。可实现 0 击提示注入 → 沙箱逃逸 → 系统控制权。攻击链可通过恶意项目或 MCP 服务器延伸至企业内部开发环境与源代码库。提示注入首次被证实可作为 RCE 攻击媒介。</p>
                 </div>
 
                 <div class="news-card">
-                    <div class="news-card-title">国产大模型周调用量领跑全球</div>
-                    <p class="news-card-text">最新监测显示，国产大模型周调用量达14.19万亿Token，连续六周超越美国位居全球首位。全球榜单前四名均被国产模型占据，DeepSeek-V4-Flash登顶榜首。</p>
+                    <div class="news-card-title">Claude Code 25 亿美元 ARR</div>
+                    <p class="news-card-text">Anthropic Claude Code 自发布不到一年，年化收入已达 25 亿美元，占公司总计 300 亿美元 ARR 的约 8%。企业编程市场份额达 42-54%，远超 OpenAI 的 21%。</p>
                 </div>
 
                 <div class="article">
-                    <h3 class="article-title">OpenAI计划改版ChatGPT转向全能超级应用</h3>
-                    <div class="article-meta">📅 6月8日 · 来源：AITOP100</div>
-                    <p class="article-text">OpenAI计划对ChatGPT进行史上最大规模改版，整合Codex编程工具、AI智能体能力及第三方应用，目标从聊天工具转型为全能超级应用。集中资源发力核心产品，暂缓Sora等支线项目。</p>
+                    <h3 class="article-title">SpaceX 600亿美元收购 Cursor 母公司</h3>
+                    <div class="article-meta">📅 7月2日 · 来源：TechCrunch/路透社</div>
+                    <p class="article-text">SpaceX 宣布以约 600 亿美元全股票方式收购 Anysphere（Cursor AI 编辑器母公司）。Grok 4.5 将整合 Cursor 编程数据，Cursor 工程师团队将参与模型研发。xAI/SpaceX 要从模型层到工具层全面控制 AI 编程入口。</p>
                 </div>
             </div>
         </div>
@@ -662,134 +596,171 @@
             <h2 class="data-title">本周关键数据</h2>
             <div class="data-grid">
                 <div class="data-item">
-                    <div class="data-number">72</div>
-                    <div class="data-label">Claude 5上线小时数<br>即遭全球下架</div>
+                    <div class="data-number">920亿</div>
+                    <div class="data-label">华为 openPangu-2.0-Flash<br/>总参数</div>
                 </div>
                 <div class="data-item">
-                    <div class="data-number">300</div>
-                    <div class="data-label">月之暗面最新估值<br>（亿美元）</div>
+                    <div class="data-number">30亿</div>
+                    <div class="data-label">可灵AI单轮融资<br/>（估值180亿美元）</div>
                 </div>
                 <div class="data-item">
-                    <div class="data-number">1M</div>
-                    <div class="data-label">GLM-5.2支持的<br>上下文窗口</div>
+                    <div class="data-number">40%</div>
+                    <div class="data-label">Claude Sonnet 5 价格<br/>仅为 Opus 4.8</div>
                 </div>
                 <div class="data-item">
-                    <div class="data-number">12亿</div>
-                    <div class="data-label">微信AI生态<br>潜在用户规模</div>
+                    <div class="data-number">600亿</div>
+                    <div class="data-label">SpaceX 收购 Cursor<br/>母公司（美元）</div>
                 </div>
             </div>
         </section>
 
-        <!-- 时间线 -->
-        <section class="timeline-section">
-            <h2 class="timeline-title">📅 本周事件时间线</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">6月8日 周日</div>
-                    <div class="timeline-content">
-                        • 微信开放平台发布AI生态接入指南<br>
-                        • 高德发布3D原生城市世界模型ABot-Earth0.5<br>
-                        • 月之暗面启动20亿美元融资，估值300亿<br>
-                        • 国产大模型周调用量连续六周超越美国
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">6月9日 周一</div>
-                    <div class="timeline-content">
-                        • Anthropic发布Claude 5 (Fable 5/Mythos 5)<br>
-                        • Fable 5在SWE-Bench Pro达到80.3%<br>
-                        • 微信AI生态消息推动腾讯股价拉升5%
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">6月11日 周三</div>
-                    <div class="timeline-content">
-                        • OpenAI宣布收购初创公司Ona<br>
-                        • Codex迎来安全云升级<br>
-                        • 推出"Codex for Open Source"计划
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">6月12日 周四</div>
-                    <div class="timeline-content">
-                        • 美国商务部长签署禁令信函<br>
-                        • Claude 5遭全球下架，回退至Opus 4.8<br>
-                        • Anthropic承诺"正在努力恢复访问"
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">6月13日 周五</div>
-                    <div class="timeline-content">
-                        • 智谱宣布GLM-5.2全量开放并MIT开源<br>
-                        • TensorZero融资后当晚闭源引争议<br>
-                        • 2026智源大会开幕
-                    </div>
+        <!-- Mermaid 图表区 -->
+        <section class="mermaid-section">
+            <h2 class="mermaid-title">📅 本周事件时间线</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">
+                    <pre class="mermaid">
+timeline
+    title 2026年7月第1周 AI 行业时间线
+    section 6月29日
+      Anthropic Opus 4.8 / Sonnet 4.6 / Haiku 4.6 上线 Azure GB300
+      NVIDIA 公告 GB300 量产进展
+    section 6月30日
+      华为 openPangu-2.0-Flash 正式开源(920亿参数)
+      Anthropic 发布 Claude Science 科研工作台
+      Anthropic 发布 Claude Sonnet 5
+      美国商务部解除 Claude Fable 5 / Mythos 5 出口管制
+      美团 LongCat-2.0 万亿 MoE 发布
+    section 7月1日
+      Claude Fable 5 / Mythos 5 全球访问正式恢复
+      Claude Sonnet 5 全渠道开放
+      字节跳动 TRAE Work 开放预览
+      月之暗面 Kimi K3 预热
+    section 7月2日
+      快手可灵 AI 落地 30 亿美元融资(估值 180 亿美元)
+      xAI Grok 4.5 在 SpaceX/Tesla 内部测试
+      SpaceX 宣布 600 亿美元收购 Anysphere(Cursor 母公司)
+    section 7月3日
+      阿里巴巴全面禁用 Claude(7月10日生效)
+      Cursor IDE 曝出 DuneSlide 双 RCE 漏洞
+      OpenAI 提议向美国政府提供 5% 股权应对 IPO 监管
+      微软 Build 2026 收官(自研 7 款 MAI 模型)
+    section 7月4日
+      DeepSeek V4 正式版预热(7月中旬发布)
+      NVIDIA Vera Rubin 平台路线图披露
+    section 7月5日
+      港股大模型概念股震荡走强(恒指+1.28%)
+      中国"活力中国调研行"展示 AI 大模型潮玩定制
+                    </pre>
                 </div>
             </div>
-        </section>
 
-        <!-- 开闭源象限图 -->
-        <section class="quadrant-section">
-            <h2 class="quadrant-title">📊 开源 vs 闭源：本周格局演变</h2>
-            <div class="quadrant-grid">
-                <div class="quadrant-cell">
-                    <span class="quadrant-label top-left">高价值 · 低开放</span>
-                    <span class="quadrant-item">Claude 5 (被禁)</span>
-                </div>
-                <div class="quadrant-cell">
-                    <span class="quadrant-label top-right">高价值 · 高开放</span>
-                    <span class="quadrant-item blue">GLM-5.2 (MIT开源)</span>
-                    <span class="quadrant-item green">微信AI生态</span>
-                </div>
-                <div class="quadrant-cell">
-                    <span class="quadrant-label bottom-left">低价值 · 低开放</span>
-                    <span class="quadrant-item amber">TensorZero (闭源)</span>
-                </div>
-                <div class="quadrant-cell">
-                    <span class="quadrant-label bottom-right">低价值 · 高开放</span>
-                    <span class="quadrant-item blue">Codex for OSS</span>
+            <h2 class="mermaid-title">📊 AI Coding 工具安全态势</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">
+                    <pre class="mermaid">
+quadrantChart
+    title AI Coding 工具安全态势 (2026年7月第1周)
+    x-axis "渗透率低" --> "渗透率高"
+    y-axis "安全风险低" --> "安全风险高"
+    quadrant-1 "高风险·高价值"
+    quadrant-2 "待观察"
+    quadrant-3 "低风险"
+    quadrant-4 "高价值·可控"
+    "Cursor IDE (DuneSlide CVE-2026-50548/9)": [0.95, 0.90]
+    "GitHub Copilot (浏览器代理权限)": [0.80, 0.55]
+    "Claude Code (阿里禁用)": [0.70, 0.75]
+    "TRAE Work (字节跳动)": [0.40, 0.45]
+    "OpenAI Codex (速率重置+TRACE日志)": [0.75, 0.50]
+    "Qoder (阿里自研)": [0.30, 0.35]
+                    </pre>
                 </div>
             </div>
-        </section>
 
-        <!-- 微信生态架构图 -->
-        <section class="architecture-section">
-            <h2 class="architecture-title">🏗️ 微信AI生态架构</h2>
-            <div class="architecture-diagram">
-                <div class="arch-box">
-                    <div class="arch-box-title">开发者</div>
-                    <div class="arch-box-items">
-                        <div>小程序开发者</div>
-                        <div>企业团队</div>
-                        <div>个人开发者</div>
-                    </div>
+            <h2 class="mermaid-title">🧠 国产 AI 格局演进</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">
+                    <pre class="mermaid">
+mindmap
+  root((本周国产AI<br>格局演进))
+    华为系
+      openPangu-2.0-Flash 开源
+      920亿参数+7大组件
+      昇腾路线全面铺开
+    美团系
+      LongCat-2.0 万亿MoE
+      5万国产卡集群
+      Owl Alpha 登顶OpenRouter
+    字节系
+      TRAE Work 三模式
+      Seedream 5.0 Pro
+      Seed 2.0 Lite 企业级
+    阿里系
+      禁用Claude自研Qoder
+      Qwen3.7-Max国际盲测登顶
+      千问合规下线拟人化Agent
+    月之暗面
+      Kimi K3 预热(2.5万亿)
+      ARR 突破3亿美元
+      API 占比超70%
+    快手系
+      可灵AI 30亿美元融资
+      估值180亿美元
+      12个月赴港IPO
+                    </pre>
                 </div>
-                <div class="arch-arrow">→</div>
-                <div class="arch-box">
-                    <div class="arch-box-title">接入层</div>
-                    <div class="arch-box-items">
-                        <div>自动模式 (零代码)</div>
-                        <div>开发模式 (可定制)</div>
-                        <div>审核机制</div>
-                    </div>
+            </div>
+
+            <h2 class="mermaid-title">🏗️ 企业 Agent 协作架构</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">
+                    <pre class="mermaid">
+graph LR
+    A[用户终端] --> B[接入层]
+    B --> C[微信AI<br/>A2A助手]
+    B --> D[飞书<br/>多维表格Agent]
+    B --> E[钉钉<br/>悟空]
+    B --> F[Slack<br/>Claude Tag]
+
+    C --> G[核心引擎]
+    D --> G
+    E --> G
+    F --> G
+
+    G --> H[腾讯 QClaw<br/>多Agent协作]
+    G --> I[蚂蚁 阿宝<br/>72项技能]
+    G --> J[百度 DuMate<br/>高考志愿Skill]
+
+    H --> K[场景化输出]
+    I --> K
+    J --> K
+
+    K --> L[数据分析报告]
+    K --> M[PPT汇报]
+    K --> N[异常清单]
+    K --> O[管理层摘要]
+                    </pre>
                 </div>
-                <div class="arch-arrow">→</div>
-                <div class="arch-box">
-                    <div class="arch-box-title">微信AI核心</div>
-                    <div class="arch-box-items">
-                        <div>服务推荐引擎</div>
-                        <div>自然语言理解</div>
-                        <div>跨应用调度</div>
-                    </div>
-                </div>
-                <div class="arch-arrow">→</div>
-                <div class="arch-box">
-                    <div class="arch-box-title">12亿用户</div>
-                    <div class="arch-box-items">
-                        <div>聊天界面</div>
-                        <div>小程序页面</div>
-                        <div>支付系统</div>
-                    </div>
+            </div>
+
+            <h2 class="mermaid-title">⚠️ AI 编程安全攻击链</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">
+                    <pre class="mermaid">
+sequenceDiagram
+    participant A as 攻击者
+    participant M as 恶意MCP服务器
+    participant C as Cursor IDE
+    participant S as 系统内核
+    A->>M: 植入提示注入载荷
+    M->>C: 用户打开恶意项目
+    Note over C: 0-click 触发
+    C->>C: CVE-2026-50548 沙箱逃逸
+    C->>C: CVE-2026-50549 符号链接路径混淆
+    C->>S: 绕过沙箱执行任意代码
+    S-->>A: 系统控制权
+    Note over A,S: 攻击链可延伸至企业内部代码库
+                    </pre>
                 </div>
             </div>
         </section>
@@ -800,23 +771,31 @@
             <div class="preview-list">
                 <div class="preview-item">
                     <div class="preview-number">01</div>
-                    <div class="preview-text"><strong>Claude 5恢复进展</strong><br>Anthropic承诺"正在努力尽快恢复访问权限"，关注是否解禁及条件</div>
+                    <div class="preview-text"><strong>阿里 7月10日禁用 Claude 生效</strong><br>Qoder 接棒效果、企业内 AI 工具切换摩擦成本</div>
                 </div>
                 <div class="preview-item">
                     <div class="preview-number">02</div>
-                    <div class="preview-text"><strong>GLM-5.2开源效果</strong><br>下周正式开源后的社区反馈和评测数据</div>
+                    <div class="preview-text"><strong>GPT-5.6 Sol / Terra / Luna 公测</strong><br>7月7日（北京时间）发布传闻是否兑现</div>
                 </div>
                 <div class="preview-item">
                     <div class="preview-number">03</div>
-                    <div class="preview-text"><strong>微信AI生态灰度</strong><br>用户侧灰度节奏、首批可调用类目、支付权限边界</div>
+                    <div class="preview-text"><strong>DeepSeek V4 正式版</strong><br>7月中旬发布，峰谷定价争议的开发者反馈</div>
                 </div>
                 <div class="preview-item">
                     <div class="preview-number">04</div>
-                    <div class="preview-text"><strong>智源大会成果</strong><br>6月12-13日智源大会发布的技术成果落地情况</div>
+                    <div class="preview-text"><strong>Gemini 3.5 Pro 二次延期</strong><br>Google 工程团队对 token 消耗和 Agent 稳定性的最新表态</div>
                 </div>
                 <div class="preview-item">
                     <div class="preview-number">05</div>
-                    <div class="preview-text"><strong>欧盟AI法案</strong><br>8月2日生效前的企业合规准备进度</div>
+                    <div class="preview-text"><strong>可灵 AI 赴港 IPO 进展</strong><br>12 个月倒计时，独立分拆的财务与合规路径</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">06</div>
+                    <div class="preview-text"><strong>2026 世界人工智能大会（WAIC）</strong><br>7 月上海举办，关注政策信号和国产模型展示</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">07</div>
+                    <div class="preview-text"><strong>Claude Science 第三方评估</strong><br>科研工作台的"研二学生"能力是否经得起学术评审考验</div>
                 </div>
             </div>
         </section>
@@ -826,45 +805,63 @@
             <h2 class="sources-title">📚 相关出处</h2>
             <div class="sources-grid">
                 <div class="source-category">
-                    <div class="source-category-title">Claude 5 发布与禁令</div>
-                    <a href="https://www.sohu.com/a/1034572313_122132398" class="source-link">Anthropic发布Claude五代模型 - 搜狐</a>
-                    <a href="https://tech.ifeng.com/c/8tvADE8llDk" class="source-link">特朗普出手！Claude Fable 5与Mythos 5全停了 - 凤凰科技</a>
-                    <a href="https://finance.sina.com.cn/tech/roll/2026-06-13/doc-inicfreu9725031.shtml" class="source-link">突发！Anthropic全球停用Claude 5 - 新浪财经</a>
+                    <div class="source-category-title">华为 openPangu-2.0-Flash 开源</div>
+                    <a href="https://finance.sina.com.cn/tech/shenji/2026-06-30/doc-inifehiw1663465.shtml" class="source-link">华为 openPangu-2.0-Flash 模型正式开源上线，总参数920亿 - 新浪科技</a>
+                    <a href="https://www.ithome.com/0/970/466.htm" class="source-link">920 亿参数，华为 openPangu-2.0-Flash 模型正式开源上线 - IT之家</a>
+                    <a href="https://www.weste.net/2026/07-01/openPangu-2.0-Flash.html" class="source-link">华为开源盘古大模型 openPangu 2.0 Flash - 西部e网</a>
                 </div>
                 <div class="source-category">
-                    <div class="source-category-title">智谱GLM-5.2开源</div>
-                    <a href="https://www.zgeo.com.cn/news/zhipu-glm-5-2-open-source" class="source-link">智谱GLM-5.2全量开放并开源 - 智脑网</a>
-                    <a href="https://www.thepaper.cn/newsDetail_forward_33374813" class="source-link">Anthropic最强模型被禁后，智谱宣布GLM5.2全量开放 - 澎湃新闻</a>
-                    <a href="https://www.ithome.com/0/963/855.htm" class="source-link">智谱：GLM-5.2将面向GLM Coding Plan全量用户开放 - IT之家</a>
+                    <div class="source-category-title">Anthropic Claude Sonnet 5</div>
+                    <a href="https://www.ic.work/article/anthropic-releases-claude-sonnet-5" class="source-link">Claude Sonnet 5 发布 - 51CTO</a>
+                    <a href="https://news.qq.com/rain/a/20260701A01X7000" class="source-link">Claude Sonnet 5 发布，性能接近 Opus 4.8 - 腾讯新闻</a>
+                    <a href="https://www.sohu.com/a/1044324783_100289121" class="source-link">Anthropic发布Claude Sonnet 5 - 搜狐</a>
+                    <a href="https://ai.zhiding.cn/2026/0701/3192136.shtml" class="source-link">Claude Sonnet 5正式发布 - 智东西</a>
                 </div>
                 <div class="source-category">
-                    <div class="source-category-title">微信AI生态</div>
-                    <a href="https://news.qq.com/rain/a/20260609A09SLG00" class="source-link">腾讯开放微信AI生态接入 - 科创板日报</a>
-                    <a href="https://finance.sina.com.cn/roll/2026-06-09/doc-iniavmyp4977661.shtml" class="source-link">微信AI生态正式对外开放 - 新浪财经</a>
-                    <a href="https://news.qq.com/rain/a/20260609A03YP900" class="source-link">微信AI这一步，正在重排中国AI的入口战 - 腾讯新闻</a>
+                    <div class="source-category-title">Claude Science 科研工作台</div>
+                    <a href="https://news.qq.com/rain/a/20260701A05E8U00" class="source-link">Anthropic发布Claude Science - 腾讯新闻</a>
+                    <a href="https://tech.ifeng.com/c/8uOc5SgmLCs" class="source-link">Anthropic推出Claude Science - 凤凰科技</a>
+                    <a href="https://news.qq.com/rain/a/20260701A01VNC00" class="source-link">从法律到制药！Anthropic推出Claude Science - 智通财经</a>
                 </div>
                 <div class="source-category">
-                    <div class="source-category-title">高德ABot-Earth</div>
-                    <a href="https://finance.sina.com.cn/tech/digi/2026-06-08/doc-iniasmvs5596428.shtml" class="source-link">高德发布3D原生城市世界模型ABot-Earth0.5 - 新浪科技</a>
-                    <a href="https://news.qq.com/rain/a/20260608A04V0N00" class="source-link">全球首个3D原生城市世界模型 - 腾讯新闻</a>
+                    <div class="source-category-title">Claude 全系列上线 Azure + GB300</div>
+                    <a href="https://www.sohu.com/a/1043649465_122396381" class="source-link">Claude 携手 NVIDIA GB300 在 Azure 上线 - 搜狐</a>
+                    <a href="https://finance.sina.com.cn/tech/digi/2026-06-30/doc-inifeaah3557800.shtml" class="source-link">微软全面推出 Anthropic Claude 模型 Azure 云服务 - 新浪科技</a>
+                    <a href="https://news.qq.com/rain/a/20260630A01WEZ00" class="source-link">Anthropic商业化加速：Claude全面上线微软Azure平台 - 腾讯新闻</a>
                 </div>
                 <div class="source-category">
-                    <div class="source-category-title">OpenAI收购Ona</div>
-                    <a href="https://www.sohu.com/a/1035453538_121956424" class="source-link">OpenAI收购Ona，Codex迎来安全云升级 - 搜狐</a>
+                    <div class="source-category-title">美国商务部解除 Claude Fable 5 出口管制</div>
+                    <a href="https://finance.sina.com.cn/stock/usstock/summary/2026-07-01/doc-inifheyy1036865.shtml" class="source-link">Anthropic称美国商务部已解除对 Claude Fable 5 的出口限制 - 新浪财经</a>
                 </div>
                 <div class="source-category">
-                    <div class="source-category-title">TensorZero争议</div>
-                    <a href="https://www.amazingindex.com/article/3e13d8993b3463e788d0910d192caff3" class="source-link">融资730万美元后闭源引争议 - AmazingIndex</a>
+                    <div class="source-category-title">可灵 AI 30 亿美元融资</div>
+                    <a href="https://www.bjnews.com.cn/detail/1783048289189640.html" class="source-link">估值 180 亿美元！快手可灵AI融资30亿美元 - 新京报</a>
+                    <a href="https://baijiahao.baidu.com/s?id=1869774479968626732&wfr=spider&for=pc" class="source-link">融资 30 亿美元，可灵AI为何执意"出走"快手 - 百家号</a>
+                    <a href="https://weibo.com/ttarticle/p/show?id=2309405316225021640738" class="source-link">快手可灵 AI 将完成 30 亿美元融资 - 微博</a>
                 </div>
                 <div class="source-category">
-                    <div class="source-category-title">月之暗面融资</div>
-                    <a href="https://juejin.cn/post/7648866670524661795" class="source-link">2026年6月8日AI重要新闻 - 掘金</a>
-                    <a href="https://www.aitop100.cn/ai-daily-2026-06-08" class="source-link">每日AI资讯-2026年6月08日 - AITOP100</a>
+                    <div class="source-category-title">阿里全面禁用 Claude</div>
+                    <a href="https://news.qq.com/rain/a/20260703A06XTB00" class="source-link">消息称阿里全面禁用 Claude，禁令于 7 月 10 日正式生效 - 腾讯新闻</a>
+                    <a href="https://www.51cto.com/article/848456.html" class="source-link">突发！阿里全面禁用Claude - 51CTO</a>
+                    <a href="https://www.ithome.com/0/972/210.htm" class="source-link">消息称阿里巴巴全面禁用 Anthropic 旗下 Claude 产品 - IT之家</a>
+                    <a href="https://www.sohu.com/a/1045491833_122105141" class="source-link">突发！阿里内部全面禁用 Claude Code - 搜狐</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Cursor IDE DuneSlide 漏洞</div>
+                    <a href="https://www.freebuf.com/articles/ai-security/488440.html" class="source-link">Cursor IDE 曝出两大关键 RCE 漏洞 - FreeBuf</a>
+                    <a href="https://www.freebuf.com/articles/ai-security/488477.html" class="source-link">Cursor IDE 沙箱逃逸漏洞凸显提示注入可成为 RCE 攻击媒介 - FreeBuf</a>
+                    <a href="https://beyondmachines.net/event_details/duneslide-zero-click-rce-vulnerabilities-discovered-in-cursor-ide-5-n-j-t-d/9uoJWdGwxq" class="source-link">DuneSlide Zero-Click RCE Vulnerabilities Discovered in Cursor IDE - BeyondMachines</a>
+                    <a href="https://gbhackers.com/critical-cursor-ide-flaws/" class="source-link">Critical Cursor IDE Flaws Let Attackers Execute Code via Zero-Click - GBHackers</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">美团 LongCat-2.0 万亿 MoE</div>
+                    <a href="https://blog.csdn.net/ld326/article/details/162531418" class="source-link">2026 年 07 月 03 日全球 AI 前沿动态 - CSDN</a>
+                    <a href="https://iaipie.com/ai%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%95%E6%B7%B1%E5%BA%A6%E7%9B%98%E7%82%B9%EF%BC%882026%E5%B9%B47%E6%9C%88%E7%AF%87%EF%BC%89%EF%BC%9Agpt-5-6%E5%86%85%E6%B5%8B%E3%80%81anthro/" class="source-link">2026 年 7 月 AI 大模型最新进展全景盘点 - 无矩AI</a>
                 </div>
                 <div class="source-category">
                     <div class="source-category-title">综合分析</div>
-                    <a href="https://www.digitalnerds.in/posts/ai-breakthroughs-june-2026-google-turbo-quant-agentic-meta-restructuring" class="source-link">AI Breakthroughs in June 2026 - DigitalNerds</a>
-                    <a href="https://kersai.com/june-2026-ai-news-anthropic-spacex-google-business-impact/" class="source-link">June 2026 AI News - Kersai</a>
+                    <a href="https://finance.sina.com.cn/tech/roll/2026-07-02/doc-inifkqfw0383467.shtml" class="source-link">Anthropic、OpenAI 同一天落子 AI4S 赛道 - 新浪财经</a>
+                    <a href="https://www.alchemyj.io/zh-cn/techtrends/2026-07-03-openai-msft-tsla-ai-infrastructure-monetization" class="source-link">OpenAI 提议转让政府股权惹议 - AlchemyJ</a>
                 </div>
             </div>
         </section>
@@ -872,9 +869,18 @@
         <!-- 页脚 -->
         <footer class="footer">
             <div class="footer-brand">AI 周报速递</div>
-            <div>编辑：AI 自动生成 | 数据截止：2026年6月14日 12:00</div>
+            <div>编辑：AI 自动生成 | 数据截止：2026年7月5日 12:00</div>
             <div style="margin-top: 5px;">© 2026 AI城 · 专注AI领域深度报道</div>
         </footer>
     </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: 'Noto Sans SC, sans-serif'
+        });
+    </script>
 </body>
 </html>
