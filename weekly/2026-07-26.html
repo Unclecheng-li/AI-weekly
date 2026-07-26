@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 周报速递 - 2026年7月第4周</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.6/dist/mermaid.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: #f5f0e8;
+            color: #1a1a1a;
+            line-height: 1.8;
+        }
+
+        .newspaper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fffef9;
+            box-shadow: 0 0 40px rgba(0,0,0,0.15);
+            min-height: 100vh;
+        }
+
+        /* 头部 - 报头 */
+        .masthead {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 20px 40px;
+            text-align: center;
+            border-bottom: 8px double #c41e3a;
+        }
+
+        .masthead-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .masthead h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 72px;
+            font-weight: 900;
+            letter-spacing: 12px;
+            margin: 10px 0;
+            text-shadow: 2px 2px 0 #c41e3a;
+        }
+
+        .masthead-subtitle {
+            font-size: 18px;
+            letter-spacing: 8px;
+            color: #ddd;
+            margin-top: 5px;
+        }
+
+        /* 导航条 */
+        .nav-bar {
+            background: #c41e3a;
+            color: white;
+            padding: 10px 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-bar span {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .nav-bar span:hover {
+            opacity: 0.8;
+        }
+
+        /* 头条区域 */
+        .headline-section {
+            padding: 30px 40px;
+            border-bottom: 3px solid #1a1a1a;
+        }
+
+        .headline-banner {
+            background: #c41e3a;
+            color: white;
+            display: inline-block;
+            padding: 5px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .headline-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+
+        .headline-subtitle {
+            font-size: 20px;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .headline-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        /* 主内容区 - 多栏布局 */
+        .content-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+            padding: 0 40px;
+        }
+
+        .column {
+            padding: 25px 20px;
+            border-right: 1px solid #ddd;
+        }
+
+        .column:last-child {
+            border-right: none;
+        }
+
+        .column-header {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #c41e3a;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        .article {
+            margin-bottom: 25px;
+        }
+
+        .article-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .article-meta {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .article-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .article-text::first-letter {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 36px;
+            font-weight: 700;
+            float: left;
+            line-height: 1;
+            margin-right: 8px;
+            color: #c41e3a;
+        }
+
+        /* 重要新闻卡片 */
+        .news-card {
+            background: #f8f5ee;
+            border-left: 4px solid #c41e3a;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .news-card-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #c41e3a;
+        }
+
+        .news-card-text {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        /* 数据区域 */
+        .data-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+            margin: 30px 0;
+        }
+
+        .data-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #c41e3a;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .data-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .data-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 42px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .data-label {
+            font-size: 13px;
+            color: #aaa;
+            margin-top: 8px;
+        }
+
+        /* 下周关注 */
+        .preview-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+        }
+
+        .preview-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 20px;
+        }
+
+        .preview-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .preview-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-left: 3px solid #c41e3a;
+        }
+
+        .preview-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .preview-text {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* 底部 - 出处 */
+        .sources-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .sources-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .source-category {
+            margin-bottom: 15px;
+        }
+
+        .source-category-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #c41e3a;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #c41e3a;
+            padding-bottom: 5px;
+        }
+
+        .source-link {
+            font-size: 12px;
+            color: #185FA5;
+            text-decoration: none;
+            display: block;
+            padding: 3px 0;
+            line-height: 1.5;
+        }
+
+        .source-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: #1a1a1a;
+            color: #aaa;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .footer-brand {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            color: #c41e3a;
+            margin-bottom: 5px;
+        }
+
+        /* Mermaid 图表区域 */
+        .mermaid-section {
+            padding: 30px 40px;
+            background: #f8f5ee;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .mermaid-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+        }
+
+        .mermaid-block {
+            background: #fffef9;
+            border: 2px solid #1a1a1a;
+            padding: 20px;
+            margin-bottom: 25px;
+            overflow-x: auto;
+        }
+
+        .mermaid-block-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+        }
+
+        .mermaid {
+            text-align: center;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .masthead h1 { font-size: 48px; letter-spacing: 8px; }
+            .content-area { grid-template-columns: 1fr; }
+            .column { border-right: none; border-bottom: 1px solid #ddd; }
+            .data-grid { grid-template-columns: repeat(2, 1fr); }
+            .preview-list { grid-template-columns: 1fr; }
+            .sources-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper">
+        <!-- 报头 -->
+        <header class="masthead">
+            <div class="masthead-top">
+                <span>2026年7月26日 星期日</span>
+                <span>第28期 · 总第112期</span>
+                <span>农历丙午年 七月初二</span>
+            </div>
+            <h1>AI 周报速递</h1>
+            <div class="masthead-subtitle">ARTIFICIAL INTELLIGENCE WEEKLY EXPRESS</div>
+        </header>
+
+        <!-- 导航条 -->
+        <nav class="nav-bar">
+            <span>头版头条</span>
+            <span>深度报道</span>
+            <span>数据洞察</span>
+            <span>开源动态</span>
+            <span>资本风向</span>
+            <span>技术前沿</span>
+        </nav>
+
+        <!-- 头条 -->
+        <section class="headline-section">
+            <div class="headline-banner">重磅头条</div>
+            <h2 class="headline-title">Google 三连发 Gemini 新模型<br>Flash Cyber 切入网络安全赛道</h2>
+            <p class="headline-subtitle">7月21日，Google 一口气推出 Gemini 3.6 Flash、3.5 Flash-Lite 与 3.5 Flash Cyber 三款模型。其中 Flash Cyber 专为网络安全微调，在 V8 JavaScript 引擎测试中揪出 55 处问题、含 10 个其他模型此前未发现的漏洞，仅向政府与可信伙伴开放——直接对标 Anthropic Mythos/Fable 与 OpenAI 的网络安全模型。旗舰 Gemini 3.5 Pro 因代码能力未达内部预期继续跳票，Gemini 4 预训练已启动。</p>
+            <div class="headline-meta">
+                <span>📅 2026年7月21日</span>
+                <span>📍 Google DeepMind</span>
+                <span>🏷️ 大模型 · LLM · 网络安全 · 性价比</span>
+            </div>
+        </section>
+
+        <!-- 三栏内容 -->
+        <div class="content-area">
+            <!-- 左栏 -->
+            <div class="column">
+                <div class="column-header">大模型 / LLM 前沿</div>
+
+                <div class="article">
+                    <h3 class="article-title">NVIDIA Vera CPU 详解 自研核心赋能 Agent</h3>
+                    <div class="article-meta">📅 7月21日 · 来源：每日经济新闻</div>
+                    <p class="article-text">NVIDIA 公布首款自研 CPU 核心的数据中心处理器 Vera，6 月已交付 OpenAI、Anthropic、SpaceX 等客户。官方称针对 AI 智能体工作负载优化，相比传统 x86 服务器 CPU 性能提升约 50%；Wolfe Research 估算单颗约 $5000，今年出货约 130 万颗。从 GPU 到整柜再到自研 CPU，Agent 算力底座被重新定义。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">Gemini 3.5 Pro 持续跳票</div>
+                    <p class="news-card-text">原计划 6 月发布的旗舰因内部测试（尤其代码生成）未达预期推迟数周，目前仅与伙伴测试；Google 同时透露已启动 Gemini 4 预训练。"代码能力"成为大模型最硬分水岭。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">三星成立机器人事业部 RX 具身智能升温</h3>
+                    <div class="article-meta">📅 7月21日 · 来源：每日经济新闻</div>
+                    <p class="article-text">三星宣布成立直属 CEO 的机器人事业部"RX"，由曾任现代汽车机器人战略的 Lee Dongkun 领导，并计划在中、美、日设研究中心。语言 Agent 成熟后，巨头把赌注压到"多模态模型 + 机器人本体"的物理世界落地。</p>
+                </div>
+            </div>
+
+            <!-- 中栏 -->
+            <div class="column">
+                <div class="column-header">协议 / 安全</div>
+
+                <div class="article">
+                    <h3 class="article-title">MCP 无状态化规格 7/28 定稿</h3>
+                    <div class="article-meta">📅 7月28日（候选）· 来源：adersaytech / AI NewsCycle</div>
+                    <p class="article-text">MCP 下一版移除 initialize/initialized 握手（SEP-2575）与 Mcp-Session-Id（SEP-2567），改为每请求在 _meta 携带版本/能力、新增 server/discover。远程 MCP 不再需要 sticky session，任意请求可落任意实例，部署门槛大幅降低。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">Microsoft 警示 MCP tool poisoning</div>
+                    <p class="news-card-text">攻击者篡改工具元数据/描述，借"silent re-trust"动态反射诱导 Agent 执行未授权操作（数据外泄、发邮件）。第三方统计 1800+ 服务器超 30% 存可利用漏洞，MCP 已成 Agent 首要劫持面。同期"skill hell"指令集合泛滥致性能退化。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">Apple Safari / Amazon 接入 MCP</h3>
+                    <div class="article-meta">📅 本周 · 来源：AI NewsCycle</div>
+                    <p class="article-text">Apple Safari MCP server（Tech Preview 247）让编码 Agent 直接调试渲染页面；Amazon WorkSpaces 用 MCP tool forwarding 操作无 API 的 legacy Windows 应用。Agent 正从"读数据"走向"直接行动"。</p>
+                </div>
+            </div>
+
+            <!-- 右栏 -->
+            <div class="column">
+                <div class="column-header">AI Coding / Agent</div>
+
+                <div class="article">
+                    <h3 class="article-title">AI Coding 工具格局大整合</h3>
+                    <div class="article-meta">📅 2026上半年持续 · 来源：Claudify / AgentsIndex</div>
+                    <p class="article-text">Cursor 收购 Continue.dev；Windsurf 改版为 Devin Desktop；Google 退役 Gemini CLI 转向闭源 Antigravity CLI；Amazon Q Developer 由 Kiro 接班；OpenAI 7/9 将 Codex 并入统一 ChatGPT（Chat/Work/Codex 三模式）。Claude Code 综合最强，Cursor 最佳编辑器内 Agent，Cline/OpenHands 为最强开源。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">Codex 跃迁为通用工作平台</div>
+                    <p class="news-card-text">OpenAI 推出可后台运行数小时的 ChatGPT Work；据论文 Codex 周活超 500 万，约 20% 为知识工作者，非开发者使用量增长 137 倍。软件构建门槛从"会写代码"降到"会描述需求"。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">Agent 平台化成主线</h3>
+                    <div class="article-meta">📅 本周发酵 · 来源：钛媒体 / Codex Docs</div>
+                    <p class="article-text">从 Codex 并入 ChatGPT、ChatGPT Work 长时运行，到各家把 Coding Agent 推向"数字员工"，竞争焦点已从补全质量升级为"自主多文件执行 + 生态深度 + 商业化模式"。Agent 拿到 repo 级写权限后，工具投毒、CI 滥用成为真实威胁。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据区域 -->
+        <section class="data-section">
+            <h2 class="data-title">本周关键数据</h2>
+            <div class="data-grid">
+                <div class="data-item">
+                    <div class="data-number">55</div>
+                    <div class="data-label">Flash Cyber 在 V8 引擎<br>发现的问题（含10个独家）</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">+50%</div>
+                    <div class="data-label">NVIDIA Vera CPU<br>AI Agent 负载性能提升</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">500万</div>
+                    <div class="data-label">OpenAI Codex<br>周活用户</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">137倍</div>
+                    <div class="data-label">非开发者使用 Codex<br>增长（个人）</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mermaid 图表区 -->
+        <section class="mermaid-section">
+            <h2 class="mermaid-title">📅 本周事件时间线</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">timeline
+    title 2026年7月20日-26日 AI 大事件时间线
+    section 7月21日
+        Google 发布三款 Gemini 模型 : 3.6 Flash / 3.5 Flash-Lite / 3.5 Flash Cyber
+        NVIDIA 详解 Vera CPU : 首款自研 CPU 核心 AI Agent 负载 +50%
+        三星成立机器人事业部 RX : 直属 CEO 布局具身智能
+    section 7月22日
+        媒体解读 Gemini 3.5 Pro 跳票 : 代码能力未达内部预期
+    section 7月28日(预告)
+        MCP 无状态化规格定稿 : 移除 Session-Id 与握手 SEP-2575/2567</div>
+            </div>
+
+            <h2 class="mermaid-title">📊 前沿模型：性价比 × 垂直安全能力 象限</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">quadrantChart
+    title 前沿模型：性价比 × 垂直安全能力
+    x-axis 低性价比 --> 高性价比
+    y-axis 无垂直安全 --> 强安全垂直
+    quadrant-1 高性价比·强安全
+    quadrant-2 低性价比·强安全
+    quadrant-3 低性价比·无安全
+    quadrant-4 高性价比·无安全
+    "Gemini 3.5 Flash Cyber": [0.85, 0.90]
+    "GPT-5.6 Sol (安全)": [0.20, 0.92]
+    "Claude Mythos/Fable 5": [0.15, 0.95]
+    "Gemini 3.6 Flash": [0.90, 0.10]
+    "GPT-5.6 Luna": [0.92, 0.10]</div>
+            </div>
+
+            <h2 class="mermaid-title">🕸️ AI Coding 工具整合格局</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">graph TD
+    A[2026 AI Coding 整合] --> B[闭源巨头]
+    A --> C[开源主力]
+    B --> D[Cursor 收购 Continue.dev]
+    B --> E[Windsurf → Devin Desktop]
+    B --> F[OpenAI Codex 并入 ChatGPT Work]
+    B --> G[Google Gemini CLI → Antigravity CLI]
+    B --> H[Amazon Q Developer → Kiro]
+    C --> I[Cline / OpenHands / aider]
+    F --> J[GPT-5.6 Sol/Terra/Luna]
+    D --> K[Composer Agent 编辑器内]
+    J --> L[Chat / Work / Codex 三模式]</div>
+            </div>
+
+            <h2 class="mermaid-title">🔐 MCP 授权演进（含 tool poisoning 风险）</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">sequenceDiagram
+    participant C as MCP 客户端 (Claude/VS Code)
+    participant S as MCP 服务器
+    participant A as 攻击者
+    Note over C,S: 旧版（有状态）
+    C->>S: initialize + Mcp-Session-Id
+    S-->>C: 会话建立 / 能力清单
+    A->>S: 篡改工具 description (tool poisoning)
+    S-->>C: silent re-trust 动态反射
+    C->>S: 执行被诱导的未授权操作
+    Note over C,S: 新版（7/28 无状态）
+    C->>S: 每请求 _meta 携带版本/能力
+    C->>S: server/discover 拉取能力
+    S-->>C: 能力可审计、无需 sticky session</div>
+            </div>
+
+            <h2 class="mermaid-title">🧠 本周 AI 大事件关系图</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">mindmap
+  root((2026·7月第4周))
+    大模型前沿
+      Google 三款 Gemini
+      Flash Cyber 网络安全
+      Gemini 3.5 Pro 跳票
+      Gemini 4 预训练
+    基础设施
+      NVIDIA Vera CPU
+      AI Agent 负载 +50%
+    协议与安全
+      MCP 无状态化 7/28
+      tool poisoning / skill hell
+      Apple Safari MCP
+    编码工具整合
+      Cursor 收购 Continue
+      Codex 并入 ChatGPT
+      Devin Desktop / Kiro
+    Agent 平台化
+      ChatGPT Work
+      非开发者 +137 倍
+    具身智能
+      三星 RX 事业部</div>
+            </div>
+        </section>
+
+        <!-- 下周关注 -->
+        <section class="preview-section">
+            <h2 class="preview-title">🔮 下周关注</h2>
+            <div class="preview-list">
+                <div class="preview-item">
+                    <div class="preview-number">01</div>
+                    <div class="preview-text"><strong>MCP 7/28 无状态化定稿</strong><br>最终规格与 RC 差异、各 SDK 迁移进度、server/discover 落地情况</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">02</div>
+                    <div class="preview-text"><strong>Flash Cyber 实测反馈</strong><br>V8 引擎 55 处问题的可复现性、与其他安全模型（Mythos/Fable）的横向对比</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">03</div>
+                    <div class="preview-text"><strong>Gemini 3.5 Pro 发布窗口</strong><br>跳票数周后是否如期到来，代码生成能力能否追平 GPT-5.6 / Claude</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">04</div>
+                    <div class="preview-text"><strong>MCP 安全治理落地</strong><br>"tool poisoning / silent re-trust" 防护是否进入企业合规，红队工具链成熟度</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">05</div>
+                    <div class="preview-text"><strong>Codex / ChatGPT Work 采用率</strong><br>非开发者 137 倍增长后的留存，企业 MCP 授权接入节奏</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">06</div>
+                    <div class="preview-text"><strong>AI Coding 整合并购后续</strong><br>Cursor×Continue.dev、Devin Desktop 整合效果，Kiro 能否接住 Q Developer 用户</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 出处 -->
+        <section class="sources-section">
+            <h2 class="sources-title">📚 相关出处</h2>
+            <div class="sources-grid">
+                <div class="source-category">
+                    <div class="source-category-title">Google 三款 Gemini 模型</div>
+                    <a href="https://new.qq.com/rain/a/20260722A03TGF00?refer=cp_1009" class="source-link">英伟达详解 Vera CPU；谷歌推出三款 Gemini 新模型 — 每日经济新闻</a>
+                    <a href="https://www.thestar.com.my/tech/tech-news/2026/07/22/google-releases-three-new-ai-models" class="source-link">Google releases three new AI models — The Star (NYT)</a>
+                    <a href="https://www.163.com/dy/article/L2DM38C105568W0A.html" class="source-link">谷歌发布三款 Gemini 新模型 应对 AI 领域激烈竞争 — 网易/新浪</a>
+                    <a href="https://www.thestar.com.my/tech/tech-news/2026/07/21/google-updates-lightweight-gemini-models-but-flagship-still-delayed" class="source-link">Google updates lightweight Gemini models, but flagship still delayed — Reuters</a>
+                    <a href="https://so.html5.qq.com/page/real/search_news?docid=70000021_1476a60341d34065" class="source-link">谷歌发布三款 Gemini 新模型，旗舰 Pro 版本发布时间仍未确定 — QQ 新闻</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">NVIDIA Vera / 三星 RX</div>
+                    <a href="https://new.qq.com/rain/a/20260722A03TGF00?refer=cp_1009" class="source-link">英伟达详解 Vera CPU；三星成立机器人事业部 RX — 每日经济新闻</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">MCP 无状态化 / 安全</div>
+                    <a href="https://adersaytech.com/ai-tutorial/mcp-model-context-protocol.html" class="source-link">MCP 一次搞懂：2026-07-28 新版规格（无状态化）— adersaytech</a>
+                    <a href="https://ainewscycle.com/story/standardizing-ai-agency-how-mcp-and-skills-are-reshaping-the-developer-workflow-fda1d0ff" class="source-link">Standardizing AI Agency: MCP & Skills Reshape Workflow — AI NewsCycle</a>
+                    <a href="https://www.developersdigest.tech/blog/mcp-servers-vs-agent-skills-2026" class="source-link">MCP Servers vs Agent Skills: Which to Build in 2026 — Developers Digest</a>
+                    <a href="https://cloud.tencent.com/developer/article/2707609" class="source-link">告别定制化 API Wrapper：2026 MCP 协议全面普及 — 腾讯云</a>
+                    <a href="https://cloud.tencent.com/developer/article/2707597" class="source-link">从对话到执行：2026 MCP 协议全面爆发 — 腾讯云</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">AI Coding 工具整合</div>
+                    <a href="https://claudify.tech/blog/agentic-coding-tools" class="source-link">Agentic Coding Tools in 2026: The 12 Best, Ranked — Claudify</a>
+                    <a href="https://agentsindex.ai/blog/best-ai-coding-agents" class="source-link">Best AI Coding Agents in 2026: 10 Tools Compared — AgentsIndex</a>
+                    <a href="https://dev.to/synfinity-dynamics-pvt-ltd/ai-coding-assistants-compared-cursor-vs-github-copilot-vs-claude-code-4gd8" class="source-link">Cursor vs Copilot vs Claude Code — Dev.to</a>
+                    <a href="https://www.toolcolumn.com/best/best-ai-coding-assistants" class="source-link">Best AI Coding Assistants in 2026 — ToolColumn</a>
+                    <a href="https://cursor.com/" class="source-link">Cursor: AI coding agent（Changelog）— Cursor</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">OpenAI Codex / ChatGPT Work</div>
+                    <a href="https://www.tmtpost.com/agent/ai-article/19251" class="source-link">137倍非开发者涌入，OpenAI Codex 正在终结技术合伙人时代 — 钛媒体</a>
+                    <a href="https://www.codex-docs.com/docs/whats-new" class="source-link">Codex 最近更新：GPT-5.6、Work mode 与 Remote — Codex Docs</a>
+                    <a href="https://openai.com/index/introducing-gpt-5-3-codex/" class="source-link">Introducing GPT-5.3-Codex — OpenAI</a>
+                    <a href="https://benchquill.com/tools/openai-codex" class="source-link">OpenAI Codex Review (2026): Pricing & Alternatives — Benchquill</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">综合分析</div>
+                    <a href="https://new.qq.com/rain/a/20260713A0BD9J00?refer=cp_1009" class="source-link">Coding 赛道三强齐发，中美 AI 模型公司角色互换？— 腾讯新闻</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="footer-brand">AI 周报速递</div>
+            <div>编辑：AI 自动生成 | 数据截止：2026年7月26日 12:00</div>
+            <div style="margin-top: 5px;">© 2026 AI城 · 专注AI领域深度报道</div>
+        </footer>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: 'Noto Sans SC, sans-serif',
+            timeline: { useMaxWidth: true },
+            quadrantChart: { useMaxWidth: true },
+            mindmap: { useMaxWidth: true },
+            sequence: { useMaxWidth: true },
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+</body>
+</html>
