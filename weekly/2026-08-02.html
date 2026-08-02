@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 周报速递 - 2026年8月第1周</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.6/dist/mermaid.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: #f5f0e8;
+            color: #1a1a1a;
+            line-height: 1.8;
+        }
+
+        .newspaper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fffef9;
+            box-shadow: 0 0 40px rgba(0,0,0,0.15);
+            min-height: 100vh;
+        }
+
+        /* 头部 - 报头 */
+        .masthead {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 20px 40px;
+            text-align: center;
+            border-bottom: 8px double #c41e3a;
+        }
+
+        .masthead-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .masthead h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 72px;
+            font-weight: 900;
+            letter-spacing: 12px;
+            margin: 10px 0;
+            text-shadow: 2px 2px 0 #c41e3a;
+        }
+
+        .masthead-subtitle {
+            font-size: 18px;
+            letter-spacing: 8px;
+            color: #ddd;
+            margin-top: 5px;
+        }
+
+        /* 导航条 */
+        .nav-bar {
+            background: #c41e3a;
+            color: white;
+            padding: 10px 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-bar span {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .nav-bar span:hover {
+            opacity: 0.8;
+        }
+
+        /* 头条区域 */
+        .headline-section {
+            padding: 30px 40px;
+            border-bottom: 3px solid #1a1a1a;
+        }
+
+        .headline-banner {
+            background: #c41e3a;
+            color: white;
+            display: inline-block;
+            padding: 5px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .headline-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+
+        .headline-subtitle {
+            font-size: 20px;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .headline-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        /* 主内容区 - 多栏布局 */
+        .content-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+            padding: 0 40px;
+        }
+
+        .column {
+            padding: 25px 20px;
+            border-right: 1px solid #ddd;
+        }
+
+        .column:last-child {
+            border-right: none;
+        }
+
+        .column-header {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #c41e3a;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        .article {
+            margin-bottom: 25px;
+        }
+
+        .article-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .article-meta {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .article-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .article-text::first-letter {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 36px;
+            font-weight: 700;
+            float: left;
+            line-height: 1;
+            margin-right: 8px;
+            color: #c41e3a;
+        }
+
+        /* 重要新闻卡片 */
+        .news-card {
+            background: #f8f5ee;
+            border-left: 4px solid #c41e3a;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .news-card-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #c41e3a;
+        }
+
+        .news-card-text {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        /* 数据区域 */
+        .data-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+            margin: 30px 0;
+        }
+
+        .data-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #c41e3a;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .data-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .data-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 42px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .data-label {
+            font-size: 13px;
+            color: #aaa;
+            margin-top: 8px;
+        }
+
+        /* 下周关注 */
+        .preview-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+        }
+
+        .preview-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 20px;
+        }
+
+        .preview-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .preview-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-left: 3px solid #c41e3a;
+        }
+
+        .preview-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .preview-text {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* 底部 - 出处 */
+        .sources-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .sources-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .source-category {
+            margin-bottom: 15px;
+        }
+
+        .source-category-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #c41e3a;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #c41e3a;
+            padding-bottom: 5px;
+        }
+
+        .source-link {
+            font-size: 12px;
+            color: #185FA5;
+            text-decoration: none;
+            display: block;
+            padding: 3px 0;
+            line-height: 1.5;
+        }
+
+        .source-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: #1a1a1a;
+            color: #aaa;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .footer-brand {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            color: #c41e3a;
+            margin-bottom: 5px;
+        }
+
+        /* Mermaid 图表区域 */
+        .mermaid-section {
+            padding: 30px 40px;
+            background: #f8f5ee;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .mermaid-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+        }
+
+        .mermaid-block {
+            background: #fffef9;
+            border: 2px solid #1a1a1a;
+            padding: 20px;
+            margin-bottom: 25px;
+            overflow-x: auto;
+        }
+
+        .mermaid-block-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+        }
+
+        .mermaid {
+            text-align: center;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .masthead h1 { font-size: 48px; letter-spacing: 8px; }
+            .content-area { grid-template-columns: 1fr; }
+            .column { border-right: none; border-bottom: 1px solid #ddd; }
+            .data-grid { grid-template-columns: repeat(2, 1fr); }
+            .preview-list { grid-template-columns: 1fr; }
+            .sources-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper">
+        <!-- 报头 -->
+        <header class="masthead">
+            <div class="masthead-top">
+                <span>2026年8月2日 星期日</span>
+                <span>第29期 · 总第113期</span>
+                <span>农历丙午年 七月初九</span>
+            </div>
+            <h1>AI 周报速递</h1>
+            <div class="masthead-subtitle">ARTIFICIAL INTELLIGENCE WEEKLY EXPRESS</div>
+        </header>
+
+        <!-- 导航条 -->
+        <nav class="nav-bar">
+            <span>头版头条</span>
+            <span>深度报道</span>
+            <span>数据洞察</span>
+            <span>开源动态</span>
+            <span>资本风向</span>
+            <span>技术前沿</span>
+        </nav>
+
+        <!-- 头条 -->
+        <section class="headline-section">
+            <div class="headline-banner">重磅头条</div>
+            <h2 class="headline-title">RufRoot 引爆 MCP 安全危机<br>一个未授权请求拿下 AI 全家桶</h2>
+            <p class="headline-subtitle">7月29日，Noma Security 披露 CVE-2026-59726（代号 RufRoot），CVSS 10.0（满分）。开源 AI Agent 编排平台 Ruflo（约 6.7 万 GitHub Star、近千万下载）默认将核心 MCP Bridge 以无认证方式暴露在网络上，桥上挂了 233 个工具（含命令执行、数据库、记忆存储）。攻击者只需一个未认证 HTTP POST，即可在容器内拿到 RCE、窃取 LLM API Key、读取全部用户对话，并向 AgentDB 持久记忆写入恶意指令——让攻击者控制的 Agent 集群以平台合法凭据长期运行。同日 Wiz Research 披露：约 5% 的云环境已暴露公网可达的 MCP 服务器，含财富 500 强泄露 PII。</p>
+            <div class="headline-meta">
+                <span>📅 2026年7月29日</span>
+                <span>📍 Noma Security · Ruflo</span>
+                <span>🏷️ AI安全 · MCP · CVSS 10.0 · Agent</span>
+            </div>
+        </section>
+
+        <!-- 三栏内容 -->
+        <div class="content-area">
+            <!-- 左栏 -->
+            <div class="column">
+                <div class="column-header">大模型 / LLM 前沿</div>
+
+                <div class="article">
+                    <h3 class="article-title">Thinking Machines 开源 Inkling-Small 编程反超旗舰</h3>
+                    <div class="article-meta">📅 7月30日 · 来源：chooseai / Forkast / Digital Applied</div>
+                    <p class="article-text">Mira Murati 的 Thinking Machines Lab 发布并开源 Inkling-Small（2760 亿总参数 / 120 亿激活，MoE，Apache 2.0）。它是旗舰 Inkling（9750 亿/410 亿）的蒸馏版，经 on-policy 蒸馏 + 两周智能体编码 RL。官方自报在 Agent 编程基准反超旗舰：SWE-Bench Verified 80.2% vs 77.6%、Terminal-Bench 2.1 64.7% vs 63.8%；代价是事实性近腰斩（SimpleQA 20.6% vs 43.9%）。价格约 $0.30/$1.20 每百万 token，约为旗舰 1/3，原生多模态、1M 上下文。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">开放权重公开信 25→50 家联署</div>
+                    <p class="news-card-text">7月24日英伟达、微软、Meta 等 25 家联名《Open Weights and American AI Leadership》；约一天内增至 50 家，Google、OpenAI 补签，Anthropic 与 Amazon 始终未签。信中明确区分合法蒸馏与非法提取，正是 OpenAI 得以签字的关键段落。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">MiniMax H3 通用全模态模型 宣布开源</h3>
+                    <div class="article-meta">📅 7月31日 · 来源：站长之家 AI日报</div>
+                    <p class="article-text">MiniMax 发布 H3 通用全模态模型，统一文本 / 图像 / 视频 / 音频的理解与生成，原生双声道音视频输出，最高 15 秒 2K；引入 Contextual Omni Representation 把自然语言作为连接各模态的通用桥梁，在指令遵循、品牌呈现、V2V 动作迁移达到商用级稳定性，并考虑国产芯片兼容性。MiniMax 表示将在合规前提下开源 H3 权重。</p>
+                </div>
+            </div>
+
+            <!-- 中栏 -->
+            <div class="column">
+                <div class="column-header">安全 / 协议</div>
+
+                <div class="article">
+                    <h3 class="article-title">Wiz 同日披露：5% 云环境暴露公网 MCP</h3>
+                    <div class="article-meta">📅 7月29日 · 来源：Infosec.ge / Wiz Research</div>
+                    <p class="article-text">与 RufRoot 同一天，Wiz Research 披露约 5% 的云环境已运行至少一个互联网可达的 MCP 服务器，财富 500 强亦在其中，通过无认证端点暴露员工 PII 与生产写操作。Ruflo 以 docker-compose 默认配置进入企业即"影子 AI"，而 MCP Bridge 默认就是全无认证的网络服务——这不是配置疏忽，而是假设服务永不可达网络的默认。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">MCP 工具投毒已成生产级威胁</div>
+                    <p class="news-card-text">微软 MSRC 6月30日警告：在 MCP 工具描述字段嵌入恶意指令即可劫持 Agent，使其"合规执行"表象下静默外泄数据——用户看不到、传统监控不报警。OWASP 已发布首份《MCP Top 10》，NSA 5月发布 MCP 安全设计指南；MCPTox 测试中主流 LLM Agent 中招率最高 72.8%。攻击面从"代码层"迁移到"语义层"。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">AI 记忆投毒：补丁不解毒</h3>
+                    <div class="article-meta">📅 本周发酵 · 来源：CSO Online / Noma</div>
+                    <p class="article-text">RufRoot 最具持久性的一击是向 AgentDB 持久记忆写入恶意 pattern：即使原始入侵结束，未来所有用户得到的 Agent 响应都会被污染。Noma 强调处置不能只打补丁——须轮换 LLM API Key、审计 AgentDB 是否被植入、从干净镜像重建容器。把"可写持久记忆"当作安全边界，是绝大多数平台还没做的事。</p>
+                </div>
+            </div>
+
+            <!-- 右栏 -->
+            <div class="column">
+                <div class="column-header">AI Coding / Agent / 多模态</div>
+
+                <div class="article">
+                    <h3 class="article-title">DeepSeek-V4-Flash 正式版 + Harness 框架</h3>
+                    <div class="article-meta">📅 7月31日 · 来源：站长之家 / Forkast / lmmarketcap</div>
+                    <p class="article-text">DeepSeek-V4-Flash 正式版 API 公测上线，激活参数仅 130 亿，主打 Agent 赛道；同步首发自研 DeepSeek Harness 智能体框架，并兼容 OpenAI Responses API 格式，降低开发者迁移成本。按 Forkast 口径，其定价（$0.14/$0.28 每百万 token）是当前价格地板。成本领先 + Agent 原生 + 生态兼容三件事打包，明显在抢 Agent 基础设施层。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">Kimi K3 全量权重落地 开源成共识</div>
+                    <p class="news-card-text">月之暗面 Kimi K3（2.8 万亿参数、modified MIT，1040 亿激活、1M 上下文）全量权重于 7月26–27日前后正式开放下载，迄今最大开放权重模型。消息带动 Z.ai 港股一度跌 30%、Moonshot 日营收至少增 6 倍。叠加 50 家巨头联署支持，国产开源从"追赶"转为"定义生态"。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">字节 Seedance 2.5：30 秒一镜到底</h3>
+                    <div class="article-meta">📅 7月31日 · 来源：站长之家 AI日报</div>
+                    <p class="article-text">字节跳动发布视频生成模型 Seedance 2.5，单次视频生成时长提升至 30 秒，支持多镜头叙事与逻辑关联的镜头组织、多轮延长（保持人物 / 场景 / 风格 / 音效一致性），最多输入 30 张图片 + 10 段视频 + 音频做精准参考与编辑。AI 视频从"单镜头炫技"进入"能讲故事"阶段。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据区域 -->
+        <section class="data-section">
+            <h2 class="data-title">本周关键数据</h2>
+            <div class="data-grid">
+                <div class="data-item">
+                    <div class="data-number">10.0</div>
+                    <div class="data-label">RufRoot CVSS 评分<br>（满分严重性）</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">233</div>
+                    <div class="data-label">Ruflo MCP Bridge<br>默认暴露工具数</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">80.2%</div>
+                    <div class="data-label">Inkling-Small<br>SWE-Bench Verified</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">50</div>
+                    <div class="data-label">开放权重公开信<br>联署机构数</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mermaid 图表区 -->
+        <section class="mermaid-section">
+            <h2 class="mermaid-title">📅 本周事件时间线</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">timeline
+    title 2026年7月27日-8月2日 AI 大事件时间线
+    section 7月27日
+        Kimi K3 全量权重落地 : 2.8T 参数 modified MIT 开源
+        Qwen3.7 Flash 发布 : 阿里 1M 上下文轻量模型
+    section 7月29日
+        RufRoot 披露 CVE-2026-59726 : CVSS 10.0 MCP 桥梁未授权 RCE
+        Wiz 同日披露 5% 云暴露公网 MCP : 财富500强泄露 PII
+    section 7月30日
+        Thinking Machines 开源 Inkling-Small : 276B/12B SWE-Bench 80.2%
+    section 7月31日
+        DeepSeek-V4-Flash 正式版上线 : 13B 激活 + Harness Agent 框架
+        MiniMax H3 通用全模态发布 : 15秒2K 音视频 拟开源
+        字节 Seedance 2.5 发布 : 30秒一镜到底视频</div>
+            </div>
+
+            <h2 class="mermaid-title">📊 开放权重模型：性价比 × Agent 编程能力 象限</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">quadrantChart
+    title 开放权重模型：性价比 × Agent 编程能力
+    x-axis 低性价比 --> 高性价比
+    y-axis 弱Agent编程 --> 强Agent编程
+    quadrant-1 高性价比·强编程
+    quadrant-2 低性价比·强编程
+    quadrant-3 低性价比·弱编程
+    quadrant-4 高性价比·弱编程
+    "DeepSeek V4 Flash": [0.95, 0.78]
+    "Inkling-Small": [0.80, 0.85]
+    "GLM-5.2": [0.75, 0.80]
+    "Kimi K3": [0.70, 0.75]
+    "MiniMax H3": [0.62, 0.55]</div>
+            </div>
+
+            <h2 class="mermaid-title">🕸️ 本周开放权重发布脉络</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">graph TD
+    A[2026 开放权重周] --> B[美国阵营]
+    A --> C[中国阵营]
+    B --> D[Inkling-Small 276B/12B]
+    B --> E[Thinking Machines Tinker 分发]
+    C --> F[DeepSeek V4 Flash 13B 激活]
+    C --> G[Kimi K3 2.8T 全量权重]
+    C --> H[MiniMax H3 全模态]
+    C --> I[GLM-5.2 MIT 开源]
+    D --> J[SWE-Bench 80.2% 反超旗舰]
+    F --> K[Harness Agent 框架 + Responses API]
+    A --> L[政策: 开放权重公开信 50 家联署]
+    L --> M[OpenAI/Google 补签 · Anthropic 缺席]</div>
+            </div>
+
+            <h2 class="mermaid-title">🔐 RufRoot 攻击链（CVE-2026-59726）</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">sequenceDiagram
+    participant A as 攻击者
+    participant B as Ruflo MCP Bridge (端口3001)
+    participant C as 容器/宿主机
+    participant D as AgentDB (AI 记忆)
+    Note over A,B: 默认无认证 (0.0.0.0 暴露)
+    A->>B: 单条 HTTP POST terminal_execute
+    B->>C: 容器内命令执行 (RCE)
+    A->>B: 读取环境变量
+    B-->>A: 泄露 OpenAI/Anthropic API Key
+    A->>D: 写入恶意 pattern (memory poisoning)
+    D-->>C: 未来 Agent 响应被劫持
+    Note over A,B: 补丁 3.16.3: 绑定 127.0.0.1 + 认证</div>
+            </div>
+
+            <h2 class="mermaid-title">🧠 本周 AI 大事件关系图</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">mindmap
+  root((2026·8月第1周))
+    安全危机
+      RufRoot CVE-10.0
+      MCP 桥梁未授权 RCE
+      Wiz 5% 公网暴露
+      tool poisoning 语义层
+    开源模型周
+      Inkling-Small 276B/12B
+      DeepSeek V4 Flash
+      Kimi K3 全量权重
+      MiniMax H3 全模态
+      GLM-5.2
+    政策
+      开放权重公开信 50 家
+      OpenAI/Google 补签
+      Anthropic 缺席
+    Agent 多模态
+      Harness 框架
+      Seedance 2.5 30秒</div>
+            </div>
+        </section>
+
+        <!-- 下周关注 -->
+        <section class="preview-section">
+            <h2 class="preview-title">🔮 下周关注</h2>
+            <div class="preview-list">
+                <div class="preview-item">
+                    <div class="preview-number">01</div>
+                    <div class="preview-text"><strong>RufRoot 后续</strong><br>Ruflo 3.16.3 实际落地率、AI memory 投毒审计（补丁不解毒，需重建容器 + 轮换 Key）</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">02</div>
+                    <div class="preview-text"><strong>MCP 公网暴露整改</strong><br>Wiz 5% 云环境、NSA 5月指南在企业侧落地与扫描工具成熟度</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">03</div>
+                    <div class="preview-text"><strong>Inkling-Small 实测复现</strong><br>Terminal-Bench 2.1 独立复跑（AA 复跑两家打平），SWE-Bench 是否站得住</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">04</div>
+                    <div class="preview-text"><strong>DeepSeek V4 Flash Harness 生态</strong><br>Responses API 迁移成本、Harness 框架开源与开发者采用</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">05</div>
+                    <div class="preview-text"><strong>MiniMax H3 开源权重落地</strong><br>合规前提下开放节奏、国产芯片适配实测</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">06</div>
+                    <div class="preview-text"><strong>开放权重政策</strong><br>华盛顿是否出"模型级管控"，Anthropic 缺席后的产业分化</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 出处 -->
+        <section class="sources-section">
+            <h2 class="sources-title">📚 相关出处</h2>
+            <div class="sources-grid">
+                <div class="source-category">
+                    <div class="source-category-title">RufRoot / CVE-2026-59726</div>
+                    <a href="https://www.csoonline.com/article/4203408/critical-ruflo-flaw-lets-attackers-hijack-ai-agents-through-exposed-mcp-bridge.html" class="source-link">Critical Ruflo flaw lets attackers hijack AI agents — CSO Online</a>
+                    <a href="https://www.prnewswire.com/news-releases/noma-labs-discovers-critical-vulnerability-in-widely-adopted-open-source-ai-agent-platform-ruflo-302837494.html" class="source-link">Noma Labs Discovers Critical Vulnerability in Ruflo — PRNewswire</a>
+                    <a href="https://www.infosec.ge/blog/rufroot-cve-2026-59726-ruflo-mcp-bridge-unauthenticated-rce" class="source-link">RufRoot: the unauthenticated Ruflo MCP bridge — Infosec.ge</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Thinking Machines Inkling-Small</div>
+                    <a href="https://www.chooseai.net/ai-news/detail/5431" class="source-link">Thinking Machines 开源 Inkling-Small — chooseai</a>
+                    <a href="https://forkast.news/thinking-machines-ships-inkling-small-open-weights-competition-now-has-a-us-entrant/" class="source-link">Inkling-Small: Open-Weights Competition Now Has a US Entrant — Forkast</a>
+                    <a href="https://www.digitalapplied.com/blog/inkling-small-open-weights-agentic-coding-efficiency-2026" class="source-link">Inkling-Small Beats Its Own Parent Model on Coding — Digital Applied</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">DeepSeek V4 Flash / MiniMax H3 / Seedance 2.5</div>
+                    <a href="https://m.chinaz.com/feed/0731/1768327.shtml" class="source-link">AI日报：MiniMax H3、Seedance 2.5、DeepSeek-V4-Flash 正式版 — 站长之家</a>
+                    <a href="https://lmmarketcap.com/new-ai-models" class="source-link">New AI Models（发布时间线）— lmmarketcap</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">开放权重公开信</div>
+                    <a href="https://ai2.work/blog/meta-microsoft-ibm-back-open-weight-ai-in-letter-to-washington" class="source-link">Meta, Microsoft, IBM Back Open-Weight AI in Letter to Washington — ai2.work</a>
+                    <a href="https://www.163.com/dy/article/L2OPOT010511B8LM.html" class="source-link">AI开源公开信签署企业增至50家 — IT之家/网易</a>
+                    <a href="https://dev.to/breachprotocol/the-open-weights-letter-doubled-to-50-signatories-google-and-openai-signed-anthropic-did-not-3dp8" class="source-link">The open-weights letter doubled to 50 signatories — Dev.to</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Kimi K3 / 开源共识</div>
+                    <a href="https://www.toutiao.com/article/7668161879696523830/" class="source-link">中国万亿级大模型开源，全球刷屏 — 央视财经/今日头条</a>
+                    <a href="https://www.analyticsvidhya.com/blog/2026/07/july-2026-ai-models-releases/" class="source-link">July 2026 AI Releases: A Timeline — Analytics Vidhya</a>
+                    <a href="https://presenc.ai/research/july-2026-llm-release-roundup" class="source-link">July 2026 LLM Release Roundup — Presenc AI</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">MCP 安全（工具投毒 / NSA 指南）</div>
+                    <a href="https://www.nerdtechnic.com/news/mcp-security-checklist-before-connecting-ai-agents" class="source-link">MCP 資安警報：接上内部系统前必做的安全检查 — Nerd Technic</a>
+                    <a href="https://www.toutiao.com/article/7664704020736393768" class="source-link">微软警告 MCP 工具投毒：AI Agent 静默泄露数据 — 今日头条</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="footer-brand">AI 周报速递</div>
+            <div>编辑：AI 自动生成 | 数据截止：2026年8月2日 12:00</div>
+            <div style="margin-top: 5px;">© 2026 AI城 · 专注AI领域深度报道</div>
+        </footer>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: 'Noto Sans SC, sans-serif',
+            timeline: { useMaxWidth: true },
+            quadrantChart: { useMaxWidth: true },
+            mindmap: { useMaxWidth: true },
+            sequence: { useMaxWidth: true },
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+</body>
+</html>
