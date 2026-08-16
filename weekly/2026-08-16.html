@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 周报速递 - 2026年8月第3周</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.6/dist/mermaid.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: #f5f0e8;
+            color: #1a1a1a;
+            line-height: 1.8;
+        }
+
+        .newspaper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fffef9;
+            box-shadow: 0 0 40px rgba(0,0,0,0.15);
+            min-height: 100vh;
+        }
+
+        /* 头部 - 报头 */
+        .masthead {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 20px 40px;
+            text-align: center;
+            border-bottom: 8px double #c41e3a;
+        }
+
+        .masthead-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .masthead h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 72px;
+            font-weight: 900;
+            letter-spacing: 12px;
+            margin: 10px 0;
+            text-shadow: 2px 2px 0 #c41e3a;
+        }
+
+        .masthead-subtitle {
+            font-size: 18px;
+            letter-spacing: 8px;
+            color: #ddd;
+            margin-top: 5px;
+        }
+
+        /* 导航条 */
+        .nav-bar {
+            background: #c41e3a;
+            color: white;
+            padding: 10px 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-bar span {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .nav-bar span:hover {
+            opacity: 0.8;
+        }
+
+        /* 头条区域 */
+        .headline-section {
+            padding: 30px 40px;
+            border-bottom: 3px solid #1a1a1a;
+        }
+
+        .headline-banner {
+            background: #c41e3a;
+            color: white;
+            display: inline-block;
+            padding: 5px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .headline-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+
+        .headline-subtitle {
+            font-size: 20px;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .headline-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        /* 主内容区 - 多栏布局 */
+        .content-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+            padding: 0 40px;
+        }
+
+        .column {
+            padding: 25px 20px;
+            border-right: 1px solid #ddd;
+        }
+
+        .column:last-child {
+            border-right: none;
+        }
+
+        .column-header {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #c41e3a;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        .article {
+            margin-bottom: 25px;
+        }
+
+        .article-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .article-meta {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .article-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .article-text::first-letter {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 36px;
+            font-weight: 700;
+            float: left;
+            line-height: 1;
+            margin-right: 8px;
+            color: #c41e3a;
+        }
+
+        /* 重要新闻卡片 */
+        .news-card {
+            background: #f8f5ee;
+            border-left: 4px solid #c41e3a;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .news-card-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #c41e3a;
+        }
+
+        .news-card-text {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        /* 数据区域 */
+        .data-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+            margin: 30px 0;
+        }
+
+        .data-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #c41e3a;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .data-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .data-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 42px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .data-label {
+            font-size: 13px;
+            color: #aaa;
+            margin-top: 8px;
+        }
+
+        /* 下周关注 */
+        .preview-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+        }
+
+        .preview-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 20px;
+        }
+
+        .preview-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .preview-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-left: 3px solid #c41e3a;
+        }
+
+        .preview-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .preview-text {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* 底部 - 出处 */
+        .sources-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .sources-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .source-category {
+            margin-bottom: 15px;
+        }
+
+        .source-category-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #c41e3a;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #c41e3a;
+            padding-bottom: 5px;
+        }
+
+        .source-link {
+            font-size: 12px;
+            color: #185FA5;
+            text-decoration: none;
+            display: block;
+            padding: 3px 0;
+            line-height: 1.5;
+        }
+
+        .source-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: #1a1a1a;
+            color: #aaa;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .footer-brand {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            color: #c41e3a;
+            margin-bottom: 5px;
+        }
+
+        /* Mermaid 图表区域 */
+        .mermaid-section {
+            padding: 30px 40px;
+            background: #f8f5ee;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .mermaid-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+        }
+
+        .mermaid-block {
+            background: #fffef9;
+            border: 2px solid #1a1a1a;
+            padding: 20px;
+            margin-bottom: 25px;
+            overflow-x: auto;
+        }
+
+        .mermaid-block-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+        }
+
+        .mermaid {
+            text-align: center;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .masthead h1 { font-size: 48px; letter-spacing: 8px; }
+            .content-area { grid-template-columns: 1fr; }
+            .column { border-right: none; border-bottom: 1px solid #ddd; }
+            .data-grid { grid-template-columns: repeat(2, 1fr); }
+            .preview-list { grid-template-columns: 1fr; }
+            .sources-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper">
+        <!-- 报头 -->
+        <header class="masthead">
+            <div class="masthead-top">
+                <span>2026年8月16日 星期日</span>
+                <span>第31期 · 总第115期</span>
+                <span>农历丙午年 七月廿三</span>
+            </div>
+            <h1>AI 周报速递</h1>
+            <div class="masthead-subtitle">ARTIFICIAL INTELLIGENCE WEEKLY EXPRESS</div>
+        </header>
+
+        <!-- 导航条 -->
+        <nav class="nav-bar">
+            <span>头版头条</span>
+            <span>深度报道</span>
+            <span>数据洞察</span>
+            <span>开源动态</span>
+            <span>资本风向</span>
+            <span>技术前沿</span>
+        </nav>
+
+        <!-- 头条 -->
+        <section class="headline-section">
+            <div class="headline-banner">重磅头条</div>
+            <h2 class="headline-title">Agent Plugins 1.0 落地 + Claude Code 默认「放权」<br>AI 编码 Agent 迈入「自主权 × 安全」新纪元</h2>
+            <p class="headline-subtitle">本周两条同轴事件把 AI Coding / Agent 叙事从「谁的模型更强」推到「谁来为 Agent 的执行权背书」：8月6日，厂商中立的 Agent Plugins 1.0 把 Agent Skills 与 MCP server 打包成单一可移植目录，首发即被 ChatGPT / Codex / Cursor / Copilot / Kiro / VS Code 六端支持——Skill 生态第一次有了跨 Agent 的统一交付格式；8月14日，Claude Code 把 Auto Mode 设为新会话默认，用独立分类器模型在每次工具调用前把关，取代逐条人工确认。同周 DEF CON 34 披露的「Ghostjacking」证明：投毒 Cloudflare / Datadog / Sentry 日志可在推荐配置下劫持 Claude Code 十次成功九次，波及 15000+ 组织。能力下放与信任上收，正是接下来一年的主战场。</p>
+            <div class="headline-meta">
+                <span>📅 2026年8月6日 — 8月14日</span>
+                <span>📍 Anthropic · AWS/Cursor/MS/OpenAI/Vercel</span>
+                <span>🏷️ Skill 标准 · Agent 安全 · AI Coding</span>
+            </div>
+        </section>
+
+        <!-- 三栏内容 -->
+        <div class="content-area">
+            <!-- 左栏 -->
+            <div class="column">
+                <div class="column-header">大模型 / LLM 前沿</div>
+
+                <div class="article">
+                    <h3 class="article-title">Gemini 3.7 Flash 发布：Google 换帅后提速，三周一迭代</h3>
+                    <div class="article-meta">📅 8月13日 · 来源：AI Frontier Daily / Ars Technica / 腾讯新闻</div>
+                    <p class="article-text">Google DeepMind 在 Jeff Dean 离任、Hassabis 升任 Alphabet 首席科学家后发布 Gemini 3.7 Flash，距上代 3.6 Flash 仅三周。软件工程与 Agent 能力大幅跃升：DeepSWE v1.1 从 49.0% 升至 65.3%（+33%），FrontierCode 1.1 达 43.6%；引导价 $0.75 / $3.75 每百万 Token，前代腰斩。同期 Gemini app 月活破 10 亿。旗舰 3.5 Pro 仍跳票两月，但 Flash 工作马系列已用「节奏 + 价格」搅动 Coding / Agent 市场。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">DeepSeek V4 Pro 转正 + Harness 开源</div>
+                    <p class="news-card-text">8月12日晚静默上线、公告一度撤回、13日晚官宣：1M 上下文、384K 输出、Agent 能力大增；同步以 MIT 协议开源 Harness 框架（"一切皆插件"，skills/sessions/sandboxes 可热插拔 + append-only 轨迹日志）。8月16日起启用 peak/off-peak 计费，高峰输出价涨至约 4.5 倍。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">阿里开源 2.4T 旗舰 + Meta Muse Glimmer 30B</h3>
+                    <div class="article-meta">📅 8月14日 · 来源：腾讯新闻 / Meta Research</div>
+                    <p class="article-text">阿里同步开源 Qwen3.8-27B 与 2.4T-A95B Max 级旗舰权重，中国开源模型下载量居全球首位。Meta 8月10—11日发布 Muse Glimmer 30B（Apache 2.0，从 Muse Spark 1.2 蒸馏，24GB 消费级 GPU 可跑，131K 上下文），回归开放权重路线。开放权重阵营本周密集补位，与闭源前沿形成「能力 vs 可控性」持续对冲。</p>
+                </div>
+            </div>
+
+            <!-- 中栏 -->
+            <div class="column">
+                <div class="column-header">Skill / 安全 / 协议</div>
+
+                <div class="article">
+                    <h3 class="article-title">Agent Plugins 1.0：Skill 与 MCP 第一次有了「统一快递盒」</h3>
+                    <div class="article-meta">📅 8月6日 · 来源：byteiota / powerdrill / GitHub Spec</div>
+                    <p class="article-text">厂商中立的 Agent 扩展打包标准落地：一个 plugin.json（仅 $schema + name 两字段必填）+ 可选 skills/（含 SKILL.md 的子目录）+ mcp.json（声明 MCP server）。技术指导委员会含 AWS、Cursor、Microsoft、OpenAI、Vercel，Google 随后以 Core Maintainer 加入，六客户端首发。规范治理独立于任何单一厂商。但 v1 明确不含签名、权限、沙箱、信任验证——VS Code 文档直言"插件里的 MCP server 安装即隐式信任"，企业落地必须靠客户端侧策略补位。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">MCP Atlassian CVE-2026-73498</div>
+                    <p class="news-card-text">8月12日披露：sooperset mcp-atlassian 的 confluence_upload_attachment 未校验 file_path，认证后 MCP 客户端可读 server 进程能访问的任意文件并外泄为附件，进而泄露 CONFLUENCE_API_TOKEN 等凭据（CVSS 7.7，修复于 0.22.0）。与 RufRoot（CVE-10.0）、FrontMCP（CVE-9.9）构成 2026 MCP 攻击面持续下探主线。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">Anthropic 全球输出水印 回应 EU AI Act</h3>
+                    <div class="article-meta">📅 8月11日 · 来源：Axios / 至顶科技</div>
+                    <p class="article-text">Anthropic 自 8月11日起全球（非仅 EU）为 Claude 生成内容加隐形统计水印 + C2PA 元数据，并开放免费检测 API，回应欧盟《AI 法案》透明度义务；部分用户不满但监管认可。Claude in Chrome 同周升级为可跨端同步的 Cowork 会话。这是"AI 内容溯源"从政策讨论走进产品架构的标志性一步。</p>
+                </div>
+            </div>
+
+            <!-- 右栏 -->
+            <div class="column">
+                <div class="column-header">AI Coding / 资本 / 基础设施</div>
+
+                <div class="article">
+                    <h3 class="article-title">Claude Code 默认 Auto Mode + Ghostjacking 投毒</h3>
+                    <div class="article-meta">📅 8月9日 — 8月14日 · 来源：dev.to / groundtruth / sdd.sh</div>
+                    <p class="article-text">8月14日起 Claude Code 新会话（Pro/Max/Team）默认进入 Auto Mode：每次工具调用先过独立分类器模型（Sonnet 5），拦截超出请求范围 / 指向不认识的基础设施 / 投毒内容驱动的动作；但默认允许 push 到任意分支（含默认分支）。Anthropic 自研数据：分类器拦下 89% 危险命令 vs 人类 13.6%；v2.1.142+ 起忽略仓库内 .claude/settings.json 的 auto 默认——"仓库不能给自己开 auto"。DEF CON 34（8/9）披露 Ghostjacking：投毒日志劫持 Claude Code 十次中九次，覆盖 15000+ 组织。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">GPT-5.6-Cyber + Cerebras Ultrafast</div>
+                    <p class="news-card-text">8月10日 OpenAI 扩展 Daybreak 并发布 GPT-5.6-Cyber 安全专用模型（dual-use 拒绝减少，完成率 95.0% vs Sol 1.5%，gated 给 vetted 伙伴 $12.50/$75，Daybreak 拆 Blue/Red）。同日 × Cerebras 推出 Ultrafast 模式 GPT-5.6 Sol，晶圆级引擎达 750 tokens/s（14x），Humanity's Last Exam 全 2500 题仅 11h11m。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">Anthropic $2 万亿 IPO 估值 + $60 亿洽购 Decart</h3>
+                    <div class="article-meta">📅 8月13日 · 来源：FT / Bloomberg / IBD</div>
+                    <p class="article-text">据 FT，Anthropic 最快 10月以 ≥$2 万亿估值 IPO（将超 SpaceX 成史上最大），年底年化营收或达 $1000–1200 亿；同日 Bloomberg 报其拟 $60 亿收购推理效率初创 Decart AI（Nvidia 投资，芯片优化，最大并购案）。OpenAI 已暂缓 2026 IPO。IPO 与并购同时发生，标志 AI 实验室从"烧钱抢模型"进入"用营收与基础设施护城河证明估值"阶段。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据区域 -->
+        <section class="data-section">
+            <h2 class="data-title">本周关键数据</h2>
+            <div class="data-grid">
+                <div class="data-item">
+                    <div class="data-number">6</div>
+                    <div class="data-label">Agent Plugins 1.0<br>首发支持客户端数</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">9/10</div>
+                    <div class="data-label">Ghostjacking 劫持<br>Claude Code 成功率</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">$2万亿</div>
+                    <div class="data-label">Anthropic IPO<br>估值（或成史上最大）</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">14x</div>
+                    <div class="data-label">Cerebras Ultrafast<br>GPT-5.6 Sol 推理提速</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mermaid 图表区 -->
+        <section class="mermaid-section">
+            <h2 class="mermaid-title">📅 本周事件时间线</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">timeline
+    title 2026年8月10日-8月16日 AI 大事件时间线
+    section 8月10-11日
+        Meta 发布 Muse Glimmer 30B : Apache 2.0 消费级 GPU 可跑
+        OpenAI 发布 GPT-5.6-Cyber : Daybreak 拆分 Blue/Red
+        Anthropic Riemann zeta 研究 : 下界 41.6% 到 67.2%
+    section 8月12日
+        Grok 4.6 发布 : long-running agents 重点
+        CVE-2026-73498 披露 : mcp-atlassian 路径遍历 CVSS 7.7
+        Anthropic 全球输出水印 : 回应 EU AI Act
+    section 8月13日
+        Gemini 3.7 Flash 发布 : 三周一迭代 价格腰斩
+        Anthropic 2万亿 IPO + 60亿购 Decart : FT/Bloomberg
+        Cerebras x OpenAI Ultrafast : Sol 750 tokens/s
+    section 8月14日
+        Claude Code Auto Mode 默认开启 : 分类器把关替代人工确认
+        DeepSeek V4 Pro 官宣 + Harness 开源 : MIT 协议
+        阿里开源 Qwen3.8 + 2.4T Max 权重 : 国产开源潮
+    section 8月15-16日
+        DeepSeek 启用 peak/off-peak 计费 : 高峰输出价涨约4.5倍
+        Ghostjacking 后续发酵 : DEF CON 34 投毒 10/9</div>
+            </div>
+
+            <h2 class="mermaid-title">📊 AI Coding 赛道：自主性 × 市场份额 象限</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">quadrantChart
+    title AI Coding 赛道：自主性 × 市场份额
+    x-axis 低自主性 --> 高自主性
+    y-axis 低份额 --> 高份额
+    quadrant-1 高自主·高份额
+    quadrant-2 低自主·高份额
+    quadrant-3 低自主·低份额
+    quadrant-4 高自主·低份额
+    "Claude Code (Auto)": [0.95, 0.75]
+    "Cursor": [0.82, 0.50]
+    "GitHub Copilot": [0.55, 0.51]
+    "OpenAI Codex": [0.88, 0.32]
+    "Muse Code": [0.85, 0.12]</div>
+            </div>
+
+            <h2 class="mermaid-title">🕸️ 2026 AI Agent 安全事件链</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">graph TD
+    A[2026 Agent 平台安全危机] --> B[Agentjacking 6月 Sentry]
+    A --> C[JADEPUFFER 7月]
+    A --> D[Langflow 加入 CISA KEV 7月]
+    A --> E[RufRoot CVE-2026-59726 8月3日]
+    A --> F[FrontMCP CVE-2026-67531 8月5日]
+    A --> G[MCP Atlassian CVE-2026-73498 8月12日]
+    A --> H[Ghostjacking 8月9日 DEF CON 34]
+    E --> E1[未授权 RCE + AI 记忆投毒]
+    F --> F1[沙箱逃逸 默认 public]
+    G --> G1[路径遍历 任意文件读取/凭据泄露]
+    H --> H1[投毒日志劫持 10/9]
+    H --> H2[覆盖 15000+ 组织]
+    A --> I[Claude Code Auto Mode 默认 8月14日]
+    A --> J[MCP 安全红队 + 插件签名成刚需]</div>
+            </div>
+
+            <h2 class="mermaid-title">🔐 Ghostjacking：日志投毒劫持 Claude Code（DEF CON 34）</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">sequenceDiagram
+    participant L as 投毒日志源(Cloudflare/Datadog/Sentry)
+    participant A as Claude Code Agent
+    participant C as 分类器模型(Sonnet 5)
+    participant H as 宿主 / 凭据 / 内部系统
+    Note over L,A: 日志被植入恶意指令(供应链/日志管道)
+    A->>A: 读取非可信文本(日常工作)
+    A->>L: 触发日志中的隐藏指令
+    A->>C: 发起工具调用(外联/读密/推送)
+    C-->>A: 在 Cloudflare 推荐配置下未拦截(10次9中)
+    A->>H: 外泄密钥 / 篡改 PR / 越权操作
+    Note over A,H: 覆盖 15000+ 组织,无公开厂商响应</div>
+            </div>
+
+            <h2 class="mermaid-title">🧠 本周 AI 大事件关系图</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">mindmap
+  root((2026·8月第3周))
+    大模型前沿
+      Gemini 3.7 Flash 三周一迭代
+      DeepSeek V4 Pro + Harness
+      阿里 Qwen3.8 开源
+      Grok 4.6 长任务
+      Meta Muse Glimmer 30B
+    Skill 标准
+      Agent Plugins 1.0
+      六客户端支持
+      无签名/沙箱缺口
+    AI 安全
+      Claude Code Auto Mode
+      Ghostjacking 10/9
+      MCP Atlassian CVE 7.7
+      Anthropic 全球水印
+    AI Coding
+      GPT-5.6-Cyber
+      Cerebras Ultrafast 14x
+    AI 资本
+      Anthropic 2万亿 IPO
+      60亿购 Decart</div>
+            </div>
+        </section>
+
+        <!-- 下周关注 -->
+        <section class="preview-section">
+            <h2 class="preview-title">🔮 下周关注</h2>
+            <div class="preview-list">
+                <div class="preview-item">
+                    <div class="preview-number">01</div>
+                    <div class="preview-text"><strong>Claude Code Auto Mode 实测</strong><br>默认放权后社区是否出现新的 rm -rf / git push 事故；分类器误拦率（自报 0.4%）能否经独立复现</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">02</div>
+                    <div class="preview-text"><strong>Agent Plugins 安全实践</strong><br>首批跨端插件上线后，mcp.json 里"安装即信任"的 MCP server 是否出现投毒；v1.1 是否补签名/权限</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">03</div>
+                    <div class="preview-text"><strong>DeepSeek peak/off-peak 计费</strong><br>高峰输出价涨 4.5 倍后开发者迁移与多供应商故障转移策略</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">04</div>
+                    <div class="preview-text"><strong>Gemini 3.5 Pro 正式发布</strong><br>跳票两月后是否如期，Google 后 Hassabis 时代研发节奏</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">05</div>
+                    <div class="preview-text"><strong>Anthropic IPO / Decart 并购</strong><br>10月窗口是否兑现，$60亿交易是否落锤</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">06</div>
+                    <div class="preview-text"><strong>MCP 安全红队常态化</strong><br>RufRoot / FrontMCP / MCP Atlassian 后，企业 MCP 网关认证与网络暴露面整改</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 出处 -->
+        <section class="sources-section">
+            <h2 class="sources-title">📚 相关出处</h2>
+            <div class="sources-grid">
+                <div class="source-category">
+                    <div class="source-category-title">Gemini 3.7 Flash / Google</div>
+                    <a href="https://ai-daily.musxiao.com/" class="source-link">AI Frontier Daily — Gemini 3.7 Flash Released（8/14）</a>
+                    <a href="https://malpass.co/top-ai-stories-august-15-2026" class="source-link">Top AI Stories – August 15, 2026</a>
+                    <a href="https://theairankings.com/changelog" class="source-link">The AI Changelog — Gemini 3.7 Flash（8/13）</a>
+                    <a href="https://new.qq.com/rain/a/20260814A0569I00" class="source-link">InfoQ via 腾讯：Gemini 3.7 Flash 突袭（8/14）</a>
+                    <a href="https://arstechnica.com/ai/2026/08/google-says-gemini-has-reached-1b-users-faster-than-any-other-google-product/" class="source-link">Ars Technica：Gemini 月活破 10 亿</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">DeepSeek V4 Pro / Harness / 阿里开源</div>
+                    <a href="https://new.qq.com/rain/a/20260814A053AI00" class="source-link">21世纪经济报道 via 腾讯：DeepSeek-V4-Pro 波折上线</a>
+                    <a href="https://new.qq.com/rain/a/20260815A085TJ00" class="source-link">环球网 via 腾讯：DeepSeek V4 Pro 与 Harness 框架上线</a>
+                    <a href="https://new.qq.com/rain/a/20260816A03JBT00" class="source-link">腾讯新闻：国产大模型掀起开源潮，阿里开放 2.4 万亿参数旗舰</a>
+                    <a href="https://www.communeify.com/en/blog/ai-daily-2026-08-14" class="source-link">AI Daily — DeepSeek Harness v0.1 / Gemini 3.7 Flash</a>
+                    <a href="https://github.com/deepseek-ai" class="source-link">DeepSeek GitHub（Harness / V4）</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Agent Plugins 1.0（Skill 标准）</div>
+                    <a href="https://byteiota.com/agent-plugins-1-0-one-package-format-for-every-ai-agent" class="source-link">Agent Plugins 1.0: One Package Format for Every AI Agent</a>
+                    <a href="https://aiautomationglobal.com/blog/agent-plugins-1-0-open-standard-ai-agent-tools-2026" class="source-link">Agent Plugins 1.0: The New Open Standard for AI Tools</a>
+                    <a href="https://powerdrill.ai/blog/what-are-agent-plugins" class="source-link">What Are Agent Plugins? Skills, MCP Servers</a>
+                    <a href="https://github.com/agentplugins/agent-plugins-spec" class="source-link">Agent Plugins Spec 仓库（GitHub）</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Claude Code Auto Mode / Ghostjacking</div>
+                    <a href="https://dev.to/rulestack/auto-mode-is-now-claude-codes-default-what-the-classifier-approves-and-how-to-switch-back-4j2j" class="source-link">Auto mode is now Claude Code's default（dev.to）</a>
+                    <a href="https://groundtruth.day/news/claude-code-stops-asking-permission-on-august-14.html" class="source-link">Claude Code stops asking permission on August 14</a>
+                    <a href="https://dig.watch/updates/claude-code-permission-checks-from-users-to-ai" class="source-link">Claude Code shifts permission checks from users to AI</a>
+                    <a href="https://agentpatterns.ai/tools/claude/auto-mode" class="source-link">Claude Code Auto Mode: Classifier-Based Permission Gating</a>
+                    <a href="https://sdd.sh/2026/04/agentic-coding-agent-comparison-2026" class="source-link">Agentic Coding Agent Comparison（Ghostjacking，8/15 更新）</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">MCP Atlassian CVE-2026-73498 / 水印</div>
+                    <a href="https://www.tenable.com/cve/CVE-2026-73498" class="source-link">CVE-2026-73498 — Tenable</a>
+                    <a href="https://www.rapid7.com/db/vulnerabilities/cve-2026-73498" class="source-link">CVE-2026-73498 — Rapid7</a>
+                    <a href="https://github.com/sooperset/mcp-atlassian/security/advisories/GHSA-g5r6-gv6m-f5jv" class="source-link">mcp-atlassian Advisory GHSA-g5r6-gv6m-f5jv</a>
+                    <a href="https://www.axios.com/2026/08/12/anthropic-claude-watermarks-ai-detection" class="source-link">Anthropic starts watermarking Claude output（Axios）</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">GPT-5.6-Cyber / Cerebras Ultrafast</div>
+                    <a href="https://openai.com/business/solutions/cybersecurity/" class="source-link">OpenAI Daybreak / GPT-5.6-Cyber</a>
+                    <a href="https://ainativefoundation.org/global-ai-native-industry-insights-20260811-anthropic-openai-meta-more" class="source-link">Global AI Native Industry Insights（8/11）</a>
+                    <a href="https://malpass.co/top-ai-stories-august-15-2026" class="source-link">Top AI Stories Aug 15（Cerebras Ultrafast）</a>
+                    <a href="https://www.communeify.com/en/blog/ai-daily-2026-08-14" class="source-link">AI Daily — GPT-5.6 Sol Ultrafast（8/14）</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Anthropic IPO / Decart / Muse Glimmer</div>
+                    <a href="https://www.investors.com/news/technology/anthropic-ipo-valuation-timing-spacex" class="source-link">Anthropic IPO Value Could Beat SpaceX's Record</a>
+                    <a href="https://www.fidelity.co.uk/shares/stock-market-news/sector-review/anthropic-in-talks-to-buy-ai-start-up-decart-for-6bn---report/" class="source-link">Anthropic in talks to buy Decart for $6bn</a>
+                    <a href="https://new.qq.com/rain/a/20260814A038YL00" class="source-link">Claude 与 Anthropic快讯（腾讯，IPO/Decart/水印）</a>
+                    <a href="https://research.meta.ai/blog/introducing-muse-glimmer-open-agentic-model" class="source-link">Meta Introduces Muse Glimmer Open Agentic Model</a>
+                    <a href="https://theairankings.com/changelog" class="source-link">The AI Changelog（Grok 4.6 / Muse Glimmer / Qwen3.8）</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="footer-brand">AI 周报速递</div>
+            <div>编辑：AI 自动生成 | 数据截止：2026年8月16日 12:00</div>
+            <div style="margin-top: 5px;">© 2026 AI城 · 专注AI领域深度报道</div>
+        </footer>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: 'Noto Sans SC, sans-serif',
+            timeline: { useMaxWidth: true },
+            quadrantChart: { useMaxWidth: true },
+            mindmap: { useMaxWidth: true },
+            sequence: { useMaxWidth: true },
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+</body>
+</html>
