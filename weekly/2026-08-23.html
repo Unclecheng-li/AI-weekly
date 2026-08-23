@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 周报速递 - 2026年8月第4周</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.6/dist/mermaid.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: #f5f0e8;
+            color: #1a1a1a;
+            line-height: 1.8;
+        }
+
+        .newspaper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fffef9;
+            box-shadow: 0 0 40px rgba(0,0,0,0.15);
+            min-height: 100vh;
+        }
+
+        /* 头部 - 报头 */
+        .masthead {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 20px 40px;
+            text-align: center;
+            border-bottom: 8px double #c41e3a;
+        }
+
+        .masthead-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .masthead h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 72px;
+            font-weight: 900;
+            letter-spacing: 12px;
+            margin: 10px 0;
+            text-shadow: 2px 2px 0 #c41e3a;
+        }
+
+        .masthead-subtitle {
+            font-size: 18px;
+            letter-spacing: 8px;
+            color: #ddd;
+            margin-top: 5px;
+        }
+
+        /* 导航条 */
+        .nav-bar {
+            background: #c41e3a;
+            color: white;
+            padding: 10px 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-bar span {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .nav-bar span:hover {
+            opacity: 0.8;
+        }
+
+        /* 头条区域 */
+        .headline-section {
+            padding: 30px 40px;
+            border-bottom: 3px solid #1a1a1a;
+        }
+
+        .headline-banner {
+            background: #c41e3a;
+            color: white;
+            display: inline-block;
+            padding: 5px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .headline-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+
+        .headline-subtitle {
+            font-size: 20px;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .headline-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        /* 主内容区 - 多栏布局 */
+        .content-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+            padding: 0 40px;
+        }
+
+        .column {
+            padding: 25px 20px;
+            border-right: 1px solid #ddd;
+        }
+
+        .column:last-child {
+            border-right: none;
+        }
+
+        .column-header {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #c41e3a;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        .article {
+            margin-bottom: 25px;
+        }
+
+        .article-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .article-meta {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .article-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .article-text::first-letter {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 36px;
+            font-weight: 700;
+            float: left;
+            line-height: 1;
+            margin-right: 8px;
+            color: #c41e3a;
+        }
+
+        /* 重要新闻卡片 */
+        .news-card {
+            background: #f8f5ee;
+            border-left: 4px solid #c41e3a;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .news-card-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #c41e3a;
+        }
+
+        .news-card-text {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        /* 数据区域 */
+        .data-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+            margin: 30px 0;
+        }
+
+        .data-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #c41e3a;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .data-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .data-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 42px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .data-label {
+            font-size: 13px;
+            color: #aaa;
+            margin-top: 8px;
+        }
+
+        /* Mermaid 图表区域 */
+        .mermaid-section {
+            padding: 30px 40px;
+            background: #f8f5ee;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .mermaid-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+        }
+
+        .mermaid-block {
+            background: #fffef9;
+            border: 2px solid #1a1a1a;
+            padding: 20px;
+            margin-bottom: 25px;
+            overflow-x: auto;
+        }
+
+        .mermaid-block-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+        }
+
+        .mermaid {
+            text-align: center;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+
+        /* 下周关注 */
+        .preview-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+        }
+
+        .preview-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 20px;
+        }
+
+        .preview-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .preview-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-left: 3px solid #c41e3a;
+        }
+
+        .preview-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .preview-text {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* 底部 - 出处 */
+        .sources-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .sources-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .source-category {
+            margin-bottom: 15px;
+        }
+
+        .source-category-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #c41e3a;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #c41e3a;
+            padding-bottom: 5px;
+        }
+
+        .source-link {
+            font-size: 12px;
+            color: #185FA5;
+            text-decoration: none;
+            display: block;
+            padding: 3px 0;
+            line-height: 1.5;
+        }
+
+        .source-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: #1a1a1a;
+            color: #aaa;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .footer-brand {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            color: #c41e3a;
+            margin-bottom: 5px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .masthead h1 { font-size: 48px; letter-spacing: 8px; }
+            .content-area { grid-template-columns: 1fr; }
+            .column { border-right: none; border-bottom: 1px solid #ddd; }
+            .data-grid { grid-template-columns: repeat(2, 1fr); }
+            .preview-list { grid-template-columns: 1fr; }
+            .sources-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper">
+        <!-- 报头 -->
+        <header class="masthead">
+            <div class="masthead-top">
+                <span>2026年8月23日 星期日</span>
+                <span>第32期 · 总第116期</span>
+                <span>农历丙午年 七月三十</span>
+            </div>
+            <h1>AI 周报速递</h1>
+            <div class="masthead-subtitle">ARTIFICIAL INTELLIGENCE WEEKLY EXPRESS</div>
+        </header>
+
+        <!-- 导航条 -->
+        <nav class="nav-bar">
+            <span>头版头条</span>
+            <span>深度报道</span>
+            <span>数据洞察</span>
+            <span>开源动态</span>
+            <span>资本风向</span>
+            <span>技术前沿</span>
+        </nav>
+
+        <!-- 头条 -->
+        <section class="headline-section">
+            <div class="headline-banner">重磅头条</div>
+            <h2 class="headline-title">前沿模型的「信任危机」<br>Anthropic 自揭安全事故 + Claude Code 配置即代码漏洞</h2>
+            <p class="headline-subtitle">本周两条同轴事件把 AI 安全/治理叙事推到最前台：8月14日发布、8月17日发酵的 Anthropic 186 页风险报告，首次自我上调风险评级、披露未发布且强于旗舰的 Model 2、承认生物武器分类器被静默关闭近 11 个月；同期披露的 Claude Code MCP RCE 证明，恶意 PR 只需在仓库塞一个 .mcp.json，开发者在「已信任」仓库启动 Claude Code 时本地命令便自动执行、无需确认，Anthropic 称「按设计工作」。一边是「把风险讲成资产」的主动透明，一边是「Agent 配置=可执行供应链」的真实攻击面——信任边界，正是这一年 Agent 落地的主战场。</p>
+            <div class="headline-meta">
+                <span>📅 2026年8月17日 — 8月23日</span>
+                <span>📍 Anthropic · Immersive Labs / Kevin Breen</span>
+                <span>🏷️ AI 安全 · 治理 · MCP · 模型风险</span>
+            </div>
+        </section>
+
+        <!-- 三栏内容 -->
+        <div class="content-area">
+            <!-- 左栏 -->
+            <div class="column">
+                <div class="column-header">大模型 / LLM 前沿</div>
+
+                <div class="article">
+                    <h3 class="article-title">智谱 GLM-5.3 发布：纯后训练 Scaling 追平闭源旗舰</h3>
+                    <div class="article-meta">📅 8月17日—19日 · 来源：智谱官方 / 北京市政府门户 / 光明日报</div>
+                    <p class="article-text">智谱发布 GLM-5.3（约 7530 亿参数，沿用 GLM-5.2 基座、不重新预训练），靠极致后训练 Scaling 把能力上限拉高：编程成最强开源模型，内部体感较 GLM-5.2 提升约 50%，Terminal-Bench 3.0 从 4.6 升至 28.3、DeepSWE v1.1 从 46.2 升至 66.9；Artificial Analysis 综合 60 分，与 Claude Fable 5、GPT-5.6 Sol 并列、与 Kimi K3 共居开源榜首。网络安全能力涌现：CyberGym 84.5%，略高于 Mythos 5 的 83.8%，实测自主发现 269 个开源项目中 1097 个中高危漏洞并产出人类专家级 PoC 与补丁。权重两周内开源，同步启动「开源的盾」免费安全审计。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">Anthropic 186 页风险报告</div>
+                    <p class="news-card-text">自我上调 misalignment 风险评级 very low→low；披露未发布、强于旗舰的 Model 2（CoBench 62.8% vs Mythos 5 的 50.3%）因安全评估未完成而雪藏；承认生物武器安全分类器被调试标志静默关闭近 11 个月（约 1.33 亿次消息、5 万外包承包商不经筛查）；自认评估基准已「饱和」。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">Gemini 3.7 Flash 全面上线 + Spark 个人 Agent</h3>
+                    <div class="article-meta">📅 8月17日 · 来源：腾讯研究院 AI 速递 / IT之家</div>
+                    <p class="article-text">Gemini 3.7 Flash 向 Pro 与 Ultra 用户全面开放，并以 3.7 Flash 为底座推出个人 Agent Gemini Spark，改进对 Google Workspace 应用的工具调用；Gemini app 月活破 10 亿，同期用 MCP 协议串起 14 款第三方应用，AI 助手正从「聊天」变成能订票、约诊、管邮箱的交易型管家。</p>
+                </div>
+            </div>
+
+            <!-- 中栏 -->
+            <div class="column">
+                <div class="column-header">Skill / 安全 / 协议</div>
+
+                <div class="article">
+                    <h3 class="article-title">Claude Code MCP RCE：恶意 PR + .mcp.json 自动执行</h3>
+                    <div class="article-meta">📅 8月 · 来源：Cyberpress / The Spacelab / Immersive Labs</div>
+                    <p class="article-text">Immersive Labs 研究员 Kevin Breen 披露：恶意 PR 在仓库根目录塞一个伪装成常用工具的 .mcp.json，开发者在「已信任」仓库启动 Claude Code 时，本地 MCP server 进程会在用户提问前被拉起，以开发者权限运行，可外泄环境变量、SSH key、云 token、API 凭据。Anthropic 将其定性为 workspace trust 设计、非漏洞；更早的 CVE-2026-47751（claude-code-action &lt; 1.0.74）已修复，但本次把焦点从 CI 拉回普通开发者工作站。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">MCP 安全生态持续收紧</div>
+                    <p class="news-card-text">Mitiga：恶意 npm 包 post-install hook 静默改写 ~/.claude.json，把 MCP OAuth 流量重定向到攻击者基础设施，窃取 Jira/GitHub/Confluence 等 SaaS bearer token，请求来自 Anthropic 合法出口 IP 难以审计；Mastra 被窃号者 republish 140+ 包拉恶意依赖；Phoenix Security 统计上半年恶意包活动 37 起、是去年 2.6 倍。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">DeepSeek Harness 开源 42 小时破 10 万星</h3>
+                    <div class="article-meta">📅 8月17日 · 来源：机器之心 / IT之家 / 中国新闻网</div>
+                    <p class="article-text">「万物皆插件」智能体框架 Harness（DSH v0.1，MIT）开源 42 小时 GitHub 破 10 万星，社区两天冒出近 3000 个插件仓库（dsh-plugin 标签公开仓库超 700 个）；同期 V4 Pro 上线国家超算互联网，依托十万卡级算力池提供国产算力一站式支撑，硅基流动同步上线（百万级上下文、三档推理强度）。</p>
+                </div>
+            </div>
+
+            <!-- 右栏 -->
+            <div class="column">
+                <div class="column-header">AI Coding / 资本 / 基础设施</div>
+
+                <div class="article">
+                    <h3 class="article-title">Cursor Origin + Cloud Agents / Harness</h3>
+                    <div class="article-meta">📅 8月17日—19日 · 来源：Cursor Changelog / Oday Bakkour</div>
+                    <p class="article-text">8月17日 Cursor 放出 Origin——内建在编辑器里的代码托管平台，仓库/PR/CI/Agent 全跑在 Cursor 侧，GitHub 保留为 source of truth 实时双向同步（Vercel/Depot/Buildkite 已接入）。8月19日升级 Cloud Agents + Harness：云端智能体可订阅事件源（PR、Slack、定时任务）自动接手并坚持目标；/goal 设长期目标；子智能体各自跑独立 VM；任意 Skill 可固定为「自定义模式」（always-on skills）。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">OpenAI 模型换防 + Codex</div>
+                    <p class="news-card-text">GPT-5.4 定档 8月31日退役、迁 GPT-5.6 Terra/Luna；Codex CLI 0.148 加 Amazon Bedrock 内建 provider；Codex 确认接下一代模型 Astra 并支持 1M 上下文；企业版 Codex 在法律岗周活涨 108 倍，智能体从「写代码」扩散到各业务线；桌面端 8月11日登陆 Linux 预览。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">Stripe 超 $70 亿收购 OpenRouter + Anthropic Q2 $115 亿</h3>
+                    <div class="article-meta">📅 8月16日—20日 · 来源：Bloomberg / NYT / Yahoo / 网易</div>
+                    <p class="article-text">支付巨头 Stripe 以超 70 亿美元（NYT 报 75 亿）收购 AI 模型聚合网关 OpenRouter（400+ 模型、1000 万+ 开发者、日均 10 万亿 token、月收入 3 倍至约 $13M），价值从「模型」转向「路由与计费层」，a16z 一周内连收 Cursor + OpenRouter 两笔巨型退出。Anthropic Q2 营收超 115 亿美元、首次正利润、同比增 14 倍；OpenAI 同期解散第三个安全团队 Preparedness。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据区域 -->
+        <section class="data-section">
+            <h2 class="data-title">本周关键数据</h2>
+            <div class="data-grid">
+                <div class="data-item">
+                    <div class="data-number">186</div>
+                    <div class="data-label">Anthropic 风险报告<br>页数（RSP v3.4）</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">$70亿+</div>
+                    <div class="data-label">Stripe 收购 OpenRouter<br>AI 网关成基础设施</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">11个月</div>
+                    <div class="data-label">生物分类器<br>静默关闭时长</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">10万+</div>
+                    <div class="data-label">DeepSeek Harness<br>42 小时 GitHub 星标</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mermaid 图表区 -->
+        <section class="mermaid-section">
+            <h2 class="mermaid-title">📅 本周事件时间线</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">timeline
+    title 2026年8月17日-8月23日 AI 大事件时间线
+    section 8月17日
+        Anthropic 186页风险报告发酵 : 自我上调评级+Model 2雪藏
+        智谱 GLM-5.3 发布 : 后训练Scaling 编程+50% CyberGym 84.5%
+        Cursor Origin 内测 : 代码托管搬进编辑器
+        DeepSeek Harness 42h破10万星 : 社区近3000插件仓库
+        OpenAI 解散 Preparedness : 第三个安全团队消失
+    section 8月18日
+        Stripe 确认收购 OpenRouter : 超70亿美元 AI网关
+        Codex CLI 0.148 加 Bedrock : Amazon内建provider
+        Claude Code 关 NTLM 路径缺口 : 4天4版本 v2.1.234-237
+    section 8月19日
+        Cursor Cloud Agents/Harness : 订阅事件+子智能体各自VM
+        GLM-5.3 API 开放 : Artificial Analysis 60分并列开源首
+    section 8月20日
+        Anthropic Q2 营收超115亿 : 首次正利润 同比14倍
+        SpaceX 600亿收购Cursor发酵 : 编程Agent最清晰付费场景
+    section 8月21-23日
+        Gemini 3.7 Flash 全面上线+Spark : 月活破10亿 MCP串14款应用
+        OpenAI GPT-5.4 定档8/31退役 : 迁 GPT-5.6 Terra/Luna
+        MCP OAuth劫持/Mastra接管 : 上半年恶意包2.6倍增长</div>
+            </div>
+
+            <h2 class="mermaid-title">📊 AI Coding 赛道：自主性 × 市场份额 象限</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">quadrantChart
+    title AI Coding 赛道：自主性 × 市场份额
+    x-axis 低自主性 --> 高自主性
+    y-axis 低份额 --> 高份额
+    quadrant-1 高自主·高份额
+    quadrant-2 低自主·高份额
+    quadrant-3 低自主·低份额
+    quadrant-4 高自主·低份额
+    "Claude Code (Auto)": [0.95, 0.75]
+    "Cursor (Cloud Agents)": [0.90, 0.52]
+    "GitHub Copilot": [0.58, 0.51]
+    "OpenAI Codex": [0.90, 0.35]
+    "GLM-5.3 / ZCode": [0.70, 0.18]</div>
+            </div>
+
+            <h2 class="mermaid-title">🕸️ 2026 AI Agent 安全事件链</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">graph TD
+    A[2026 Agent 平台安全危机] --> B[Agentjacking 6月 Sentry]
+    A --> C[JADEPUFFER 7月]
+    A --> D[Langflow 加入 CISA KEV 7月]
+    A --> E[RufRoot CVE-2026-59726 8月3日]
+    A --> F[FrontMCP CVE-2026-67531 8月5日]
+    A --> G[MCP Atlassian CVE-2026-73498 8月12日]
+    A --> H[Ghostjacking 8月9日 DEF CON 34]
+    A --> I[Claude Code MCP RCE 8月 .mcp.json]
+    A --> J[Mitiga OAuth劫持 ~/.claude.json 8月]
+    A --> K[Mastra 140+包被接管 8月]
+    E --> E1[未授权 RCE + AI 记忆投毒]
+    F --> F1[沙箱逃逸 默认 public]
+    G --> G1[路径遍历 任意文件读取/凭据泄露]
+    H --> H1[投毒日志劫持 10/9]
+    I --> I1[恶意PR自动执行本地命令]
+    J --> J1[改写OAuth流量 窃SaaS token]
+    K --> K1[恶意依赖 收割钱包回连C2]
+    A --> L[Claude Code Auto Mode 默认 8月14日]
+    A --> M[MCP 安全红队 + 插件签名成刚需]</div>
+            </div>
+
+            <h2 class="mermaid-title">🔐 Claude Code MCP RCE：恶意 PR 通过 .mcp.json 执行</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">sequenceDiagram
+    participant A as 攻击者(提交PR)
+    participant R as 已信任仓库 (.mcp.json)
+    participant C as Claude Code Agent (开发者机器)
+    participant H as 开发者环境 / 凭据
+    Note over A,R: PR 注入伪装成常用工具的恶意 MCP server
+    A->>R: 添加 .mcp.json (command=恶意载荷)
+    R->>C: 开发者在已信任仓库启动 Claude Code
+    C->>C: 初始化时自动拉起本地 MCP server
+    C->>H: 以开发者权限执行 (env/SSH/云token/API key)
+    Note over C,H: Anthropic: 属 workspace trust 设计,非漏洞
+    H->>A: 外泄密钥 / 植入后门 / 回连 C2</div>
+            </div>
+
+            <h2 class="mermaid-title">🧠 本周 AI 大事件关系图</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">mindmap
+  root((2026·8月第4周))
+    大模型前沿
+      GLM-5.3 后训练Scaling
+      CyberGym 84.5% 追平闭源
+      开源的盾 安全审计
+      Anthropic 186页风险报告
+      Model 2 雪藏 CoBench 62.8%
+      生物分类器静默11个月
+    AI Coding
+      Cursor Origin 代码托管
+      Cloud Agents 订阅+子智能体VM
+      GPT-5.4退役→5.6 Terra/Luna
+      Codex Astra+1M上下文
+      DeepSeek Harness 10万星
+    AI 安全
+      Claude Code MCP RCE
+      Mitiga OAuth劫持
+      Mastra 供应链接管
+      恶意包2.6倍增长
+    AI 资本
+      Stripe 70亿购OpenRouter
+      Anthropic Q2 115亿首次盈利
+      OpenAI 解散Preparedness
+      SpaceX 600亿购Cursor</div>
+            </div>
+        </section>
+
+        <!-- 下周关注 -->
+        <section class="preview-section">
+            <h2 class="preview-title">🔮 下周关注</h2>
+            <div class="preview-list">
+                <div class="preview-item">
+                    <div class="preview-number">01</div>
+                    <div class="preview-text"><strong>Anthropic 风险报告监管回响</strong><br>自我上调评级是否引发 EU/美国对「生物分类器静默 11 个月」追问；Model 2 雪藏是否成自我克制新范式</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">02</div>
+                    <div class="preview-text"><strong>Claude Code MCP RCE 利用与缓解</strong><br>社区是否出现真实武器化 PR；Anthropic 是否补强 .mcp.json 变更重审；用户侧把 Agent 配置纳入代码审查</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">03</div>
+                    <div class="preview-text"><strong>GLM-5.3 权重开源与「开源的盾」</strong><br>两周后权重开放节奏、安全加固细节，以及 CNCF 项目审计实际效果</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">04</div>
+                    <div class="preview-text"><strong>Cursor Origin / Cloud Agents 实战</strong><br>子智能体各自 VM、/goal 长期目标在真实仓库的稳定性与成本；GitHub 同步冲突</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">05</div>
+                    <div class="preview-text"><strong>Stripe × OpenRouter 整合与网关竞争</strong><br>Vercel/Requesty 反应；中文模型占 OpenRouter 美国企业 token 46% 的地缘合规影响</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">06</div>
+                    <div class="preview-text"><strong>OpenAI 安全架构后续</strong><br>Preparedness 解散后分散团队是否保留同等 oversight；IPO（传 2027、估值 $1 万亿）前夕更多高管离职</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 出处 -->
+        <section class="sources-section">
+            <h2 class="sources-title">📚 相关出处</h2>
+            <div class="sources-grid">
+                <div class="source-category">
+                    <div class="source-category-title">Anthropic 186页风险报告 / Model 2</div>
+                    <a href="https://www.machinebrief.com/news/anthropic-august-2026-risk-report-model-2-bioweapon-classifier-gap" class="source-link">Anthropic Raises Its Own Safety Risk Rating — Model 2 Shelved（Machine Brief）</a>
+                    <a href="https://singularity.kiwi/anthropic-august-2026-risk-report-model-2-shelved-safeguard-gap" class="source-link">Anthropic Raised Its Own Risk Rating and Shelved a Model That Beats Its Flagship</a>
+                    <a href="https://roboaidigest.com/posts/2026-08-18-anthropic-risk-report" class="source-link">Anthropic's 186-Page Reckoning（RoboAI Digest）</a>
+                    <a href="https://www.sohu.com/a/1063915236_116365" class="source-link">Anthropic甩出186页风险报告：Claude会藏违规、内部还有个更强的Model 2（搜狐）</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Claude Code MCP RCE / MCP 安全</div>
+                    <a href="https://cyberpress.org/claude-code-rce-flaw-pull-requests-execute-commands/" class="source-link">Claude Code RCE Flaw Lets Malicious Pull Requests Execute Commands（Cyberpress）</a>
+                    <a href="https://www.thespacelab.tv/Content/2026/08-August/Anthropic-Claude-Code-RCE-Flaw-Malicious-Pull-Request-MCP-Security.html" class="source-link">Anthropic Claude Code RCE Flaw Can Turn Pull Requests Into an Attack</a>
+                    <a href="https://daily.dev/posts/claude-code-has-an-mcp-security-problem-and-your-developers-are-already-using-it-p4ennanew" class="source-link">Claude Code has an MCP security problem — Mitiga OAuth hijack（daily.dev）</a>
+                    <a href="https://www.reva.ai/blog/coding-agent-security-lessons-from-claude-code-cowork-codex-and-copilot-in-the-wild" class="source-link">Coding Agent Security Lessons（Reva AI）</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">智谱 GLM-5.3 / 开源的盾</div>
+                    <a href="https://www.zhipuai.cn/zh/research/162" class="source-link">GLM-5.3: 前沿编程能力与涌现的网络安全能力（智谱官方）</a>
+                    <a href="https://www.beijing.gov.cn/fuwu/lqfw/gggs/202608/t20260817_4825065.html" class="source-link">北京自研大模型网络安全能力实现重大突破（北京市政府门户）</a>
+                    <a href="https://www.toutiao.com/article/7675860450076115496/" class="source-link">北京自研大模型网络安全能力升级（光明日报）</a>
+                    <a href="https://www.toutiao.com/a7675927023096807978" class="source-link">不换基座仅靠后训练 智谱 GLM-5.3 追平闭源旗舰</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Stripe 收购 OpenRouter / AI 基础设施</div>
+                    <a href="https://insideai.news/news/ai-in-business/stripe-to-buy-openrouter-for-over-7-5-billion-in-ai-gateway-push/8317" class="source-link">Stripe to Buy OpenRouter for Over $7.5 Billion（Inside AI）</a>
+                    <a href="https://finance.yahoo.com/technology/ai/articles/stripe-acquires-openrouter-7b-turning-091812340.html" class="source-link">Stripe Acquires OpenRouter for $7B+（Yahoo Finance）</a>
+                    <a href="https://www.163.com/dy/article/L4P7NA3F05198NMR.html" class="source-link">Stripe收购OpenRouter：估值三个月暴涨4倍（网易/华尔街见闻）</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">OpenAI 解散 Preparedness / 模型换防</div>
+                    <a href="https://www.theverge.com/ai-artificial-intelligence/980817/openai-disbands-preparedness-team" class="source-link">OpenAI disbands Preparedness team（The Verge）</a>
+                    <a href="https://www.163.com/dy/article/L4JRPHL605568W0A.html" class="source-link">OpenAI 大刀砍向安全团队！「灾难性风险」评估组被解散（网易）</a>
+                    <a href="https://www.analyticsinsight.net/news/openai-ends-ai-preparedness-team-as-ipo-plans-meet-fresh-safety-questions" class="source-link">OpenAI Ends AI Preparedness Team（Analytics Insight）</a>
+                    <a href="https://oday-bakkour.com/blog/ai-coding-news-august-18-2026-claude-code-cursor-cloud-agents" class="source-link">AI Coding News Aug 18：Claude Code / Cursor（Oday Bakkour）</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Cursor Origin / DeepSeek / Gemini</div>
+                    <a href="https://cursor.com/changelog" class="source-link">Cursor Changelog — Origin Code Hosting（8/17）</a>
+                    <a href="https://cursor.com/en-US/changelog" class="source-link">What's New in Cursor — Cloud Agents and Harness（8/19）</a>
+                    <a href="https://www.163.com/dy/article/L4H81TBN0556MLE9.html" class="source-link">DeepSeek V4 Pro 上线国家超算互联网 + Harness v0.1</a>
+                    <a href="https://ima.qq.com/wiki/?shareId=df5afdc4ac2e73c2bc5239ab8232fd11d97a97f3be8d392f0513e773032a7c2b" class="source-link">AI 资讯每日精选 2026.08.17（IMA 知识库）</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="footer-brand">AI 周报速递</div>
+            <div>编辑：AI 自动生成 | 数据截止：2026年8月23日 12:00</div>
+            <div style="margin-top: 5px;">© 2026 AI城 · 专注AI领域深度报道</div>
+        </footer>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: 'Noto Sans SC, sans-serif',
+            timeline: { useMaxWidth: true },
+            quadrantChart: { useMaxWidth: true },
+            mindmap: { useMaxWidth: true },
+            sequence: { useMaxWidth: true },
+            flowchart: { useMaxWidth: true }
+        });
+    </script>
+</body>
+</html>
