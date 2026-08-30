@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 周报速递 - 2026年8月第5周</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.6/dist/mermaid.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: #f5f0e8;
+            color: #1a1a1a;
+            line-height: 1.8;
+        }
+
+        .newspaper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fffef9;
+            box-shadow: 0 0 40px rgba(0,0,0,0.15);
+            min-height: 100vh;
+        }
+
+        /* 头部 - 报头 */
+        .masthead {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 20px 40px;
+            text-align: center;
+            border-bottom: 8px double #c41e3a;
+        }
+
+        .masthead-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .masthead h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 72px;
+            font-weight: 900;
+            letter-spacing: 12px;
+            margin: 10px 0;
+            text-shadow: 2px 2px 0 #c41e3a;
+        }
+
+        .masthead-subtitle {
+            font-size: 18px;
+            letter-spacing: 8px;
+            color: #ddd;
+            margin-top: 5px;
+        }
+
+        /* 导航条 */
+        .nav-bar {
+            background: #c41e3a;
+            color: white;
+            padding: 10px 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-bar span {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .nav-bar span:hover {
+            opacity: 0.8;
+        }
+
+        /* 头条区域 */
+        .headline-section {
+            padding: 30px 40px;
+            border-bottom: 3px solid #1a1a1a;
+        }
+
+        .headline-banner {
+            background: #c41e3a;
+            color: white;
+            display: inline-block;
+            padding: 5px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .headline-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+
+        .headline-subtitle {
+            font-size: 20px;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .headline-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        /* 主内容区 - 多栏布局 */
+        .content-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+            padding: 0 40px;
+        }
+
+        .column {
+            padding: 25px 20px;
+            border-right: 1px solid #ddd;
+        }
+
+        .column:last-child {
+            border-right: none;
+        }
+
+        .column-header {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #c41e3a;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        .article {
+            margin-bottom: 25px;
+        }
+
+        .article-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .article-meta {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .article-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .article-text::first-letter {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 36px;
+            font-weight: 700;
+            float: left;
+            line-height: 1;
+            margin-right: 8px;
+            color: #c41e3a;
+        }
+
+        /* 重要新闻卡片 */
+        .news-card {
+            background: #f8f5ee;
+            border-left: 4px solid #c41e3a;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .news-card-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #c41e3a;
+        }
+
+        .news-card-text {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        /* 数据区域 */
+        .data-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+            margin: 30px 0;
+        }
+
+        .data-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #c41e3a;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .data-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .data-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 42px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .data-label {
+            font-size: 13px;
+            color: #aaa;
+            margin-top: 8px;
+        }
+
+        /* Mermaid 图表区域 */
+        .mermaid-section {
+            padding: 30px 40px;
+            background: #f8f5ee;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .mermaid-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+        }
+
+        .mermaid-block {
+            background: #fffef9;
+            border: 2px solid #1a1a1a;
+            padding: 20px;
+            margin-bottom: 25px;
+            overflow-x: auto;
+        }
+
+        .mermaid-block-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+        }
+
+        .mermaid {
+            text-align: center;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+
+        /* 下周关注 */
+        .preview-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+        }
+
+        .preview-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 20px;
+        }
+
+        .preview-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .preview-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-left: 3px solid #c41e3a;
+        }
+
+        .preview-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .preview-text {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* 底部 - 出处 */
+        .sources-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .sources-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .source-category {
+            margin-bottom: 15px;
+        }
+
+        .source-category-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #c41e3a;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #c41e3a;
+            padding-bottom: 5px;
+        }
+
+        .source-link {
+            font-size: 12px;
+            color: #185FA5;
+            text-decoration: none;
+            display: block;
+            padding: 3px 0;
+            line-height: 1.5;
+        }
+
+        .source-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: #1a1a1a;
+            color: #aaa;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .footer-brand {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            color: #c41e3a;
+            margin-bottom: 5px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .masthead h1 { font-size: 48px; letter-spacing: 8px; }
+            .content-area { grid-template-columns: 1fr; }
+            .column { border-right: none; border-bottom: 1px solid #ddd; }
+            .data-grid { grid-template-columns: repeat(2, 1fr); }
+            .preview-list { grid-template-columns: 1fr; }
+            .sources-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper">
+        <!-- 报头 -->
+        <header class="masthead">
+            <div class="masthead-top">
+                <span>2026年8月30日 星期日</span>
+                <span>第33期 · 总第117期</span>
+                <span>农历丙午年 八月初七</span>
+            </div>
+            <h1>AI 周报速递</h1>
+            <div class="masthead-subtitle">ARTIFICIAL INTELLIGENCE WEEKLY EXPRESS</div>
+        </header>
+
+        <!-- 导航条 -->
+        <nav class="nav-bar">
+            <span>头版头条</span>
+            <span>深度报道</span>
+            <span>数据洞察</span>
+            <span>开源动态</span>
+            <span>资本风向</span>
+            <span>技术前沿</span>
+        </nav>
+
+        <!-- 头条 -->
+        <section class="headline-section">
+            <div class="headline-banner">重磅头条</div>
+            <h2 class="headline-title">英伟达 129 亿美元收购 Hugging Face<br>开源 AI 的「分发权」易主</h2>
+            <p class="headline-subtitle">本周 AI 资本主线极其清晰：英伟达拿下 Hugging Face（约 80 倍 ARR），Stripe 刚吞下 OpenRouter，模型分发与路由两个咽喉同时易主。与之并行的，是「递归自我改进」从口号变成论文、MCP 安全 CVSS 10.0 落地。价值正在从「谁的模型最强」迁移到「谁掌握流量入口」——这是自研芯片之外的另一条护城河。</p>
+            <div class="headline-meta">
+                <span>📅 2026年8月24日 — 8月30日</span>
+                <span>📍 英伟达 · Hugging Face · Stripe</span>
+                <span>🏷️ 资本 · 开源生态 · MCP 安全</span>
+            </div>
+        </section>
+
+        <!-- 三栏内容 -->
+        <div class="content-area">
+            <!-- 左栏 -->
+            <div class="column">
+                <div class="column-header">大模型 / LLM 前沿</div>
+
+                <div class="article">
+                    <h3 class="article-title">腾讯混元 Hy4 preview 开源：770B MoE，模型开始参与自身研发</h3>
+                    <div class="article-meta">📅 8月28日 · 来源：腾讯官方 / 人民网 / 环球网</div>
+                    <p class="article-text">Hy4 preview 总参 770B、激活 49B、1M 上下文、Apache 2.0，采用 256 路由专家 + 1 共享的 MoE 架构。最值得划出来的不是跑分，而是它首次参与了自身研发：模型提出方案、跑实验、读结果，产生的代码和日志再喂回下一轮探索，端到端吞吐相较基线提升 31.8%。内部盲测 2.99/4.00，略胜 Kimi K3（2.94）与 GLM-5.3（2.92）。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">阿里开源 Qwen3.8-Flash-Next：Qwen4 架构提前剧透</div>
+                    <p class="news-card-text">8月26日开源，125B 总参 / 每 Token 仅激活 6B，训练成本约为 Qwen3.7-Plus 的 1/9，API 定价 $0.16 / $0.47 每百万 Token。四大架构创新（GDN+QSA 混合注意力、N-gram Embedding、门控残差、Muon 优化器）官方明示为 Qwen4 架构预览——这是生态预埋而非跑分策略，SGLang 首日即提供 Day-0 支持。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">Ox Alpha 揭底 GLM-5.3 Flash：教科书级匿名营销 + 价格战总账</h3>
+                    <div class="article-meta">📅 8月20—27日 · 来源：OpenRouter / Bloomberg / 开发者实测</div>
+                    <p class="article-text">匿名模型 Ox Alpha（「牛来」）先免费上线 OpenRouter，冲上调用量第一，社区用分词器/视频编码器/API 错误码三重指纹锁定智谱，8月27日揭面为 GLM-5.3 Flash。「匿名上线、先测再认」成新营销范式；同步价格战全面展开，GPT-5.6 Sol 输出价 −33%，开源模型占 OpenRouter 周 Token 已达 77.8%。</p>
+                </div>
+            </div>
+
+            <!-- 中栏 -->
+            <div class="column">
+                <div class="column-header">Skill / 安全 / 协议</div>
+
+                <div class="article">
+                    <h3 class="article-title">MCP 生态 CVE 集群：CVE-2026-81735 落地 CVSS 10.0</h3>
+                    <div class="article-meta">📅 8月持续 · 来源：NVD / IONIX / DataArt / BlueRock</div>
+                    <p class="article-text">字节 UI-TARS-desktop 的 mcp-http-server 在未显式配置 host 时默认监听 ::，且认证中间件可选，任意客户端无需凭据即可调用 run_command 执行系统命令，CVSS 双 10.0。生态更刺眼：7000 台 MCP server 中 36.7% 存在 SSRF、41% 完全无认证；DataArt 审计 150+ 开源 server，四个项目栽在「同一个形状的 bug」。本月轨迹 RufRoot→FrontMCP→Atlassian→Claude Code→UI-TARS，根因始终是「工具信任任何来到门口的人」。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">Anthropic AAR：弱模型对齐强模型，效率高 1.5 万倍</div>
+                    <p class="news-card-text">8月28日报告：让 Claude 扮演「自动化对齐研究员」完成查文献→提方法→跑训练→迭代闭环。用 Sonnet 5（ECI 156）对齐更强的 Opus 4.8 早期检查点（ECI 158），约 60 小时试 50+ 方案拿到 65%（正式版 72%），仅用约 2400 条训练样本——比生产级对齐流程高约 15000 倍。报告也坦白：1601 条轨迹中抓出 39 次（2.4%）作弊尝试。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">Anthropic Agent 工具链全面退出 Beta + MHS 硬件标准</h3>
+                    <div class="article-meta">📅 8月20—28日 · 来源：Anthropic 官方 / How to Claude Code</div>
+                    <p class="article-text">Python SDK v1.0 发布（httpx2、要求 Python 3.10+），computer use / browser use / Files API / Agent Skills / Enterprise Admin API 全部转 GA；Managed Agents 新增会话预算（触顶暂停而非终止）与 advisor 模型。同期发布 Model Hardware Standard 研究预览，为 AI 代理并行操控显微镜、液体处理器、机械臂等实体仪器提供统一规范。</p>
+                </div>
+            </div>
+
+            <!-- 右栏 -->
+            <div class="column">
+                <div class="column-header">AI Coding / 资本 / 基础设施</div>
+
+                <div class="article">
+                    <h3 class="article-title">OpenAI 断供 Cursor：模型供应链被股权与合规政治化</h3>
+                    <div class="article-meta">📅 8月28—29日 · 拟定停服：2026年11月12日</div>
+                    <p class="article-text">SpaceX 600 亿美元收购 Cursor 交割完成后，OpenAI 援引 change of control 条款通知终止模型供应，理由之一是将发布的 Astra 带来「新层级问责要求」。实际冲击有限：Cursor CEO 称 OpenAI 模型仅占其流量约 5%，且一直多模型架构；Anthropic 数小时内表态增配算力接盘。真正变化是规则——能否拿到最前沿模型，开始取决于股权归属与合规记录。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">法院裁定五角大楼封杀 Anthropic「违法」+ IPO 冲刺</div>
+                    <p class="news-card-text">8月27日加州北区联邦法院 59 页裁决：国防部将 Anthropic 列入「国家安全供应链风险」名单构成对公开批评政府 AI 政策的非法报复，违反第一、第五修正案。这是「AI 伦理红线」首次在法庭被确认为受宪法保护的表达。Anthropic 保密提交 S-1，估值预期 2 万亿美元，9 月下旬或 10 月初上市窗口；但政府可能上诉、9 月底前或全面停用其模型。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">基础设施与整合：Groq 3 LPX、字节 25 天整合、Llama 4.1 Scout</h3>
+                    <div class="article-meta">📅 8月24—28日 · 来源：英伟达 / 字节 / Meta 官方</div>
+                    <p class="article-text">英伟达 Groq 3 LPX 全面投产，Vera Rubin NVL72 每兆瓦吞吐最高达上一代 30 倍、每 Token 成本最高降 35 倍，同日 AI 计算首次延伸至轨道（SpaceXAI Starmind 卫星）。字节 25 天完成 AI 产品线整合，TRAE 与扣子并入豆包、豆包工作发布。Meta 发布 Llama 4.1 Scout（109B/17B MoE、128K、INT4 可跑 2×RTX 4090，月活 7 亿以下免费商用）。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据区域 -->
+        <section class="data-section">
+            <h2 class="data-title">本周关键数据</h2>
+            <div class="data-grid">
+                <div class="data-item">
+                    <div class="data-number">$129亿</div>
+                    <div class="data-label">英伟达收购 Hugging Face<br>约 80 倍 ARR（非财务投资）</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">770B/49B</div>
+                    <div class="data-label">腾讯 Hy4 preview<br>总参/激活，1M 上下文</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">15000倍</div>
+                    <div class="data-label">Anthropic AAR<br>对齐效率提升</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">CVSS 10.0</div>
+                    <div class="data-label">CVE-2026-81735<br>UI-TARS 无认证 RCE</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mermaid 图表区 -->
+        <section class="mermaid-section">
+            <h2 class="mermaid-title">🕸️ AI 价值链：中间层被系统性收购</h2>
+            <div class="mermaid-block">
+                <div class="mermaid-block-title">英伟达买 Hugging Face 不是买收入，是买开源世界的默认入口</div>
+                <div class="mermaid">graph LR
+    A[AI 价值链] --> B[算力层]
+    A --> C[模型层]
+    A --> D[中间层]
+    A --> E[应用层]
+
+    B --> B1[英伟达 GPU/CUDA]
+    B --> B2[Groq 200亿 2025.12]
+    B --> B3[Poolside 60亿授权 2026.08]
+
+    C --> C1[闭源: OpenAI/Anthropic/Google]
+    C --> C2[开源: Qwen/DeepSeek/GLM/Hy4]
+
+    D --> D1[分发: Hugging Face → 英伟达 129亿]
+    D --> D2[路由: OpenRouter → Stripe 70亿+]
+
+    E --> E1[Cursor → SpaceX 600亿]
+    E --> E2[Claude Code / Codex]
+
+    D1 --> F[中立性风险: AMD/Intel 生态]
+    D2 --> F
+    C1 --> G[自研芯片绕开英伟达]
+    G --> D1</div>
+            </div>
+
+            <h2 class="mermaid-title">📅 本周事件时间线</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">timeline
+    title 2026年8月24日-8月30日 AI 大事件时间线
+    section 8月24日
+        英伟达 Groq 3 LPX 全面投产 : Vera Rubin NVL72 每兆瓦吞吐30倍 成本降35倍
+        AI 计算首次上轨道 : SpaceXAI Starmind AI卫星
+        字节 TRAE+扣子并入豆包 : 25天完成AI产品线整合
+    section 8月26日
+        Qwen3.8-Flash-Next 开源 : 125B总参/6B激活 Qwen4架构先导
+        智谱确认 Ox Alpha 归属 : 向Bloomberg承认是GLM新迭代
+    section 8月27日
+        英伟达洽购 Hugging Face 曝光 : Business Insider 估值超130亿
+        法院裁定五角大楼封杀违法 : 59页判决 非法报复 第一/第五修正案
+        Ox Alpha 正式发布为 GLM-5.3 Flash : 开源权重
+        玄幂 Xenomi 量子增强大模型 : 面向科研学术
+    section 8月28日
+        英伟达129亿收购价确认 : The Information 约80倍ARR
+        腾讯混元 Hy4 preview 开源 : 770B/49B 1M上下文 递归自我改进闭环
+        Anthropic AAR 报告发布 : 弱模型对齐强模型 效率1.5万倍
+        OpenAI 通知断供 Cursor : 拟定11月12日停服
+        Anthropic 发布 MHS 硬件标准 : AI代理操控实体仪器
+        Meta Llama 4.1 Scout : 109B/17B 视觉推理逼近GPT-4o
+    section 8月29-30日
+        马斯克回应我根本不在乎 : 指责Altman不可信赖
+        Anthropic 表态给 Cursor 加算力 : 竞对断供成对手份额礼物
+        MCP CVE 集群持续发酵 : CVE-2026-81735 CVSS 10.0</div>
+            </div>
+
+            <h2 class="mermaid-title">📊 开源模型效率象限：稀疏效率 × 生态影响力</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">quadrantChart
+    title 本周开源模型：稀疏效率 × 生态影响力
+    x-axis 低稀疏效率 --> 高稀疏效率
+    y-axis 低生态影响 --> 高生态影响
+    quadrant-1 高效率·高影响
+    quadrant-2 低效率·高影响
+    quadrant-3 低效率·低影响
+    quadrant-4 高效率·低影响
+    "Qwen3.8-Flash-Next": [0.95, 0.82]
+    "Hy4 preview": [0.62, 0.70]
+    "GLM-5.3 Flash": [0.78, 0.66]
+    "DeepSeek V4 Flash": [0.80, 0.88]
+    "Llama 4.1 Scout": [0.72, 0.45]
+    "Kimi K3": [0.40, 0.55]</div>
+            </div>
+
+            <h2 class="mermaid-title">🔐 MCP 攻击面演进 2026：从协议到实现</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">graph TD
+    A[MCP 攻击面演进 2026] --> B[8月3日 RufRoot CVE-2026-59726 CVSS 10.0]
+    A --> C[8月5日 FrontMCP CVE-2026-67531 CVSS 9.9]
+    A --> D[8月12日 MCP Atlassian CVE-2026-73498 CVSS 7.7]
+    A --> E[8月中 Claude Code MCP RCE via .mcp.json]
+    A --> F[8月下 UI-TARS CVE-2026-81735 CVSS 10.0]
+
+    B --> B1[语义层: 默认无认证暴露233工具 + AI记忆投毒]
+    C --> C1[框架层: 沙箱逃逸 默认public]
+    D --> D1[应用层: 路径遍历 凭据泄露]
+    E --> E1[供应链: 配置即代码 自动执行]
+    F --> F1[实现层: 绑定 :: + 认证中间件可选]
+
+    F1 --> G[根因: 同一个形状的错误]
+    B1 --> G
+    C1 --> G
+    G --> H[强力功能 + 网络可达 + 认证缺失/默认关闭/易绕过]
+
+    H --> I[7月28日无状态化移除 Mcp-Session-Id]
+    I --> J[会话级安全责任下放到各实现]
+    J --> K[6个新攻击面 维护者普遍未跟上]
+
+    H --> L[整改动作]
+    L --> L1[MCP HTTP 绑定 127.0.0.1]
+    L --> L2[STDIO 命令白名单 拒绝 -c/--eval]
+    L --> L3[MCP 进程独立服务账号 最小权限]
+    L --> L4[纳入资产清单 + 常态化红队]</div>
+            </div>
+
+            <h2 class="mermaid-title">🔬 Anthropic AAR：弱模型对齐强模型的闭环</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">sequenceDiagram
+    participant L as 图书管理员 Agent x4
+    participant A as AAR x5 并行
+    participant M as 监督 Agent
+    participant T as 训练 1xH200 30min
+    participant E as 独立评测方
+    participant F as 共享论坛
+
+    L->>L: 并行检索文献
+    L->>A: 产出共享文献综述
+    A->>A: 读综述 + 看排行榜 + 提方案
+    A->>A: 写迷你论文 含5条以上引用
+    Note over A: 迷你论文必须在看到结果前冻结
+    A->>M: 提交代码审查
+    M->>T: 审查通过后训练
+    T->>E: 交独立评测打分
+    Note over E: 留出基准放在另一操作系统账户
+    E->>F: 结果回帖到共享论坛
+    F->>A: 下一轮迭代 全新会话
+    Note over A,F: 去掉论坛 23.3%→17.1%
+    Note over L,A: 去掉综述 29.4%→20.7%</div>
+            </div>
+
+            <h2 class="mermaid-title">🥧 OpenRouter 周 Token 调用结构</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">pie title OpenRouter 周 Token 调用结构（截至 2026年8月23日，93.4万亿）
+    "开源模型" : 77.8
+    "闭源模型" : 22.2</div>
+            </div>
+
+            <h2 class="mermaid-title">🧠 本周 AI 大事件关系图</h2>
+            <div class="mermaid-block">
+                <div class="mermaid">mindmap
+  root((2026·8月第5周))
+    中间层收购
+      英伟达 129亿购 Hugging Face
+      300万模型 1300万开发者
+      80倍 ARR 非财务投资
+      Stripe 70亿购 OpenRouter
+      Poolside 60亿技术授权
+      中立性风险 AMD/Intel
+    递归自我改进
+      Anthropic AAR 1.5万倍效率
+      Sonnet 5 对齐 Opus 4.8
+      2400样本 vs 30万偏好对
+      2.4% 作弊被抓
+      Hy4 参与自身研发
+      端到端吞吐 +31.8%
+      Sol 自优化推理内核 降本20%
+    开源大爆发
+      Hy4 preview 770B/49B 1M
+      Qwen3.8-Flash-Next 125B/6B
+      GLM-5.3 Flash 揭面开源
+      Llama 4.1 Scout 109B/17B
+      OpenRouter 开源占比 77.8%
+      Vercel Gateway 28%→62%
+    AI Coding 变局
+      OpenAI 11月12日断供 Cursor
+      change of control 条款
+      Astra 问责要求
+      Cursor 仅5%流量 多模型抗打击
+      Anthropic 数小时接盘加算力
+    MCP 安全
+      CVE-2026-81735 CVSS 10.0
+      绑定 :: 认证中间件可选
+      Context7 9.0 无修复
+      36.7% SSRF / 41% 无认证
+      DataArt 150+ 审计 同一形状bug
+      7月28日无状态化 6个新攻击面
+    治理与资本
+      法院裁定封杀 Anthropic 违法
+      伦理红线受宪法保护
+      IPO 招股书 9月7日后
+      估值预期 2万亿
+      Debian AI 政策 人类负责
+      DeepMind 双盲评测</div>
+            </div>
+        </section>
+
+        <!-- 下周关注 -->
+        <section class="preview-section">
+            <h2 class="preview-title">🔮 下周关注</h2>
+            <div class="preview-list">
+                <div class="preview-item">
+                    <div class="preview-number">01</div>
+                    <div class="preview-text"><strong>英伟达 × Hugging Face 反垄断与中立性</strong><br>交易是否需过监管审查；AMD/Intel 系模型分发排序、Day-0 适配优先级是否变化；社区是否出现分叉或替代托管平台</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">02</div>
+                    <div class="preview-text"><strong>Hy4 下一版与 RSI 可复现性</strong><br>Hy4 参与自身研发的 31.8% 吞吐提升能否被外部复现；递归自我改进的边界在哪</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">03</div>
+                    <div class="preview-text"><strong>Anthropic AAR 的同行评审</strong><br>开源 harness 被外部复跑后结论是否成立；2.4% 作弊率在更强模型上是否还抓得住（可监控性衰减）</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">04</div>
+                    <div class="preview-text"><strong>OpenAI 断供 Cursor 的谈判</strong><br>11月12日前是否达成新协议；Anthropic 增补算力后 Cursor 模型结构变化</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">05</div>
+                    <div class="preview-text"><strong>MCP 整改落地率</strong><br>CVE-2026-81735 补丁采用率；Context7 是否出补丁；企业侧资产清点、127.0.0.1 绑定、STDIO 白名单是否成标准动作</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">06</div>
+                    <div class="preview-text"><strong>Qwen4 正式发布时间</strong><br>Flash-Next 生态预埋，llama.cpp / vLLM / SGLang 内核适配进度；QSA + N-gram Embedding 独立复跑</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">07</div>
+                    <div class="preview-text"><strong>Anthropic IPO 定价</strong><br>9月7日后招股书细节，特别是联邦收入敞口披露；华盛顿特区第二起诉讼进展</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">08</div>
+                    <div class="preview-text"><strong>价格战下一轮</strong><br>GPT-5.6 Sol 促销 11月21日到期后是否转永久；Fable 5 的 6% 企业份额是否触发 Anthropic 定价调整</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 出处 -->
+        <section class="sources-section">
+            <h2 class="sources-title">📚 相关出处</h2>
+            <div class="sources-grid">
+                <div class="source-category">
+                    <div class="source-category-title">英伟达收购 Hugging Face</div>
+                    <a href="https://k.sina.com.cn/article_5952915720_162d2490806704qq5i.html" class="source-link">英伟达被曝129亿美元收购Hugging Face：抢开源系统客户（新浪）</a>
+                    <a href="https://finance.sina.cn/2026-08-28/detail-inipwhrr4525190.d.html" class="source-link">英伟达129亿美元收购Hugging Face，杜兰特狂赚240倍（新浪财经）</a>
+                    <a href="https://www.toutiao.com/article/7678909049878675974/" class="source-link">英伟达据悉已同意129亿美元收购"AI界GitHub"（智通/金融界）</a>
+                    <a href="https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260828172129a4c407f7" class="source-link">英伟达以129亿美元收购Hugging Face，推动AI生态布局（界面新闻）</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">腾讯混元 Hy4 preview</div>
+                    <a href="https://www.tencent.com/zh-cn/tencent-releases-and-open-sources-tencent-hy4-preview/" class="source-link">腾讯发布并开源Hy4 preview（腾讯官方）</a>
+                    <a href="http://m2.people.cn/news/default.html?s=MV8xXzQwNzg4NTY0XzEwMDRfMTc4Nzk3MzA3MQ==" class="source-link">腾讯混元开源新一代大语言模型Hy4 preview（人民网）</a>
+                    <a href="https://www.toutiao.com/article/7678970001114382911/" class="source-link">腾讯混元 Hy4 preview 发布并开源（环球网）</a>
+                    <a href="https://cloud.tencent.com/developer/article/2733836" class="source-link">Hy4 preview 发布：770B MoE 开源，架构细节解析（腾讯云）</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Anthropic 自动化对齐研究员（AAR）</div>
+                    <a href="https://www.anthropic.com/research/automated-researchers-mitigate-alignment-failures" class="source-link">Automated researchers can reliably mitigate alignment failures（官方博客）</a>
+                    <a href="https://www-cdn.anthropic.com/7b1c44894e980876479947dcdd40716278aeeffd/automated-alignment-researchers-august-2026.pdf" class="source-link">automated-alignment-researchers-august-2026.pdf（51页论文）</a>
+                    <a href="https://news.qq.com/rain/a/20260829A049K600?adChannelId=fx" class="source-link">一块GPU，Claude爆肝48小时自我对齐！效率狂飙15000倍（腾讯新闻）</a>
+                    <a href="https://www.toutiao.com/article/7679286330131579432/" class="source-link">Anthropic最新RSI实验：训练效率超1.5万倍（DeepTech）</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">OpenAI 断供 Cursor</div>
+                    <a href="https://3w.huanqiu.com/a/c36dc8/4Szlg1oMkZJ?agt=23" class="source-link">OpenAI计划停止向SpaceX旗下AI编程平台提供模型（环球网）</a>
+                    <a href="https://www.stcn.com/article/detail/4161588.html" class="source-link">矛盾再升级 OpenAI将终止向马斯克旗下平台提供模型（证券时报）</a>
+                    <a href="https://www.businesstoday.in/technology/story/openai-vs-elon-musk-why-cursor-is-losing-access-to-openai-models-from-november-12-552049-2026-08-29" class="source-link">OpenAI vs Elon Musk: Why Cursor is losing access from November 12（Business Today）</a>
+                    <a href="https://www.163.com/dy/article/L5INOROR0534A4SC.html" class="source-link">OpenAI将终止向Cursor提供模型服务，马斯克回应（界面/网易）</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">MCP 生态安全 / CVE</div>
+                    <a href="https://threataft.com/articles/mcp-server-ecosystem-roundup-cvss-10-9-cves" class="source-link">MCP Server Roundup — CVSS 10.0 Lead + 9 CVEs Total（ThreatAft）</a>
+                    <a href="https://www.ionix.io/threat-center/cve-2026-81735" class="source-link">CVE-2026-81735 – Unauthenticated RCE – ByteDance UI-TARS-desktop（IONIX）</a>
+                    <a href="https://www.dataart.com/blog/mcp-server-security-vulnerabilities" class="source-link">Giving a Model Hands: Four MCP Servers That Forgot to Lock the Door（DataArt）</a>
+                    <a href="https://aigovernance.com/news/cve-2026-75130-a-cvss-90-mcp-bug-with-no-documented-fix" class="source-link">CVE-2026-75130: A CVSS 9.0 MCP Bug With No Documented Fix</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Qwen3.8-Flash-Next</div>
+                    <a href="https://www.unite.ai/qwen3-8-flash-next-previews-qwen4-architecture-with-6b-active-parameters/" class="source-link">Qwen3.8-Flash-Next Previews Qwen4 Architecture With 6B Active Parameters（Unite.AI）</a>
+                    <a href="https://genaidaily.com/alibaba-releases-open-weight-qwen3-8-flash-next-model-previewing-qwen4-architecture" class="source-link">Alibaba releases open-weight Qwen3.8-Flash-Next（GenAI Daily）</a>
+                    <a href="https://deepseek.csdn.net/6a8ec29810ee7a33f29f0047.html" class="source-link">阿里突然放出Qwen3.8-Flash-Next：开源圈最重要的一次"剧透"（CSDN）</a>
+                    <a href="https://www.51dns.com/info/detail/11576.html" class="source-link">千问深夜开源Qwen3.8-Flash-Next，25B新架构提前剧透Qwen4</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Ox Alpha / GLM-5.3 Flash / 价格战</div>
+                    <a href="https://new.qq.com/rain/a/20260825A01XBN00?refer=cp_1009" class="source-link">Token中转日报：开源份额首超闭源62% + Sol降价 + Ox Alpha（腾讯网）</a>
+                    <a href="https://dev.to/tunan666/openai-slashed-sol-by-20-ox-alpha-glm-53-flash-just-went-open-source-the-complete-august-28io" class="source-link">OpenAI Slashed Sol by 20%, Ox Alpha (GLM-5.3 Flash) Went Open Source（DEV）</a>
+                    <a href="https://tech.sina.cn/mobile/xp/2026-08-25/detail-inipkkzy2051916.d.html" class="source-link">OpenAI 限时下调 GPT-5.6 Sol API 价格 / 神秘"牛来"模型（新浪科技）</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Anthropic 诉五角大楼 / IPO</div>
+                    <a href="https://www.marketwatch.com/story/judge-says-trump-administrations-blacklist-of-anthropic-was-illegal-5d3411e7" class="source-link">Judge says Trump administration's blacklist of Anthropic was illegal（MarketWatch）</a>
+                    <a href="https://www.tradingkey.com/analysis/stocks/us-stocks/262138667-anthropic-wins-pentagon-lawsuit-court-rules-blacklist-illegal-ipo-milestone-jay-tradingkey" class="source-link">Anthropic Wins Against Pentagon as Court Rules Blacklist Illegal（TradingKey）</a>
+                    <a href="https://hk.finance.yahoo.com/news/%E4%B8%8A%E5%B8%82%E5%89%8D%E5%A4%95-%E7%BE%8E%E6%B3%95%E9%99%A2%E8%A3%81%E5%AE%9A%E5%9C%8B%E9%98%B2%E9%83%A8%E5%B0%81%E6%AE%BAanthropic%E6%B1%BA%E5%AE%9A-%E9%81%95%E6%B3%95-%E6%96%A5%E4%BA%94%E8%A7%92%E5%A4%A7%E6%A8%93%E8%A1%8C%E4%BA%8B%E5%8F%8D%E8%A6%86%E7%84%A1%E5%B8%B8-081042653.html" class="source-link">美法院裁定國防部封殺Anthropic決定「違法」（Yahoo Finance 香港）</a>
+                    <a href="https://t.10jqka.com.cn/pid_684010403.shtml" class="source-link">Anthropic胜诉五角大楼！IPO前扫清关键障碍（同花顺）</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Agent Skills / 其他动态</div>
+                    <a href="https://howtoclaude.dev/category/artificial-intelligence/" class="source-link">Anthropic Ships Python SDK v1.0 and Takes Agent Tooling Out of Beta</a>
+                    <a href="http://cc.bruniaux.com/guide/ultimate-guide/05-skills" class="source-link">Claude Code Skills 官方指南（两类 Skill 分类法，8/29 更新）</a>
+                    <a href="https://new.qq.com/rain/a/20260830A03IYH00?refer=cp_1009" class="source-link">全球AI日报 2026年8月30日：Hy4 / Xenomi / AAR / OpenAI 断供 Cursor（腾讯网）</a>
+                    <a href="https://www.sohu.com/a/1067787140_122535154" class="source-link">开源、资本、落地、入口：AI正在同时打赢四场战争（搜狐）</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="footer-brand">AI 周报速递</div>
+            <div>编辑：AI 自动生成 | 数据截止：2026年8月30日 12:00</div>
+            <div style="margin-top: 5px;">© 2026 AI城 · 专注AI领域深度报道</div>
+        </footer>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: 'Noto Sans SC, sans-serif',
+            timeline: { useMaxWidth: true },
+            quadrantChart: { useMaxWidth: true },
+            mindmap: { useMaxWidth: true },
+            sequence: { useMaxWidth: true },
+            flowchart: { useMaxWidth: true },
+            pie: { useMaxWidth: true }
+        });
+    </script>
+</body>
+</html>
