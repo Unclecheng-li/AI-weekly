@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 周报速递 - 2026年9月第2周</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: #f5f0e8;
+            color: #1a1a1a;
+            line-height: 1.8;
+        }
+
+        .newspaper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fffef9;
+            box-shadow: 0 0 40px rgba(0,0,0,0.15);
+            min-height: 100vh;
+        }
+
+        /* 头部 - 报头 */
+        .masthead {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 20px 40px;
+            text-align: center;
+            border-bottom: 8px double #c41e3a;
+        }
+
+        .masthead-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .masthead h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 72px;
+            font-weight: 900;
+            letter-spacing: 12px;
+            margin: 10px 0;
+            text-shadow: 2px 2px 0 #c41e3a;
+        }
+
+        .masthead-subtitle {
+            font-size: 18px;
+            letter-spacing: 8px;
+            color: #ddd;
+            margin-top: 5px;
+        }
+
+        /* 导航条 */
+        .nav-bar {
+            background: #c41e3a;
+            color: white;
+            padding: 10px 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-bar span {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .nav-bar span:hover {
+            opacity: 0.8;
+        }
+
+        /* 头条区域 */
+        .headline-section {
+            padding: 30px 40px;
+            border-bottom: 3px solid #1a1a1a;
+        }
+
+        .headline-banner {
+            background: #c41e3a;
+            color: white;
+            display: inline-block;
+            padding: 5px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .headline-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 44px;
+            font-weight: 900;
+            line-height: 1.25;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+
+        .headline-subtitle {
+            font-size: 19px;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .headline-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* 主内容区 - 多栏布局 */
+        .content-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+            padding: 0 40px;
+        }
+
+        .column {
+            padding: 25px 20px;
+            border-right: 1px solid #ddd;
+        }
+
+        .column:last-child {
+            border-right: none;
+        }
+
+        .column-header {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #c41e3a;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        .article {
+            margin-bottom: 25px;
+        }
+
+        .article-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .article-meta {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .article-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .article-text::first-letter {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 36px;
+            font-weight: 700;
+            float: left;
+            line-height: 1;
+            margin-right: 8px;
+            color: #c41e3a;
+        }
+
+        /* 重要新闻卡片 */
+        .news-card {
+            background: #f8f5ee;
+            border-left: 4px solid #c41e3a;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .news-card-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #c41e3a;
+        }
+
+        .news-card-text {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        /* 数据区域 */
+        .data-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+            margin: 30px 0;
+        }
+
+        .data-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #c41e3a;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .data-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .data-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 38px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .data-label {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 8px;
+        }
+
+        /* 时间线 */
+        .timeline-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .timeline-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #c41e3a;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-left: 25px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: #c41e3a;
+            border-radius: 50%;
+            border: 3px solid #fffef9;
+        }
+
+        .timeline-date {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        /* 开闭源象限图 */
+        .quadrant-section {
+            padding: 30px 40px;
+            background: #f8f5ee;
+        }
+
+        .quadrant-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .quadrant-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 3px;
+            background: #1a1a1a;
+            padding: 3px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quadrant-cell {
+            background: #fffef9;
+            padding: 20px;
+            position: relative;
+            min-height: 120px;
+        }
+
+        .quadrant-label {
+            position: absolute;
+            font-size: 10px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .quadrant-label.top-left { top: 5px; left: 10px; }
+        .quadrant-label.top-right { top: 5px; right: 10px; }
+        .quadrant-label.bottom-left { bottom: 5px; left: 10px; }
+        .quadrant-label.bottom-right { bottom: 5px; right: 10px; }
+
+        .quadrant-item {
+            display: inline-block;
+            background: #c41e3a;
+            color: white;
+            padding: 5px 12px;
+            font-size: 12px;
+            margin: 5px;
+            font-weight: 500;
+            margin-top: 22px;
+        }
+
+        .quadrant-item.blue { background: #185FA5; }
+        .quadrant-item.green { background: #3B6D11; }
+        .quadrant-item.amber { background: #BA7517; }
+
+        /* 架构图 */
+        .architecture-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .architecture-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .architecture-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .arch-box {
+            background: #f8f5ee;
+            border: 2px solid #1a1a1a;
+            padding: 15px 20px;
+            min-width: 180px;
+            text-align: center;
+        }
+
+        .arch-box-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+        }
+
+        .arch-box-items {
+            font-size: 13px;
+            color: #444;
+            text-align: left;
+        }
+
+        .arch-box-items div {
+            padding: 3px 0;
+            border-bottom: 1px dotted #ddd;
+        }
+
+        .arch-box-items div:last-child {
+            border-bottom: none;
+        }
+
+        .arch-arrow {
+            font-size: 24px;
+            color: #c41e3a;
+            align-self: center;
+        }
+
+        /* 下周关注 */
+        .preview-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+        }
+
+        .preview-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 20px;
+        }
+
+        .preview-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .preview-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-left: 3px solid #c41e3a;
+        }
+
+        .preview-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .preview-text {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* 出处 */
+        .sources-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .sources-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .source-category {
+            margin-bottom: 15px;
+        }
+
+        .source-category-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #c41e3a;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #c41e3a;
+            padding-bottom: 5px;
+        }
+
+        .source-link {
+            font-size: 12px;
+            color: #185FA5;
+            text-decoration: none;
+            display: block;
+            padding: 3px 0;
+            line-height: 1.5;
+        }
+
+        .source-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: #1a1a1a;
+            color: #aaa;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .footer-brand {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            color: #c41e3a;
+            margin-bottom: 5px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .masthead h1 { font-size: 48px; letter-spacing: 8px; }
+            .content-area { grid-template-columns: 1fr; }
+            .column { border-right: none; border-bottom: 1px solid #ddd; }
+            .data-grid { grid-template-columns: repeat(2, 1fr); }
+            .preview-list { grid-template-columns: 1fr; }
+            .sources-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper">
+        <!-- 报头 -->
+        <header class="masthead">
+            <div class="masthead-top">
+                <span>2026年9月13日 星期日</span>
+                <span>第38期 · 总第122期</span>
+                <span>农历丙午年 八月初三</span>
+            </div>
+            <h1>AI 周报速递</h1>
+            <div class="masthead-subtitle">ARTIFICIAL INTELLIGENCE WEEKLY EXPRESS</div>
+        </header>
+
+        <!-- 导航条 -->
+        <nav class="nav-bar">
+            <span>头版头条</span>
+            <span>深度报道</span>
+            <span>数据洞察</span>
+            <span>开源动态</span>
+            <span>资本风向</span>
+            <span>技术前沿</span>
+        </nav>
+
+        <!-- 头条 -->
+        <section class="headline-section">
+            <div class="headline-banner">重磅头条</div>
+            <h2 class="headline-title">OpenAI 把 Codex harness 变成商品<br>Agents API 公测 + GPT-Live-1 全双工语音 GA</h2>
+            <p class="headline-subtitle">9 月 10 日 OpenAI 平台日三连发——托管式智能体开发平台、全双工语音模型、ChatGPT Work 数据智能体；同日 DeepSeek V4.1-Flash 以 552B MoE + ¥0.02/百万 token 把开源推理成本打到地板；Coder 自托管 coding agent 进企业边界，AI Coding 资本一周涌入 60.5 亿美元。从「卖模型」到「卖 harness + 卖执行环境」迁移完成关键一跃。</p>
+            <div class="headline-meta">
+                <span>📅 2026年9月10日</span>
+                <span>📍 OpenAI · DeepSeek · Coder</span>
+                <span>🏷️ AI Agent · AI Coding · 开源 · 资本</span>
+            </div>
+        </section>
+
+        <!-- 三栏内容 -->
+        <div class="content-area">
+            <!-- 左栏 -->
+            <div class="column">
+                <div class="column-header">开源与成本</div>
+
+                <div class="article">
+                    <h3 class="article-title">DeepSeek V4.1-Flash 开源：推理成本打到地板</h3>
+                    <div class="article-meta">📅 9月10日 · 来源：DeepSeek / CSDN / Stanford Tech Review</div>
+                    <p class="article-text">552B 参数 MoE，输入激活仅 8B、生成激活 16B，1M 上下文。闲时缓存命中输入 ¥0.02/百万 token，Terminal-Bench 2.1 得分 90.6 反超 V4-Pro。MIT 开放权重，腾讯 WorkBuddy、OpenCode 已接入，V4-Pro 9/14 下线——开源模型首次在性价比与头部 Agentic 基准双维度逼宫闭源旗舰。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">Coder 自托管 coding agent GA</div>
+                    <p class="news-card-text">9 月 9 日推到正式可用：Agent 推理、工具调用、代码执行全部跑在客户边界内（含 air-gapped 物理隔离网络），满足数据主权、DORA、边界安全，与 OpenAI 托管沙箱形成对照路线。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">GitHub HydraFusion 多模型编排降本</h3>
+                    <div class="article-meta">📅 9月4日 · 来源：DutchStartup.ai</div>
+                    <p class="article-text">Copilot CLI 研究预览，动态编排多模型跑编码：Single / Cascade（便宜先试、不行升级）/ Critique（写—审—改）三模式。TerminalBench 2.1 等基准达或优于 Claude Opus 5，token 成本却低 36–67%。模型无关编排的官方范例。</p>
+                </div>
+            </div>
+
+            <!-- 中栏 -->
+            <div class="column">
+                <div class="column-header">Agent 生态</div>
+
+                <div class="article">
+                    <h3 class="article-title">OpenAI Agents API 公测：harness 托管化</h3>
+                    <div class="article-meta">📅 9月10日 · 来源：OpenAI changelog / Ground Truth</div>
+                    <p class="article-text">把驱动 Codex 的同款托管 harness 暴露成产品：OpenAI 替你跑会话编排、上下文压缩、故障恢复。跨轮持久会话、流式进度、接自有工具与 MCP server、OpenAI 托管或自带沙箱。API 本身不额外收费，只收 token / 工具 / 容器时长。8 月 Apache 2.0 开源 harness，现在卖托管运行版。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">GPT-Live-1 全双工语音 GA</div>
+                    <p class="news-card-text">$0.05/分钟（按秒计费），后端推理另算。Full Duplex Bench 较上代 +30pp，搭配 Astra 在 Tau3 首试 83.6%（vs 45.7%），turn-taking 延迟 0.798s。语音只管听/说/打断，重思考交给后端模型。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">ChatGPT Work Data Agent + Meta Muse</h3>
+                    <div class="article-meta">📅 9月10日 / 9月8日 · 来源：CSDN / NeoDrop</div>
+                    <p class="article-text">Data Agent 连 BigQuery/Snowflake/Databricks/Redshift/MongoDB，自然语言分析 + 可共享 dashboard，底层权限强制生效。Meta Muse 主动式个人 Agent 则用 Secure VM 隔离 + Sentinel 审批门，每笔出站通信与扣款都显式要人批。</p>
+                </div>
+            </div>
+
+            <!-- 右栏 -->
+            <div class="column">
+                <div class="column-header">资本与安全</div>
+
+                <div class="article">
+                    <h3 class="article-title">AI Coding 资本三重奏：一周 60.5 亿美元</h3>
+                    <div class="article-meta">📅 9月8—9日 · 来源：Stanford Tech Review</div>
+                    <p class="article-text">Cognition（Devin）Series E $2.0B、估值 $48B（4 个月近翻倍）；Mistral €3B（三星领投，欧洲史上最大私募科技融资）；Harvey $550M、估值 $15.5B、ARR 破 $400M 后转训自有模型。三笔合计 $6.05B，投后 $87.5B。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">Anthropic 9 月威胁报告</div>
+                    <p class="news-card-text">披露截至 8 月 disruption 了 Claude 辅助的恶意活动，横跨 7 类危害域；多数操作用的是 Haiku/Sonnet/Opus 而非最新 Fable/Mythos——旧代次 + 长上下文 + 工具链才是常态威胁面。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">Agent 安全范式收敛</h3>
+                    <div class="article-meta">📅 本周 · 来源：综合</div>
+                    <p class="article-text">Muse 的 VM 隔离 + 审批门、Claude Code 的 Containment Escape 规则、OpenAI 的自动关闭功能，与 Agents API 的托管执行 + 审计同源：把「模型能做什么」与「被允许做什么」用隔离和人工确认硬拆开，是全厂商共性命题。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据区域 -->
+        <section class="data-section">
+            <h2 class="data-title">本周关键数据</h2>
+            <div class="data-grid">
+                <div class="data-item">
+                    <div class="data-number">552B</div>
+                    <div class="data-label">DeepSeek V4.1-Flash<br>总参数（激活仅 8B）</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">¥0.02</div>
+                    <div class="data-label">DeepSeek 闲时缓存输入<br>每百万 token</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">$6.05B</div>
+                    <div class="data-label">本周 Cognition+Mistral<br>+Harvey 融资合计</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">90.6</div>
+                    <div class="data-label">DeepSeek V4.1-Flash<br>Terminal-Bench 2.1 得分</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 时间线 -->
+        <section class="timeline-section">
+            <h2 class="timeline-title">📅 本周事件时间线</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">9月8日 周日</div>
+                    <div class="timeline-content">
+                        • Meta 发布 Muse 主动式个人 Agent（Secure VM + Sentinel 审批门）<br>
+                        • OpenAI 发布 ChatGPT Images 2.5（延迟最高 −50%）
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">9月9日 周一</div>
+                    <div class="timeline-content">
+                        • Coder 自托管 coding agent 正式可用（跑在客户边界含 air-gapped）
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">9月10日 周三</div>
+                    <div class="timeline-content">
+                        • OpenAI Agents API 公测（托管 Codex harness）<br>
+                        • GPT-Live-1 全双工语音 GA（$0.05/分钟，Tau3 83.6%）<br>
+                        • ChatGPT Work Data Agent 连 BigQuery/Snowflake 等<br>
+                        • DeepSeek V4.1-Flash 开源（552B MoE，¥0.02/百万 token）<br>
+                        • Cognition $2B / Mistral €3B / Harvey $550M 融资公布
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">9月13日 周六</div>
+                    <div class="timeline-content">
+                        • 黄仁勋祝贺 GPT-6 Astra，称 AGI 已来（约 10 万 Blackwell）<br>
+                        • 国产大模型周调用量持续领跑全球
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 开闭源象限图 -->
+        <section class="quadrant-section">
+            <h2 class="quadrant-title">📊 能力 × 开放度：本周模型格局</h2>
+            <div class="quadrant-grid">
+                <div class="quadrant-cell">
+                    <span class="quadrant-label top-left">高能力 · 低开放</span>
+                    <span class="quadrant-item">GPT-6 Astra（闭源高价）</span>
+                    <span class="quadrant-item amber">Fable 5.1</span>
+                </div>
+                <div class="quadrant-cell">
+                    <span class="quadrant-label top-right">高能力 · 高开放</span>
+                    <span class="quadrant-item blue">DeepSeek V4.1-Flash（MIT）</span>
+                    <span class="quadrant-item green">Gemini 3.8 Flash</span>
+                </div>
+                <div class="quadrant-cell">
+                    <span class="quadrant-label bottom-left">低能力 · 低开放</span>
+                    <span class="quadrant-item amber">Meta Muse（个人 Agent）</span>
+                </div>
+                <div class="quadrant-cell">
+                    <span class="quadrant-label bottom-right">低能力 · 高开放</span>
+                    <span class="quadrant-item blue">HydraFusion（编排开源）</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 架构图 -->
+        <section class="architecture-section">
+            <h2 class="architecture-title">🏗️ OpenAI Agents API 技术栈</h2>
+            <div class="architecture-diagram">
+                <div class="arch-box">
+                    <div class="arch-box-title">开发者 / 企业</div>
+                    <div class="arch-box-items">
+                        <div>自有工具</div>
+                        <div>MCP server</div>
+                        <div>自带基础设施沙箱</div>
+                    </div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">
+                    <div class="arch-box-title">Agents API</div>
+                    <div class="arch-box-items">
+                        <div>托管 Codex harness</div>
+                        <div>会话编排</div>
+                        <div>上下文压缩 / 恢复</div>
+                    </div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">
+                    <div class="arch-box-title">执行环境</div>
+                    <div class="arch-box-items">
+                        <div>OpenAI 托管沙箱</div>
+                        <div>多智能体委派</div>
+                        <div>流式进度 / 持久会话</div>
+                    </div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">
+                    <div class="arch-box-title">用户 / 后端</div>
+                    <div class="arch-box-items">
+                        <div>GPT-Live-1 语音</div>
+                        <div>Data Agent 连数仓</div>
+                        <div>后端模型 Astra·Luna</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 下周关注 -->
+        <section class="preview-section">
+            <h2 class="preview-title">🔮 下周关注</h2>
+            <div class="preview-list">
+                <div class="preview-item">
+                    <div class="preview-number">01</div>
+                    <div class="preview-text"><strong>Agents API 实战</strong><br>托管 harness 长任务上下文压缩/恢复质量，与自研 loop 的对比基准</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">02</div>
+                    <div class="preview-text"><strong>DeepSeek 生态接入</strong><br>WorkBuddy/OpenCode 之外框架跟进；V4-Pro 9/14 下线迁移摩擦</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">03</div>
+                    <div class="preview-text"><strong>托管 vs 自托管</strong><br>受监管行业选 OpenAI 沙箱还是 Coder 边界；数据驻留（仅美、无 ZDR）影响</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">04</div>
+                    <div class="preview-text"><strong>GPT-Live-1 落地</strong><br>Tau3 高分在真实客服/工单复现；全双工延迟对中文场景影响</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">05</div>
+                    <div class="preview-text"><strong>HydraFusion 泛化</strong><br>Cascade/Critique 在中文编码任务表现；会否进 VS Code / Cursor</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">06</div>
+                    <div class="preview-text"><strong>Anthropic 报告后续</strong><br>7 类危害域具体手法；旧代次模型默认护栏会否收紧</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 出处 -->
+        <section class="sources-section">
+            <h2 class="sources-title">📚 相关出处</h2>
+            <div class="sources-grid">
+                <div class="source-category">
+                    <div class="source-category-title">OpenAI Agents API + GPT-Live-1 + Data Agent</div>
+                    <a href="https://openai.com/index/introducing-gpt-live-1-in-the-api/" class="source-link">OpenAI: Build more natural voice experiences with GPT-Live-1</a>
+                    <a href="https://community.openai.com/t/introducing-gpt-live-1-in-the-api/1396471" class="source-link">Introducing GPT-Live-1 in the API（Developer Community）</a>
+                    <a href="https://www.orcarouter.ai/blog/gpt-live-1-api-launch-openai-agents-brief" class="source-link">GPT-Live-1 in the API, Plus the Agents API in Public Beta</a>
+                    <a href="https://groundtruth.day/news/openai-turns-the-codex-harness-into-a-product-with-an-agents-api.html" class="source-link">OpenAI turns the Codex harness into a product with an Agents API</a>
+                    <a href="https://mr.technology/payloads/openai-agents-api-public-beta-gpt-live-1-ga-project-key-expiration-sep-2026" class="source-link">OpenAI Shipped Three Things on September 10</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">DeepSeek V4.1-Flash</div>
+                    <a href="https://stanfordtechreview.com/articles/ai-news-this-week-gpt-6-astra-iphone-duo-funding" class="source-link">AI News This Week: GPT-6 Astra, … $6B in Funding</a>
+                    <a href="https://aitechmodel.com/what-is-new-with-ai-big-data-in-september-2026-latest-model-cards-and-company-releases-and-key-takeaways" class="source-link">What Is New With AI Big Data in September 2026</a>
+                    <a href="https://tianqi.csdn.net/6aa4a0fe61de6467390ea87e.html" class="source-link">AI 资讯日报 2026年9月11日（Agents API / DeepSeek）</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Coder 自托管 / Meta Muse / Images 2.5</div>
+                    <a href="https://neodrop.ai/zh-cn/post/huQvUrXbop8" class="source-link">Muse, Images 2.5, MAPL-EMIT, Coder Agents: four AI boundaries</a>
+                    <a href="https://aiagentsdirectory.com/news/ai-agents-news-brief-september-3-2026" class="source-link">AI Agents News Brief: September 3, 2026（Coder Agent Relay）</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">AI Coding 资本三重奏</div>
+                    <a href="https://stanfordtechreview.com/articles/ai-news-this-week-gpt-6-astra-iphone-duo-funding" class="source-link">Cognition $2B / Mistral €3B / Harvey $550M 明细</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">GitHub HydraFusion</div>
+                    <a href="https://www.dutchstartup.ai/en/news/a-wave-of-new-ai-agent-tools-is-emerging-around-early-september-2026" class="source-link">A wave of new AI agent tools is emerging（HydraFusion）</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Anthropic 威胁报告 / 综合</div>
+                    <a href="https://aitechmodel.com/what-is-new-with-ai-big-data-in-september-2026-latest-model-cards-and-company-releases-and-key-takeaways" class="source-link">9 月威胁报告 / Fable 5.1 / Gemini 3.8 Flash Cyber</a>
+                    <a href="https://www.toutiao.com/w/1876186203327497/" class="source-link">黄仁勋祝贺 GPT-6 Astra：AGI 已来（今日头条）</a>
+                    <a href="https://www.toutiao.com/article/7683040382200775231/" class="source-link">AI新模型四连发，AGI要来了吗？（南方周末）</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="footer-brand">AI 周报速递</div>
+            <div>编辑：AI 自动生成 | 数据截止：2026年9月13日 12:00</div>
+            <div style="margin-top: 5px;">© 2026 AI城 · 专注 AI 领域深度报道</div>
+        </footer>
+    </div>
+</body>
+</html>
