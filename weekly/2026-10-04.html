@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 周报速递 - 2026年10月第1周</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: #f5f0e8;
+            color: #1a1a1a;
+            line-height: 1.8;
+        }
+
+        .newspaper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fffef9;
+            box-shadow: 0 0 40px rgba(0,0,0,0.15);
+            min-height: 100vh;
+        }
+
+        /* 头部 - 报头 */
+        .masthead {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 20px 40px;
+            text-align: center;
+            border-bottom: 8px double #c41e3a;
+        }
+
+        .masthead-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .masthead h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 72px;
+            font-weight: 900;
+            letter-spacing: 12px;
+            margin: 10px 0;
+            text-shadow: 2px 2px 0 #c41e3a;
+        }
+
+        .masthead-subtitle {
+            font-size: 18px;
+            letter-spacing: 8px;
+            color: #ddd;
+            margin-top: 5px;
+        }
+
+        /* 导航条 */
+        .nav-bar {
+            background: #c41e3a;
+            color: white;
+            padding: 10px 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-bar span {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .nav-bar span:hover {
+            opacity: 0.8;
+        }
+
+        /* 头条区域 */
+        .headline-section {
+            padding: 30px 40px;
+            border-bottom: 3px solid #1a1a1a;
+        }
+
+        .headline-banner {
+            background: #c41e3a;
+            color: white;
+            display: inline-block;
+            padding: 5px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .headline-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+
+        .headline-subtitle {
+            font-size: 20px;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .headline-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        /* 主内容区 - 多栏布局 */
+        .content-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+            padding: 0 40px;
+        }
+
+        .column {
+            padding: 25px 20px;
+            border-right: 1px solid #ddd;
+        }
+
+        .column:last-child {
+            border-right: none;
+        }
+
+        .column-header {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #c41e3a;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        .article {
+            margin-bottom: 25px;
+        }
+
+        .article-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .article-meta {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .article-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .article-text::first-letter {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 36px;
+            font-weight: 700;
+            float: left;
+            line-height: 1;
+            margin-right: 8px;
+            color: #c41e3a;
+        }
+
+        /* 重要新闻卡片 */
+        .news-card {
+            background: #f8f5ee;
+            border-left: 4px solid #c41e3a;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .news-card-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #c41e3a;
+        }
+
+        .news-card-text {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        /* 数据区域 */
+        .data-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+            margin: 30px 0;
+        }
+
+        .data-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #c41e3a;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .data-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .data-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 42px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .data-label {
+            font-size: 13px;
+            color: #aaa;
+            margin-top: 8px;
+        }
+
+        /* 时间线 */
+        .timeline-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .timeline-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #c41e3a;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-left: 25px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: #c41e3a;
+            border-radius: 50%;
+            border: 3px solid #fffef9;
+        }
+
+        .timeline-date {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        /* 开闭源象限图 */
+        .quadrant-section {
+            padding: 30px 40px;
+            background: #f8f5ee;
+        }
+
+        .quadrant-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .quadrant-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 3px;
+            background: #1a1a1a;
+            padding: 3px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quadrant-cell {
+            background: #fffef9;
+            padding: 20px;
+            position: relative;
+        }
+
+        .quadrant-label {
+            position: absolute;
+            font-size: 10px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .quadrant-label.top-left { top: 5px; left: 10px; }
+        .quadrant-label.top-right { top: 5px; right: 10px; }
+        .quadrant-label.bottom-left { bottom: 5px; left: 10px; }
+        .quadrant-label.bottom-right { bottom: 5px; right: 10px; }
+
+        .quadrant-item {
+            display: inline-block;
+            background: #c41e3a;
+            color: white;
+            padding: 5px 12px;
+            font-size: 12px;
+            margin: 5px;
+            font-weight: 500;
+        }
+
+        .quadrant-item.blue { background: #185FA5; }
+        .quadrant-item.green { background: #3B6D11; }
+        .quadrant-item.amber { background: #BA7517; }
+
+        /* 微信生态架构图 */
+        .architecture-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .architecture-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .architecture-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .arch-box {
+            background: #f8f5ee;
+            border: 2px solid #1a1a1a;
+            padding: 15px 20px;
+            min-width: 180px;
+            text-align: center;
+        }
+
+        .arch-box-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+        }
+
+        .arch-box-items {
+            font-size: 13px;
+            color: #444;
+            text-align: left;
+        }
+
+        .arch-box-items div {
+            padding: 3px 0;
+            border-bottom: 1px dotted #ddd;
+        }
+
+        .arch-box-items div:last-child {
+            border-bottom: none;
+        }
+
+        .arch-arrow {
+            font-size: 24px;
+            color: #c41e3a;
+            align-self: center;
+        }
+
+        /* 下周关注 */
+        .preview-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+        }
+
+        .preview-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 20px;
+        }
+
+        .preview-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .preview-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-left: 3px solid #c41e3a;
+        }
+
+        .preview-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .preview-text {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* 底部 - 出处 */
+        .sources-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .sources-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .source-category {
+            margin-bottom: 15px;
+        }
+
+        .source-category-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #c41e3a;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #c41e3a;
+            padding-bottom: 5px;
+        }
+
+        .source-link {
+            font-size: 12px;
+            color: #185FA5;
+            text-decoration: none;
+            display: block;
+            padding: 3px 0;
+            line-height: 1.5;
+        }
+
+        .source-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: #1a1a1a;
+            color: #aaa;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .footer-brand {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            color: #c41e3a;
+            margin-bottom: 5px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .masthead h1 { font-size: 48px; letter-spacing: 8px; }
+            .content-area { grid-template-columns: 1fr; }
+            .column { border-right: none; border-bottom: 1px solid #ddd; }
+            .data-grid { grid-template-columns: repeat(2, 1fr); }
+            .preview-list { grid-template-columns: 1fr; }
+            .sources-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper">
+        <!-- 报头 -->
+        <header class="masthead">
+            <div class="masthead-top">
+                <span>2026年10月4日 星期日</span>
+                <span>第41期 · 总第125期</span>
+                <span>农历丙午年 八月廿二</span>
+            </div>
+            <h1>AI 周报速递</h1>
+            <div class="masthead-subtitle">ARTIFICIAL INTELLIGENCE WEEKLY EXPRESS</div>
+        </header>
+
+        <!-- 导航条 -->
+        <nav class="nav-bar">
+            <span>头版头条</span>
+            <span>模型与经济</span>
+            <span>Agent与协议</span>
+            <span>AI Coding</span>
+            <span>资本市场</span>
+            <span>技术前沿</span>
+        </nav>
+
+        <!-- 头条 -->
+        <section class="headline-section">
+            <div class="headline-banner">重磅头条</div>
+            <h2 class="headline-title">OpenAI DevDay 2026：<br>从「卖模型」转向「卖 Agent 运行时」</h2>
+            <p class="headline-subtitle">9月29日，OpenAI 一口气发布 20+ 项更新：常驻智能体 Dots、公测版 Agents API（托管 Codex harness）、远程编码环境 Codex Cloud、工作马模型 GPT-6.1 Sol 与受限预览的 Decisions API。本质变化是架构级的——把 agent loop 周边的会话、工具、环境与后台执行全部收进托管产品，平台边界正在上移。</p>
+            <div class="headline-meta">
+                <span>📅 2026年9月29日</span>
+                <span>📍 OpenAI · DevDay 2026</span>
+                <span>🏷️ AI Agent · 运行时 · AI Coding</span>
+            </div>
+        </section>
+
+        <!-- 三栏内容 -->
+        <div class="content-area">
+            <!-- 左栏 -->
+            <div class="column">
+                <div class="column-header">模型与经济</div>
+
+                <div class="article">
+                    <h3 class="article-title">Claude Sonnet 5.5 成默认 + Opus 5.5 发布</h3>
+                    <div class="article-meta">📅 9/28 发布 · 10/1 成默认 · 来源：Claude News</div>
+                    <p class="article-text">Anthropic 发布 Claude Sonnet 5.5：1M 上下文、$2/$10 每百万 token、缓存读取 $0.20/Mtok，多数负载较 Sonnet 5 快约 30%、便宜约 30%，并成 API 默认 Sonnet；Sonnet 4.5 定档 11/30 退役。Opus 5.5（10/1）达成 Fable 级性能、约 30% 降价，演示了 68 万行代码一天内迁移完成。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">Gemini 4 Argon 受控发布</div>
+                    <p class="news-card-text">Google 新旗舰 19 项基准拿 13 项领先、输出 token 上限升至 100 万，但仅通过 Fairwind 计划向网络安全伙伴开放、参与美国政府预发布评估，暂不对普通用户开放；DeepMind 同期重组（Hassabis 卸任 CEO）。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">GPT-6.1 Sol：逼近 Astra 的廉价工作马</h3>
+                    <div class="article-meta">📅 9/29 · 来源：AIReiter / Business Standard</div>
+                    <p class="article-text">1.05M 上下文、最大 12.8 万输出 token，定价 $2/$10（缓存输入 $0.10）。官方称在编码与电脑操作上逼近 Astra 性能而成本更低，长指令与重复项目上下文的工作负载尤其受益。</p>
+                </div>
+            </div>
+
+            <!-- 中栏 -->
+            <div class="column">
+                <div class="column-header">Agent 与协议</div>
+
+                <div class="article">
+                    <h3 class="article-title">OpenAI DevDay：Dots / Agents API / Codex Cloud</h3>
+                    <div class="article-meta">📅 9/29 · 来源：OpenAI 社区 / Business Standard</div>
+                    <p class="article-text">Dots 是常驻智能体，拥有云端电脑+连携应用，可跨 ChatGPT/短信/邮件/Slack 继续工作并委派子智能体。Agents API 公测把 Codex harness 托管化（会话/编排/上下文压缩/恢复/托管电脑使用/多智能体/MCP）。Codex Cloud 让任务在隔离云环境后台运行。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">MCP 生态本周集中成熟</div>
+                    <p class="news-card-text">Earendil Pi 1.0（11.2万星，MIT）反转立场加入 MCP；LangChain MCP Adapters 2.0 支持 stateless MCP；MCP Python SDK v2.3.0 / TS SDK v1.11.0 强化 streamable HTTP 与 OAuth；关注点从「能连」转向「沙箱/护栏/治理」。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">Rubrik MCP：企业数据连 AI Agent</h3>
+                    <div class="article-meta">📅 9/15 发布 · GA 10月 · 来源：Futurum</div>
+                    <p class="article-text">与 Anthropic 共研，暴露 Rubrik Security Cloud API schema，带 RBAC 与 OWASP MCP Top 10 护栏；Rubrik AI 已被全球 1/3 客户采用，把事件响应推向「机器速度」。</p>
+                </div>
+            </div>
+
+            <!-- 右栏 -->
+            <div class="column">
+                <div class="column-header">编码与资本</div>
+
+                <div class="article">
+                    <h3 class="article-title">AI Coding：用量计费 + 长驻平台</h3>
+                    <div class="article-meta">📅 本周综述 · 来源：Cybersentinel / Orchestra</div>
+                    <p class="article-text">GitHub Copilot 全面转向 usage-based billing：completions 与 NES 仍免费，chat/agent/review 消耗 AI Credits。Cursor Projects 把编辑器变成协调 agent + 子 agent 的长驻平台；OpenHands 1.0 在 SWE-bench Verified 达 67%。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">资本向头部极端集中</div>
+                    <p class="news-card-text">2026 上半年 OpenAI + Anthropic 合计吸走全球 VC 约 43%；头部两家估值已逼近 $1.8 万亿，融资能力直接决定迭代速度。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">OpenAI $1.2万亿 · Anthropic $2万亿 IPO</h3>
+                    <div class="article-meta">📅 9月延续 · 来源：FT / AI Magazine</div>
+                    <p class="article-text">OpenAI 拟 IPO 前以 $1.2 万亿估值再融资，Altman 表态 2027 年前不上市；Anthropic 最快 10 月 IPO、目标约 $2 万亿，已连续两季调整后盈利。DeepSeek 启动首轮外部融资（估值 >$100 亿），Kimi 冲 $500 亿。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据区域 -->
+        <section class="data-section">
+            <h2 class="data-title">本周关键数据</h2>
+            <div class="data-grid">
+                <div class="data-item">
+                    <div class="data-number">100万</div>
+                    <div class="data-label">Gemini 4 输出 token 上限<br>（上代仅 6.4万）</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">1M</div>
+                    <div class="data-label">Claude Sonnet 5.5<br>上下文窗口</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">$2/$10</div>
+                    <div class="data-label">GPT-6.1 Sol / Sonnet 5.5<br>API 定价（每百万 token）</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">30%</div>
+                    <div class="data-label">Sonnet 5.5 较 Sonnet 5<br>提速 / 降本</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 时间线 -->
+        <section class="timeline-section">
+            <h2 class="timeline-title">📅 本周事件时间线</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">9月28日 周日</div>
+                    <div class="timeline-content">
+                        • Anthropic 发布 Claude Sonnet 5.5（1M 上下文，$2/$10）<br>
+                        • 同步发布迁移指南，列出 5 个破坏性变更
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">9月29日 周一</div>
+                    <div class="timeline-content">
+                        • OpenAI DevDay 2026：Dots / GPT-6.1 Sol / Agents API / Codex Cloud<br>
+                        • GPT-4.5 回归（重新评估算力与成本后）<br>
+                        • Ultrafast 高速档 + $500/月 Pro 计划
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">9月30日 周三</div>
+                    <div class="timeline-content">
+                        • MCP TypeScript SDK v1.11.0 / Python SDK v2.3.0 发布<br>
+                        • Claude Code 2.1.288：gh api 集成、MCP tunnels beta<br>
+                        • Anthropic Admin API 企业控制上线
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">10月1日 周四</div>
+                    <div class="timeline-content">
+                        • Claude Opus 5.5 发布（Fable 级 + 约30%降价）<br>
+                        • Sonnet 5.5 成 API 默认 Sonnet<br>
+                        • Earendil Pi 1.0 发布（MIT + 原生 MCP，11.2万星）<br>
+                        • LangChain MCP Adapters 2.0
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">10月3日 周六</div>
+                    <div class="timeline-content">
+                        • Google Gemini 4 Argon 经 CNBC 正式曝光<br>
+                        • 仅 Fairwind 受限开放，暂不对普通用户<br>
+                        • 19 项基准 13 项领先，输出 token 升至 100万
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 开闭源象限图 -->
+        <section class="quadrant-section">
+            <h2 class="quadrant-title">📊 开放度 vs 受控度：本周前沿模型格局</h2>
+            <div class="quadrant-grid">
+                <div class="quadrant-cell">
+                    <span class="quadrant-label top-left">高价值 · 低开放</span>
+                    <span class="quadrant-item">Gemini 4 Argon（受限）</span>
+                    <span class="quadrant-item amber">GPT-6 Astra（受限）</span>
+                </div>
+                <div class="quadrant-cell">
+                    <span class="quadrant-label top-right">高价值 · 高开放</span>
+                    <span class="quadrant-item blue">Claude Sonnet 5.5</span>
+                    <span class="quadrant-item blue">GPT-6.1 Sol</span>
+                    <span class="quadrant-item green">Pi 1.0（MIT）</span>
+                </div>
+                <div class="quadrant-cell">
+                    <span class="quadrant-label bottom-left">低价值 · 低开放</span>
+                </div>
+                <div class="quadrant-cell">
+                    <span class="quadrant-label bottom-right">低价值 · 高开放</span>
+                    <span class="quadrant-item green">DeepSeek V4.1 Flash（MIT）</span>
+                    <span class="quadrant-item blue">Rubrik MCP（开放协议）</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 微信生态架构图 -->
+        <section class="architecture-section">
+            <h2 class="architecture-title">🏗️ OpenAI Agent 运行时栈</h2>
+            <div class="architecture-diagram">
+                <div class="arch-box">
+                    <div class="arch-box-title">开发者 / 企业</div>
+                    <div class="arch-box-items">
+                        <div>提供工具与执行环境</div>
+                        <div>设定权限与审批门</div>
+                        <div>业务系统集成</div>
+                    </div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">
+                    <div class="arch-box-title">Agents API 公测</div>
+                    <div class="arch-box-items">
+                        <div>托管 Codex harness</div>
+                        <div>会话 / 编排 / 压缩</div>
+                        <div>故障恢复 + MCP 连接</div>
+                    </div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">
+                    <div class="arch-box-title">执行层</div>
+                    <div class="arch-box-items">
+                        <div>托管电脑使用（浏览器）</div>
+                        <div>多智能体委派</div>
+                        <div>Codex Cloud 隔离云环境</div>
+                    </div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">
+                    <div class="arch-box-title">智能体产物</div>
+                    <div class="arch-box-items">
+                        <div>Dots 常驻 + 子智能体</div>
+                        <div>Decisions API 路由</div>
+                        <div>Codex Security Cloud 扫漏洞</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 下周关注 -->
+        <section class="preview-section">
+            <h2 class="preview-title">🔮 下周关注</h2>
+            <div class="preview-list">
+                <div class="preview-item">
+                    <div class="preview-number">01</div>
+                    <div class="preview-text"><strong>Anthropic 10月后续</strong><br>市场预测 Sonnet ~10/13、Haiku ~10/25、Fable 5.2 临近，关注 Opus 5.5 实测与定价</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">02</div>
+                    <div class="preview-text"><strong>Gemini 4 Argon 全面开放节奏</strong><br>关注 Fairwind 受限放开时间与真实编码/安全表现</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">03</div>
+                    <div class="preview-text"><strong>Dots / Agents API 公测进展</strong><br>企业落地、额度与区域可用性、是否成稳定集成面</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">04</div>
+                    <div class="preview-text"><strong>DeepSeek V4.1 Pro</strong><br>开源旗舰继任者，关注近前沿质量与地板价延续</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">05</div>
+                    <div class="preview-text"><strong>Qwen 4 家族</strong><br>阿里称"very soon"，27B 开放权重档值得盯</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 出处 -->
+        <section class="sources-section">
+            <h2 class="sources-title">📚 相关出处</h2>
+            <div class="sources-grid">
+                <div class="source-category">
+                    <div class="source-category-title">OpenAI DevDay 2026</div>
+                    <a href="https://community.openai.com/t/devday-2026-announcements-and-developer-resources/1402006" class="source-link">DevDay 2026 社区汇总 - OpenAI</a>
+                    <a href="https://aireiter.com/blog/openai-devday-2026-recap-developers" class="source-link">DevDay 2026 开发者复盘（含定价）- AIReiter</a>
+                    <a href="https://www.business-standard.com/amp/technology/tech-news/openai-devday-2026-dots-gpt-6-1-sol-codex-developer-tools-126093000396_1.html" class="source-link">Dots/GPT-6.1 Sol/Codex 全面盘点 - Business Standard</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Claude Sonnet 5.5 / Opus 5.5</div>
+                    <a href="https://claudenews.online/en/edition/2026-10-01" class="source-link">Claude News 10/1（Sonnet 5.5 成默认）- ClaudeNews</a>
+                    <a href="https://www.claudenews.com.br/en-US/edicoes/158-2026-10-01" class="source-link">Claude Report 10/1（Claude Code/MCP/Skills）- ClaudeNews</a>
+                    <a href="https://www.trendlive.online/anthropic-releases-opus-5-5-lower-prices-fable-performance" class="source-link">Opus 5.5 发布解读 - TrendLive</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Gemini 4 Argon</div>
+                    <a href="https://www.toutiao.com/article/7692243537655562806/" class="source-link">对标 GPT 与 Claude，谷歌新大模型暂不面向普通用户 - 环球网</a>
+                    <a href="https://time.news/google-announces-gemini-4-ai-model-after-months-of-delays" class="source-link">Google announces Gemini 4 after months of delays - Time News</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">MCP 生态</div>
+                    <a href="https://theterminal.space/software/pi-1-0-earendil-mcp-mit-agent-harness" class="source-link">Earendil Pi 1.0 + MCP（反转报道）- The Terminal</a>
+                    <a href="https://huggingnews.com/ai/langchain-launches-mcp-adapters-20-for-typescript-agents-7d1d6fe1" class="source-link">LangChain MCP Adapters 2.0 - HuggingNews</a>
+                    <a href="https://releasebot.io/updates/modelcontextprotocol" class="source-link">MCP Release Notes（Python/TS SDK）- Releasebot</a>
+                    <a href="https://futurumgroup.com/insights/rubriks-mcp-launch-bets-on-agentic-ai-as-cyber-resiliences-next-layer" class="source-link">Rubrik MCP 发布 - Futurum</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">AI Coding 格局</div>
+                    <a href="https://cybersentinelnews.com/github-copilot-leads-ai-coding-tools-as-billing-shifts-to-usage-based" class="source-link">Copilot 用量计费与排行 - Cybersentinel</a>
+                    <a href="https://www.getorchestra.io/guides/ai-assistants-coding" class="source-link">AI Coding 工具实践三场景 - Orchestra</a>
+                    <a href="https://www.ithome.com/1/006/627.htm" class="source-link">2026年9月AI编程Agent前十解析 - IT之家</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">资本市场</div>
+                    <a href="https://www.toutiao.com/article/7685978568202977835/" class="source-link">OpenAI 拟 $1.2 万亿估值再融资 / Anthropic $2 万亿 IPO - 环球网</a>
+                    <a href="https://ai-magazine.com/the-complete-list-of-28-us-ai-startups-to-earn-over-100-million-in-2026" class="source-link">2026 美国 AI 融资全景（头部占 43%）- AI Magazine</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">模型发布日历（交叉验证）</div>
+                    <a href="https://www.fatherofai.in/blog/every-ai-model-coming-2026-2027-release-calendar" class="source-link">Every AI Model Coming in 2026–2027 - Father of AI</a>
+                    <a href="https://www.fatherofai.in/blog/ai-week-in-review-september-30-2026" class="source-link">AI Week in Review Sep 30, 2026 - Father of AI</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">DeepSeek / Kimi 融资动态</div>
+                    <a href="https://ima.qq.com/wiki/?shareId=1433aa3fdc678dd27a01267e6bb6f25a38d0b1f94b6a6129c5eb23611ba44430" class="source-link">AI科技早报 2026-09-27（融资综述）- ima</a>
+                    <a href="https://spectrumailab.com/blog/deepseek-v4-guide-release-date-benchmarks-features-2026" class="source-link">DeepSeek V4 指南（API/定价/迁移）- Spectrum AI</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="footer-brand">AI 周报速递</div>
+            <div>编辑：AI 自动生成 | 数据截止：2026年10月4日 12:00</div>
+            <div style="margin-top: 5px;">© 2026 AI城 · 专注AI领域深度报道</div>
+        </footer>
+    </div>
+</body>
+</html>
