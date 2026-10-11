@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 周报速递 - 2026年10月第2周</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: #f5f0e8;
+            color: #1a1a1a;
+            line-height: 1.8;
+        }
+
+        .newspaper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fffef9;
+            box-shadow: 0 0 40px rgba(0,0,0,0.15);
+            min-height: 100vh;
+        }
+
+        /* 头部 - 报头 */
+        .masthead {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 20px 40px;
+            text-align: center;
+            border-bottom: 8px double #c41e3a;
+        }
+
+        .masthead-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .masthead h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 72px;
+            font-weight: 900;
+            letter-spacing: 12px;
+            margin: 10px 0;
+            text-shadow: 2px 2px 0 #c41e3a;
+        }
+
+        .masthead-subtitle {
+            font-size: 18px;
+            letter-spacing: 8px;
+            color: #ddd;
+            margin-top: 5px;
+        }
+
+        /* 导航条 */
+        .nav-bar {
+            background: #c41e3a;
+            color: white;
+            padding: 10px 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-bar span {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .nav-bar span:hover {
+            opacity: 0.8;
+        }
+
+        /* 头条区域 */
+        .headline-section {
+            padding: 30px 40px;
+            border-bottom: 3px solid #1a1a1a;
+        }
+
+        .headline-banner {
+            background: #c41e3a;
+            color: white;
+            display: inline-block;
+            padding: 5px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .headline-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+
+        .headline-subtitle {
+            font-size: 20px;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .headline-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        /* 主内容区 - 多栏布局 */
+        .content-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+            padding: 0 40px;
+        }
+
+        .column {
+            padding: 25px 20px;
+            border-right: 1px solid #ddd;
+        }
+
+        .column:last-child {
+            border-right: none;
+        }
+
+        .column-header {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #c41e3a;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        .article {
+            margin-bottom: 25px;
+        }
+
+        .article-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .article-meta {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .article-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .article-text::first-letter {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 36px;
+            font-weight: 700;
+            float: left;
+            line-height: 1;
+            margin-right: 8px;
+            color: #c41e3a;
+        }
+
+        /* 重要新闻卡片 */
+        .news-card {
+            background: #f8f5ee;
+            border-left: 4px solid #c41e3a;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .news-card-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #c41e3a;
+        }
+
+        .news-card-text {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        /* 数据区域 */
+        .data-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+            margin: 30px 0;
+        }
+
+        .data-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #c41e3a;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .data-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .data-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 42px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .data-label {
+            font-size: 13px;
+            color: #aaa;
+            margin-top: 8px;
+        }
+
+        /* 时间线 */
+        .timeline-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .timeline-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #c41e3a;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-left: 25px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: #c41e3a;
+            border-radius: 50%;
+            border: 3px solid #fffef9;
+        }
+
+        .timeline-date {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        /* 开闭源象限图 */
+        .quadrant-section {
+            padding: 30px 40px;
+            background: #f8f5ee;
+        }
+
+        .quadrant-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .quadrant-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 3px;
+            background: #1a1a1a;
+            padding: 3px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quadrant-cell {
+            background: #fffef9;
+            padding: 20px;
+            position: relative;
+            min-height: 120px;
+        }
+
+        .quadrant-label {
+            position: absolute;
+            font-size: 10px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .quadrant-label.top-left { top: 5px; left: 10px; }
+        .quadrant-label.top-right { top: 5px; right: 10px; }
+        .quadrant-label.bottom-left { bottom: 5px; left: 10px; }
+        .quadrant-label.bottom-right { bottom: 5px; right: 10px; }
+
+        .quadrant-item {
+            display: inline-block;
+            background: #c41e3a;
+            color: white;
+            padding: 5px 12px;
+            font-size: 12px;
+            margin: 5px;
+            font-weight: 500;
+        }
+
+        .quadrant-item.blue { background: #185FA5; }
+        .quadrant-item.green { background: #3B6D11; }
+        .quadrant-item.amber { background: #BA7517; }
+
+        /* 架构图 */
+        .architecture-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .architecture-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .architecture-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .arch-box {
+            background: #f8f5ee;
+            border: 2px solid #1a1a1a;
+            padding: 15px 20px;
+            min-width: 180px;
+            text-align: center;
+        }
+
+        .arch-box-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+        }
+
+        .arch-box-items {
+            font-size: 13px;
+            color: #444;
+            text-align: left;
+        }
+
+        .arch-box-items div {
+            padding: 3px 0;
+            border-bottom: 1px dotted #ddd;
+        }
+
+        .arch-box-items div:last-child {
+            border-bottom: none;
+        }
+
+        .arch-arrow {
+            font-size: 24px;
+            color: #c41e3a;
+            align-self: center;
+        }
+
+        /* 下周关注 */
+        .preview-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+        }
+
+        .preview-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 20px;
+        }
+
+        .preview-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .preview-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-left: 3px solid #c41e3a;
+        }
+
+        .preview-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .preview-text {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* 底部 - 出处 */
+        .sources-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .sources-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .source-category {
+            margin-bottom: 15px;
+        }
+
+        .source-category-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #c41e3a;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #c41e3a;
+            padding-bottom: 5px;
+        }
+
+        .source-link {
+            font-size: 12px;
+            color: #185FA5;
+            text-decoration: none;
+            display: block;
+            padding: 3px 0;
+            line-height: 1.5;
+        }
+
+        .source-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: #1a1a1a;
+            color: #aaa;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .footer-brand {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            color: #c41e3a;
+            margin-bottom: 5px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .masthead h1 { font-size: 48px; letter-spacing: 8px; }
+            .content-area { grid-template-columns: 1fr; }
+            .column { border-right: none; border-bottom: 1px solid #ddd; }
+            .data-grid { grid-template-columns: repeat(2, 1fr); }
+            .preview-list { grid-template-columns: 1fr; }
+            .sources-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper">
+        <!-- 报头 -->
+        <header class="masthead">
+            <div class="masthead-top">
+                <span>2026年10月11日 星期日</span>
+                <span>第42期 · 总第126期</span>
+                <span>农历丙午年 八月廿九</span>
+            </div>
+            <h1>AI 周报速递</h1>
+            <div class="masthead-subtitle">ARTIFICIAL INTELLIGENCE WEEKLY EXPRESS</div>
+        </header>
+
+        <!-- 导航条 -->
+        <nav class="nav-bar">
+            <span>头版头条</span>
+            <span>Agent编排层</span>
+            <span>大模型与Skill</span>
+            <span>开源权重</span>
+            <span>安全治理</span>
+            <span>资本风向</span>
+        </nav>
+
+        <!-- 头条 -->
+        <section class="headline-section">
+            <div class="headline-banner">重磅头条</div>
+            <h2 class="headline-title">Google 发布 Gemini agent<br>一个 Agent 打通全公司，Claude 也进路由池</h2>
+            <p class="headline-subtitle">在 Gemini at Work 2026 上，Google Cloud 把企业 AI 折叠成「一个统一的、面向工作的通用 Agent」：用户只给目标、不给指令；Agent 自己按任务挑模型，Gemini 家族之外，Anthropic Claude 已在路由池内。更关键的是每个 coworker agent 拿到独立企业身份、独立邮箱与审计轨迹——Google 要做的不是又一个聊天机器人，而是企业 AI 的守门人。</p>
+            <div class="headline-meta">
+                <span>📅 2026年10月8日</span>
+                <span>📍 Google Cloud · Gemini at Work 2026</span>
+                <span>🏷️ Agent 编排 · 多模型路由 · 企业治理</span>
+            </div>
+        </section>
+
+        <!-- 三栏内容 -->
+        <div class="content-area">
+            <!-- 左栏 -->
+            <div class="column">
+                <div class="column-header">Agent 编排层</div>
+
+                <div class="article">
+                    <h3 class="article-title">Gemini agent：把「选模型」这件事交给 Agent</h3>
+                    <div class="article-meta">📅 10月8日 · 来源：Google 官方博客/Computerworld</div>
+                    <p class="article-text">简单任务走 Gemini Flash，长周期前沿任务走 Argon，Anthropic Claude 已在池内，其他闭源与开源模型后续接入。配 Smart Routing 与实时项目级 spend cap，预算触顶直接暂停 Agent。工具注册表打通 Salesforce、ServiceNow、Jira、Snowflake、Databricks、M365、Slack，以及任意 MCP server。现状为 private preview，财富 100 强近 90% 在用 Gemini Enterprise。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">Coworker Agent 有了企业身份</div>
+                    <p class="news-card-text">同事代理拥有自己的 @agents.company.com 邮箱、日历、Drive 与目录条目，只看到被明确分享的数据。每个 Agent 都有加密证明的身份、OAuth 传播权限、行动级审计轨迹（归属 Agent 而非人）、Agent Sandbox 与 Agent Gateway（Google 称「AI 网络防火墙」）。Google 明确表示不打算按席位收费。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">Grok Bot 拆掉自家围墙，择优调用 Claude</h3>
+                    <div class="article-meta">📅 10月7日 · 来源：IT之家/科创板日报</div>
+                    <p class="article-text">马斯克在 X 上宣布，Grok Bot 不再局限于 SpaceXAI 自研的 Grok 系列，将按任务自动选择「最有可能给出最好结果」的后端模型，并点名 Claude Opus 5.5、Midjourney、Suno。用户侧本就没有模型选择器，由编排层决定。AI 同事的竞争从此从「拼基座」转向「拼调度」。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">Manus 2.0 + Cue：给每个 Agent 邮箱、电话和钱包</h3>
+                    <div class="article-meta">📅 10月8日 · 来源：钱江晚报/搜狐</div>
+                    <p class="article-text">Manus 母公司蝴蝶效应完成超 5 亿美元融资，博裕、IDG 领投，目标估值约 40 亿美元。产品侧 Cascade 框架自报 Token −23.2%、时间 −28.2%、成本 −32%；Cloud Computer 让项目有独立云端运行环境；Cue 让每个个人 Agent 拥有独立邮箱、电话号码、受上限约束的钱包与专属云电脑。</p>
+                </div>
+            </div>
+
+            <!-- 中栏 -->
+            <div class="column">
+                <div class="column-header">大模型与 Skill</div>
+
+                <div class="article">
+                    <h3 class="article-title">OpenAI「28 天连续更新」：GPT-6 全量开放</h3>
+                    <div class="article-meta">📅 10月5日–10月8日 · 来源：腾讯新闻/IT之家</div>
+                    <p class="article-text">Codex 负责人 Thibault Sottiaux 立下招牌：28 天内每天推出一项对多数 Codex/Work 用户有明显帮助的改进，否则执行一次完整额度重置。第 3 天，GPT-6 成为 ChatGPT 默认模型，覆盖超 12 亿周活用户；Plus/Pro/Business/Enterprise 用 GPT-6 Sol，Free/Go 用 GPT-6 Luna。Codex 与 ChatGPT Work 活跃用户合计破 4000 万，并附送一次额度重置。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">Intelligent UI：回答变成可点的界面</div>
+                    <p class="news-card-text">回答不再只是一段文字，而是组合文字、图表、按钮、表单与可调参数示意图——并排对比表、随人数变化的采购清单、可勾选的流程，甚至随手生成的小型内联应用。GPT-6.1 Sol 同期在 Responses API 增加 Ultrafast 档，面向延迟敏感型 Agent。对话正在变成生成式界面。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">Anthropic：Haiku 5.5 补齐家族，Artifacts 扩到数据与动画</h3>
+                    <div class="article-meta">📅 10月7日–10月8日 · 来源：TestingCatalog/IT之家</div>
+                    <p class="article-text">Haiku 5.5 面向高并发成本敏感场景，补齐 Opus/Sonnet/Haiku 三档。Claude Dashboards 直连 Redshift、BigQuery、ClickHouse、Databricks、Snowflake，自然语言提问即搭看板并随数据刷新，点开数字可看 SQL。Claude Motion 把报告图表变短片，关键是写可编辑代码、不调用视频生成模型，无生成画面与 AI 人脸，可导出 MP4。Docs/Slides/Design 出 beta 全量开放，用户已创建超 4500 万份文档/演示/设计。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">「决策模型」成为新品类</div>
+                    <p class="news-card-text">一批模型不生成文本，只在给定选项里做选择并给出置信度，一次前向出结果：Cloudflare Clef 27B/9B（中位延迟 209ms/38.8ms，对标闭源 Jev 的 524ms）、Liquid AI d1-3B、Perplexity pplx-decider、Microsoft-Decision-1、AWS Strands Decider 2B（RTX 3090 上 115ms）。llama.cpp 0.6.0 已新增 /v1/systemone 端点支持六种决策模型。Agent 的「小决策」被拆成确定性调用，延迟与成本降一个数量级。</p>
+                </div>
+            </div>
+
+            <!-- 右栏 -->
+            <div class="column">
+                <div class="column-header">开源 · 安全 · 资本</div>
+
+                <div class="article">
+                    <h3 class="article-title">西方开源权重反攻：Beam 与 Le Chonk 相隔 48 小时</h3>
+                    <div class="article-meta">📅 10月5日–10月6日 · 来源：Axios/Machine Brief</div>
+                    <p class="article-text">Reflection 发布 Beam：稀疏 MoE，501B 总参 / 23B 激活，23.8T tokens 预训练，10,500 张 GB300 跑 4 周、超 1 亿次 rollout，厂商自报 SWE-Bench Verified 80.9，称达到 GLM-5.2 级推理只需 1/3–1/4 算力。Mistral 预览 Large 4「Le Chonk」：约 1T 总参 / 49B 激活，1M 上下文，3,800 张 Grace Blackwell 训 2 个月。权重均未公开，Beam 本月内 Apache 2.0 释出，Le Chonk 定档 10/27。基准全部厂商自报，第三方无法复现。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">MCP 安全集中爆雷</div>
+                    <p class="news-card-text">企业 MCP 指南给出六大攻击类：工具投毒、Schema 投毒、工具遮蔽、命令注入、影子服务器、上下文过度共享。OX Security 扫描 15,465 个公开 MCP 服务器：15.6% 在美国境外、0.45% 跑在个人机器隧道上、2.3% 位于 $4–12 即可劫持的悬空域名。Ars 报道跨 Google、JPMorgan、Weaviate、法国 DINUM 的同一类 SSRF 模式被确认修复，研究员称之为「protocol pivoting」。另有 5 个美国联邦机构 MCP 服务器仍在 triage。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">资本：OpenAI 冲 1.4 万亿，Anthropic 冲 2 万亿 IPO</h3>
+                    <div class="article-meta">📅 10月5日–10月8日 · 来源：Bloomberg/金融界</div>
+                    <p class="article-text">OpenAI 洽谈至少 300 亿美元新融资，投前估值约 1.4 万亿美元（较 3 月的 8520 亿 +64%），阿布扎比 MGX 等阿联酋基金合计拟投上限 100 亿美元，贝莱德在谈，暂不设领投方，IPO 推迟至 2027 年后。Anthropic 已于 9/30 递交招股书，目标估值约 2 万亿美元、拟募资最高 1000 亿美元，最早 11 月中上市；另有 600 亿美元 AI 芯片融资进入银团分销。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">Codex 生态补课：失败模式与推理层监控</div>
+                    <p class="news-card-text">JetBrains 开源 Mellum2.1（12B/2.5B 激活，Apache 2.0），面向编码 Agent。Microsoft 发布 AX Practitioner Playbook，汇总数百次 Agent 会话里编码 Agent 的九类反复失败模式。Baseten 与 Goodfire 宣布 Project Beacon，把模型内部激活信号与文本检查结合，在推理层监控提示注入、越权操作、数据外泄与网络滥用。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据区域 -->
+        <section class="data-section">
+            <h2 class="data-title">本周关键数据</h2>
+            <div class="data-grid">
+                <div class="data-item">
+                    <div class="data-number">12亿</div>
+                    <div class="data-label">GPT-6 全量开放的<br>ChatGPT 周活用户</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">501B</div>
+                    <div class="data-label">Reflection Beam<br>总参数（23B 激活）</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">15465</div>
+                    <div class="data-label">被扫出安全缺口的<br>公开 MCP 服务器</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">1.4万亿</div>
+                    <div class="data-label">OpenAI 新轮融资<br>投前估值（美元）</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 时间线 -->
+        <section class="timeline-section">
+            <h2 class="timeline-title">📅 本周事件时间线</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">10月5日 周一</div>
+                    <div class="timeline-content">
+                        • OpenAI 宣布「28 天连续更新」计划，不更新就重置额度<br>
+                        • Reflection 发布 Beam（501B MoE，23B 激活）<br>
+                        • Agentics 发布《Enterprise MCP Guide 2026》六大攻击类<br>
+                        • Ars Technica 报道跨厂商 MCP「protocol pivoting」SSRF
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">10月6日 周二</div>
+                    <div class="timeline-content">
+                        • Mistral 预览 Mistral Large 4「Le Chonk」（约 1T 多模态）<br>
+                        • Google 开源 EmbeddingGemma 2（740M 多模态嵌入）<br>
+                        • Perplexity 发布 pplx-decider-v1.1-27b
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">10月7日 周三</div>
+                    <div class="timeline-content">
+                        • 马斯克宣布 Grok Bot 择优调用 Claude Opus 5.5/Midjourney/Suno<br>
+                        • Anthropic 发布 Claude Haiku 5.5，5.5 家族齐全<br>
+                        • Liquid AI 开源决策模型 d1-3B 与 d1-omni-600M
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">10月8日 周四</div>
+                    <div class="timeline-content">
+                        • Google Cloud 发布 Gemini agent（Gemini at Work 2026）<br>
+                        • GPT-6 全量开放 + Intelligent UI 上线<br>
+                        • Claude Dashboards / Motion 进入 beta，Docs/Slides/Design 出 beta<br>
+                        • GPT-6.1 Sol 增加 Ultrafast 档<br>
+                        • Manus 母公司宣布完成超 5 亿美元融资
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">10月9日 周五</div>
+                    <div class="timeline-content">
+                        • Cloudflare 发布 Clef-omni（音频/视频/图像/文本单次调用）<br>
+                        • Microsoft 发布 Decision-1 决策打分模型<br>
+                        • Microsoft 发布 AX Practitioner Playbook（九类 Agent 失败模式）<br>
+                        • Baseten × Goodfire 宣布 Project Beacon（推理层监控）
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 开闭源象限图 -->
+        <section class="quadrant-section">
+            <h2 class="quadrant-title">📊 本周格局：模型开放度 × 企业可控性</h2>
+            <div class="quadrant-grid">
+                <div class="quadrant-cell">
+                    <span class="quadrant-label top-left">强能力 · 低开放</span>
+                    <span class="quadrant-item">Claude Opus 5.5</span>
+                    <span class="quadrant-item">Gemini 4 Argon</span>
+                </div>
+                <div class="quadrant-cell">
+                    <span class="quadrant-label top-right">强能力 · 高开放</span>
+                    <span class="quadrant-item blue">Reflection Beam</span>
+                    <span class="quadrant-item blue">Mistral Large 4</span>
+                </div>
+                <div class="quadrant-cell">
+                    <span class="quadrant-label bottom-left">轻能力 · 低开放</span>
+                    <span class="quadrant-item amber">闭源 Jev</span>
+                </div>
+                <div class="quadrant-cell">
+                    <span class="quadrant-label bottom-right">轻能力 · 高开放</span>
+                    <span class="quadrant-item green">Clef / Clef-flash</span>
+                    <span class="quadrant-item green">d1-3B / pplx-decider</span>
+                    <span class="quadrant-item green">Mellum2.1</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 架构图 -->
+        <section class="architecture-section">
+            <h2 class="architecture-title">🏗️ Gemini agent 的统一编排层</h2>
+            <div class="architecture-diagram">
+                <div class="arch-box">
+                    <div class="arch-box-title">用户 / 企业</div>
+                    <div class="arch-box-items">
+                        <div>给目标 不给指令</div>
+                        <div>Web/iOS/Android/桌面/CLI</div>
+                        <div>M365 · Slack 内嵌</div>
+                    </div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">
+                    <div class="arch-box-title">Gemini agent 编排</div>
+                    <div class="arch-box-items">
+                        <div>Smart Routing 挑模型</div>
+                        <div>临时子 Agent 调度</div>
+                        <div>Coworker Agent 独立身份</div>
+                        <div>四类记忆 + 个性化图</div>
+                    </div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">
+                    <div class="arch-box-title">模型池</div>
+                    <div class="arch-box-items">
+                        <div>Gemini Flash 简单任务</div>
+                        <div>Argon 长周期前沿</div>
+                        <div>Anthropic Claude 已在池内</div>
+                        <div>其他闭源/开源 后续接入</div>
+                    </div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">
+                    <div class="arch-box-title">治理与成本</div>
+                    <div class="arch-box-items">
+                        <div>Agent 身份 + OAuth 权限</div>
+                        <div>行动级审计轨迹</div>
+                        <div>Agent Sandbox / Gateway</div>
+                        <div>实时 spend cap 触顶暂停</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 下周关注 -->
+        <section class="preview-section">
+            <h2 class="preview-title">🔮 下周关注</h2>
+            <div class="preview-list">
+                <div class="preview-item">
+                    <div class="preview-number">01</div>
+                    <div class="preview-text"><strong>Gemini agent 开放节奏</strong><br>从 private preview 到 Workspace Business/Enterprise 的全面开放时间与计费口径（官方称 consumption-based、不加 SKU）</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">02</div>
+                    <div class="preview-text"><strong>开源权重释出后的复现</strong><br>Reflection Beam（本月内）与 Mistral Large 4（10/27）权重公开后的第三方评测与许可条款</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">03</div>
+                    <div class="preview-text"><strong>决策模型的实际集成</strong><br>Cloudflare Clef / Liquid d1 / Strands Decider 在 Agent 路由与护栏层的落地案例，llama.cpp 0.6.0 生态反应</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">04</div>
+                    <div class="preview-text"><strong>MCP 治理清单化</strong><br>企业是否开始建 MCP server 清单、按 Agent 工具白名单、工具层强制人工闸门；联邦机构 MCP 服务器修复进度</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">05</div>
+                    <div class="preview-text"><strong>OpenAI 28 天计划的后续</strong><br>每日更新的持续性、Codex/Work 额度重置的实际覆盖范围、GPT-6.1 Sol Ultrafast 的定价</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">06</div>
+                    <div class="preview-text"><strong>Anthropic IPO 定价</strong><br>约 2 万亿美元估值招股书的推进、11 月中上市窗口，以及「AI 责任风险」如何写进披露文件</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 出处 -->
+        <section class="sources-section">
+            <h2 class="sources-title">📚 相关出处</h2>
+            <div class="sources-grid">
+                <div class="source-category">
+                    <div class="source-category-title">Google Gemini agent</div>
+                    <a href="https://blog.google/intl/zh-tw/products/cloud/google-cloud-gemini" class="source-link">Google Cloud 推出 Gemini 代理 - Google 官方博客</a>
+                    <a href="https://futurumgroup.com/insights/google-collapses-enterprise-ai-into-a-single-gemini-agent-at-gemini-at-work-2026/" class="source-link">Google Collapses Enterprise AI Into a Single Gemini Agent - Futurum</a>
+                    <a href="https://www.computerworld.com/article/4232827/google-wants-to-be-the-gatekeeper-for-enterprise-ai-agents.html" class="source-link">Google wants to be the gatekeeper for enterprise AI agents - Computerworld</a>
+                    <a href="https://appstackinsider.com/insights/google-cloud-launches-gemini-agent-for-enterprise-work" class="source-link">what enterprise IT should test - AppStack Insider</a>
+                    <a href="https://www.toutiao.com/article/7694357664075104822" class="source-link">谷歌发布 Gemini 智能体 - 财联社</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">OpenAI 28 天计划 / GPT-6 / Intelligent UI</div>
+                    <a href="https://news.qq.com/rain/a/20261008A02QUE00" class="source-link">刚刚，GPT-6 免费开放，重置额度+1 - 腾讯新闻</a>
+                    <a href="https://www.163.com/dy/article/L8NA576E0511A6N9.html" class="source-link">AI 没有假期！三巨头已经杀疯了 - 网易/鞭牛士</a>
+                    <a href="https://www.163.com/dy/article/L8FGGDMH0511B8LM.html" class="source-link">OpenAI 宣布「28 天计划」 - IT之家</a>
+                    <a href="https://www.sohu.com/a/1084924085_122396381" class="source-link">OpenAI 发布智能 UI 系统 - 搜狐</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Anthropic Haiku 5.5 / Dashboards / Motion</div>
+                    <a href="https://www.testingcatalog.com/claude-launches-dashboards-and-motion-in-beta/" class="source-link">Claude launches Dashboards and Motion in beta - TestingCatalog</a>
+                    <a href="https://news.creativebytes.co.uk/external/150973" class="source-link">Anthropic Launches Claude Dashboards and Motion - Creative Bytes</a>
+                    <a href="https://pivotnews.ai/five/claude-merges-chat-and-cowork-adds-docs-slides-and-design" class="source-link">Claude merges chat and cowork - Pivot News</a>
+                    <a href="https://www.163.com/dy/article/L8QCBMB30511B8LM.html" class="source-link">Claude 支持数据仪表板与解释性动画 - IT之家</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Grok Bot 多模型路由</div>
+                    <a href="https://www.toutiao.com/article/7694080280126849578" class="source-link">马斯克：Grok Bot 不再只认自家模型 - IT之家</a>
+                    <a href="https://www.toutiao.com/article/7694522003198132736" class="source-link">Grok Bot 接入 Claude - 科创板日报</a>
+                    <a href="https://aiindustrytoday.com/news/musk-says-grok-bot-will-route-tasks-across-claude-midjourney-suno-and-other-leading-ai-models" class="source-link">Musk Says Grok Bot Will Route Tasks Across Claude, Midjourney, Suno - AI Industry Today</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">开源权重：Beam / Mistral Large 4</div>
+                    <a href="https://www.machinebrief.com/news/i-dont-want-an-oligopoly-new-open-weight-ai-models-mount-a-c-f45d" class="source-link">New open-weight AI models mount a comeback - Machine Brief（据 Axios）</a>
+                    <a href="https://techjacksolutions.com/ai-brief/two-open-weight-sparse-moe-frontier-models-48-hours-beam" class="source-link">Beam 与 Large 4 要素核对 - Tech Jacks Solutions</a>
+                    <a href="https://tpsreport.news/news/reflection-beam-mistral-large-4-open-weight" class="source-link">Open-Weight Models vs China - TPS Report</a>
+                    <a href="https://comcreate.io/blog/reflection-beam-mistral-large-4-open-weights" class="source-link">No Weights Yet - ComCreate</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">决策模型 / AI Coding 开源</div>
+                    <a href="https://sentient.foundation/news/os-ai-field-notes-october-9-2026" class="source-link">OS AI Field Notes 10月9日 - Sentient Foundation</a>
+                    <a href="https://www.nocode.mba/ai-release-tracker" class="source-link">模型发布追踪 10/5–10/11 - No Code MBA</a>
+                    <a href="https://techpulse.press/news/october-2026-ai-launches-recap" class="source-link">October 2026 AI launches 全盘点 - TechPulse</a>
+                    <a href="https://aiimpacthub.com/ai-news" class="source-link">Daily Briefing 10月11日（Mellum2.1 / AX Playbook / Project Beacon）- AI Impact Hub</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">MCP 安全与治理</div>
+                    <a href="https://aigovernance.com/news/mcp-threat-guide-turns-six-attack-classes-into-enterprise-controls" class="source-link">Enterprise MCP Guide 2026 六大攻击类 - AI Governance Institute</a>
+                    <a href="https://aviatrix.ai/threat-research-center/mcp-servers-security-analysis-2026-jungle-15465" class="source-link">15,465 个公开 MCP 服务器分析 - Aviatrix（据 OX Security）</a>
+                    <a href="https://timesof.ai/2026/10/mcp-protocol-pivoting-cross-agent-ssrf" class="source-link">Same MCP Trust-Boundary Bug - Times of AI</a>
+                    <a href="https://techbeat.co/story/mcp-trust-flaws-let-ai-agents-turn-prompts-into-internal-attacks" class="source-link">MCP Trust Flaws - Tech Beat</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Manus 2.0 / Cue 与资本</div>
+                    <a href="https://www.toutiao.com/article/7694215693478167076" class="source-link">Manus 母公司完成超 5 亿美元融资 - 钱江晚报</a>
+                    <a href="https://www.sohu.com/a/1085675015_123024624" class="source-link">Manus 更新 2.0 并发布 Cue - 搜狐</a>
+                    <a href="https://openaimaster.ai/manus-cue-explained" class="source-link">Manus Cue Explained - OpenAIMaster</a>
+                    <a href="https://www.toutiao.com/article/7693828679608189475/" class="source-link">中东财团巨资布局 AI，OpenAI 拟融 300 亿 - 券商中国</a>
+                    <a href="https://www.bushletter.com/openai-seeks-30-billion-raise-valuing-company-at-1-4-trillion" class="source-link">OpenAI $30B raise at $1.4T valuation - Bushletter</a>
+                    <a href="https://www.toutiao.com/article/7694320039897448975/" class="source-link">Anthropic 2 万亿估值遭遇「AI 失控」风暴 - 金融界</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="footer-brand">AI 周报速递</div>
+            <div>编辑：AI 自动生成 | 数据截止：2026年10月11日 12:00</div>
+            <div style="margin-top: 5px;">© 2026 AI城 · 专注AI领域深度报道</div>
+        </footer>
+    </div>
+</body>
+</html>
