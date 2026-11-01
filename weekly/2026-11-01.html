@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 周报速递 - 2026年11月第1周</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: #f5f0e8;
+            color: #1a1a1a;
+            line-height: 1.8;
+        }
+
+        .newspaper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fffef9;
+            box-shadow: 0 0 40px rgba(0,0,0,0.15);
+            min-height: 100vh;
+        }
+
+        /* 头部 - 报头 */
+        .masthead {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 20px 40px;
+            text-align: center;
+            border-bottom: 8px double #c41e3a;
+        }
+
+        .masthead-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .masthead h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 72px;
+            font-weight: 900;
+            letter-spacing: 12px;
+            margin: 10px 0;
+            text-shadow: 2px 2px 0 #c41e3a;
+        }
+
+        .masthead-subtitle {
+            font-size: 18px;
+            letter-spacing: 8px;
+            color: #ddd;
+            margin-top: 5px;
+        }
+
+        /* 导航条 */
+        .nav-bar {
+            background: #c41e3a;
+            color: white;
+            padding: 10px 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-bar span {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .nav-bar span:hover {
+            opacity: 0.8;
+        }
+
+        /* 头条区域 */
+        .headline-section {
+            padding: 30px 40px;
+            border-bottom: 3px solid #1a1a1a;
+        }
+
+        .headline-banner {
+            background: #c41e3a;
+            color: white;
+            display: inline-block;
+            padding: 5px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .headline-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+
+        .headline-subtitle {
+            font-size: 20px;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .headline-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        /* 主内容区 - 多栏布局 */
+        .content-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+            padding: 0 40px;
+        }
+
+        .column {
+            padding: 25px 20px;
+            border-right: 1px solid #ddd;
+        }
+
+        .column:last-child {
+            border-right: none;
+        }
+
+        .column-header {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #c41e3a;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        .article {
+            margin-bottom: 25px;
+        }
+
+        .article-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .article-meta {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .article-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .article-text::first-letter {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 36px;
+            font-weight: 700;
+            float: left;
+            line-height: 1;
+            margin-right: 8px;
+            color: #c41e3a;
+        }
+
+        /* 重要新闻卡片 */
+        .news-card {
+            background: #f8f5ee;
+            border-left: 4px solid #c41e3a;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .news-card-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #c41e3a;
+        }
+
+        .news-card-text {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        /* 数据区域 */
+        .data-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+            margin: 30px 0;
+        }
+
+        .data-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            color: #c41e3a;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .data-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .data-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 42px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .data-label {
+            font-size: 13px;
+            color: #aaa;
+            margin-top: 8px;
+        }
+
+        /* 时间线 */
+        .timeline-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .timeline-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #c41e3a;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-left: 25px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: #c41e3a;
+            border-radius: 50%;
+            border: 3px solid #fffef9;
+        }
+
+        .timeline-date {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        /* 开闭源象限图 */
+        .quadrant-section {
+            padding: 30px 40px;
+            background: #f8f5ee;
+        }
+
+        .quadrant-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .quadrant-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 3px;
+            background: #1a1a1a;
+            padding: 3px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quadrant-cell {
+            background: #fffef9;
+            padding: 20px;
+            position: relative;
+        }
+
+        .quadrant-label {
+            position: absolute;
+            font-size: 10px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .quadrant-label.top-left { top: 5px; left: 10px; }
+        .quadrant-label.top-right { top: 5px; right: 10px; }
+        .quadrant-label.bottom-left { bottom: 5px; left: 10px; }
+        .quadrant-label.bottom-right { bottom: 5px; right: 10px; }
+
+        .quadrant-item {
+            display: inline-block;
+            background: #c41e3a;
+            color: white;
+            padding: 5px 12px;
+            font-size: 12px;
+            margin: 5px;
+            font-weight: 500;
+        }
+
+        .quadrant-item.blue { background: #185FA5; }
+        .quadrant-item.green { background: #3B6D11; }
+        .quadrant-item.amber { background: #BA7517; }
+
+        /* 架构图 */
+        .architecture-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .architecture-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .architecture-note {
+            text-align: center;
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .architecture-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .arch-box {
+            background: #f8f5ee;
+            border: 2px solid #1a1a1a;
+            padding: 15px 20px;
+            min-width: 180px;
+            text-align: center;
+        }
+
+        .arch-box-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 8px;
+        }
+
+        .arch-box-items {
+            font-size: 13px;
+            color: #444;
+            text-align: left;
+        }
+
+        .arch-box-items div {
+            padding: 3px 0;
+            border-bottom: 1px dotted #ddd;
+        }
+
+        .arch-box-items div:last-child {
+            border-bottom: none;
+        }
+
+        .arch-arrow {
+            font-size: 24px;
+            color: #c41e3a;
+            align-self: center;
+        }
+
+        /* 速览表格 */
+        .brief-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .brief-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .brief-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .brief-table th {
+            background: #1a1a1a;
+            color: #fffef9;
+            font-weight: 700;
+            padding: 10px 12px;
+            text-align: left;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .brief-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e5dfd3;
+            color: #333;
+            line-height: 1.6;
+            vertical-align: top;
+        }
+
+        .brief-table tr:nth-child(even) td {
+            background: #faf7f0;
+        }
+
+        .brief-table td:first-child {
+            font-weight: 700;
+            color: #1a1a1a;
+            white-space: nowrap;
+        }
+
+        .brief-table td:nth-child(2) {
+            color: #c41e3a;
+            white-space: nowrap;
+            font-size: 12px;
+        }
+
+        /* 下周关注 */
+        .preview-section {
+            background: #1a1a1a;
+            color: #fffef9;
+            padding: 30px 40px;
+        }
+
+        .preview-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin-bottom: 20px;
+        }
+
+        .preview-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .preview-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-left: 3px solid #c41e3a;
+        }
+
+        .preview-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #c41e3a;
+            line-height: 1;
+        }
+
+        .preview-text {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* 底部 - 出处 */
+        .sources-section {
+            padding: 30px 40px;
+            border-top: 3px solid #1a1a1a;
+        }
+
+        .sources-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .source-category {
+            margin-bottom: 15px;
+        }
+
+        .source-category-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #c41e3a;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #c41e3a;
+            padding-bottom: 5px;
+        }
+
+        .source-link {
+            font-size: 12px;
+            color: #185FA5;
+            text-decoration: none;
+            display: block;
+            padding: 3px 0;
+            line-height: 1.5;
+        }
+
+        .source-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: #1a1a1a;
+            color: #aaa;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .footer-brand {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            color: #c41e3a;
+            margin-bottom: 5px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .masthead h1 { font-size: 48px; letter-spacing: 8px; }
+            .content-area { grid-template-columns: 1fr; }
+            .column { border-right: none; border-bottom: 1px solid #ddd; }
+            .data-grid { grid-template-columns: repeat(2, 1fr); }
+            .preview-list { grid-template-columns: 1fr; }
+            .sources-grid { grid-template-columns: 1fr; }
+            .headline-title { font-size: 32px; }
+            .brief-table { font-size: 12px; }
+            .brief-table td:first-child, .brief-table td:nth-child(2) { white-space: normal; }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper">
+        <!-- 报头 -->
+        <header class="masthead">
+            <div class="masthead-top">
+                <span>2026年11月1日 星期日</span>
+                <span>第45期 · 总第129期</span>
+                <span>农历丙午年 九月廿三</span>
+            </div>
+            <h1>AI 周报速递</h1>
+            <div class="masthead-subtitle">ARTIFICIAL INTELLIGENCE WEEKLY EXPRESS</div>
+        </header>
+
+        <!-- 导航条 -->
+        <nav class="nav-bar">
+            <span>头版头条</span>
+            <span>模型与能力</span>
+            <span>AI Coding</span>
+            <span>Agent 与 Skill</span>
+            <span>安全前线</span>
+            <span>资本风向</span>
+        </nav>
+
+        <!-- 头条 -->
+        <section class="headline-section">
+            <div class="headline-banner">本周主线</div>
+            <h2 class="headline-title">能力涨上去了，发放权收回来了<br>同一个模型，四套权限</h2>
+            <p class="headline-subtitle">10月28日，Gemini 4 Carbon 拿下 Artificial Analysis Intelligence Index v5.0 第一（59分），但 Google 没把它开给任何人——先给一小批网络安全防御者，再经 Fairwind Program 扩到受信伙伴，同时接受美国政府自愿预发布测试，开发者与企业排队等通知，日期都没给。同一周，OpenAI 反而把带 computer use 的 GPT-6.1 Terra 压到 $1/$5 全量铺开；Anthropic 向 SEC 递交 S-1，把公司账本摊开；在 Windows 上，Agent 第一次被操作系统策略关进笼子。三件事方向不同，结论一致：模型层不是主战场了，谁决定"这个能力给谁用、在什么边界里用"才是。</p>
+            <div class="headline-meta">
+                <span>📅 2026年10月26日-11月1日</span>
+                <span>📍 Google DeepMind · Anthropic · OpenAI · Microsoft</span>
+                <span>🏷️ 能力配给 · Agent 边界 · 模型成本 · 供应链安全</span>
+            </div>
+        </section>
+
+        <!-- 三栏内容 -->
+        <div class="content-area">
+            <!-- 左栏 -->
+            <div class="column">
+                <div class="column-header">模型与能力</div>
+
+                <div class="article">
+                    <h3 class="article-title">Gemini 4 Carbon 拿了第一 但没人能用</h3>
+                    <div class="article-meta">📅 10月28日 · 来源：Google DeepMind / Artificial Analysis</div>
+                    <p class="article-text">距 Argon 全面开放只隔 14 天。AA Intelligence Index v5.0 得 59 分排第 1（Argon 50、Opus 5.5 58、GPT-6 Astra 57）。安全三基准全 SOTA：SEC-bench Pro 找漏洞 88.2%、ExploitGym 可利用性验证 54.8%、CWE-bench 根因修复 71.0%。Gray Swan 间接提示注入攻击成功率从 Argon 的 0.7% 降到 0.0%，Terminal-Bench 4.0 作弊成功率 0.0%。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">发放才是新闻本体</div>
+                    <p class="news-card-text">流程是：本周先给一小批网络安全防御人员 → 经 Fairwind Program 扩到受信伙伴 → 并行参与美国政府自愿预发布测试 → 之后才轮到开发者、企业和消费者，<strong>没有时间表</strong>。定价沿用 $2/$10 引入期，结束后回 $4/$20。第一次有前沿模型因为"太能打漏洞"被实质性配给。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">独立评测留了话：分涨了，代价也涨了</h3>
+                    <div class="article-meta">📅 10月28日 · 来源：Artificial Analysis</div>
+                    <p class="article-text">Carbon 答对率从 48% 升到 58%，但幻觉率从 4% 升到 11%，消耗 token 更多、部分任务运行时间显著拉长。Coding Agent Index 上得 59，仍落后 Claude Code + Opus 5.5 的 62；OSWorld-2.1 81.5% 对 Opus 5.5 的 87.2%；FrontierSWE 2 61.2% 落后 GPT-6 Astra 的 65.5%。</p>
+                </div>
+            </div>
+
+            <!-- 中栏 -->
+            <div class="column">
+                <div class="column-header">AI Coding</div>
+
+                <div class="article">
+                    <h3 class="article-title">GPT-6.1 Terra：computer use 打到 $1 的价位</h3>
+                    <div class="article-meta">📅 10月26日 · 来源：OpenAI Release Notes / 证券时报</div>
+                    <p class="article-text">gpt-6.1-terra 上线 Work、Codex 与 API（不进 Chat）。输入 $1 / 输出 $5 / 缓存 $0.05，约为 Astra 的 1/10、5.6 Terra 的 50%。105 万上下文，Terminal-Bench 4.0 最高档 50.3%（前代公开成绩 21.5%）。内部高错误诱导测试里，低推理档事实错误率 53.6%→16.7%，最高档 4.3%。Preparedness 分级：网络安全 Critical。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">Factory Droid 1.0：降本不靠模型，靠少发几次请求</h3>
+                    <div class="article-meta">📅 10月29日 · 来源：Factory《Building a Frontier Harness》</div>
+                    <p class="article-text">改成程序化工具调用：让模型写一段 JS 在沙箱里批量调工具、只回摘要（CodeAct 思路）。Linear 搬 151 个 issue、312 次工具调用，逐次调用要 36 次模型请求约 310 万输入 token，程序化只要 2 次请求约 6.1 万。初始 prompt 从 20,887 砍到 13,055 token，前置工具定义从 11 个降到 2 个。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">厂商自测，读的时候打个折</div>
+                    <p class="news-card-text">配 GPT-6.1 Sol，Terminal-Bench 4 比 Codex 高 3.5 分、成本低 12%；配 Opus 5.5 比 Cursor/OpenCode/Devin/Claude Code 高 3.0–7.6 分，成本最多低 24%。但 Devin 停顿时被"算对"的调整平均每次 trial 涉及 4.7 个任务，方法是卖家自己定的，无第三方复现。</p>
+                </div>
+            </div>
+
+            <!-- 右栏 -->
+            <div class="column">
+                <div class="column-header">Agent 与 Skill</div>
+
+                <div class="article">
+                    <h3 class="article-title">中国办公 Agent 集体转向"模型池"</h3>
+                    <div class="article-meta">📅 10月29日 · 来源：华尔街日报 / 上证报 / 北京商报</div>
+                    <p class="article-text">豆包工作向团队版、企业版开放第三方模型，首批 Kimi 3.1 Pro、GLM-5.3、DeepSeek V4.1 Flash，企业不用另买 API，直接用已有 AI 点数扣费，管理员按成员/部门/群组配权限。腾讯同天发布 Hy4（首次引入视觉理解）与跨应用体系 Buddy One，Marvis 上线"Coding 管家"可手机遥控 CodeBuddy IDE 与 Kimi Code Desktop。阿里千问办公仍只给自有模型。</p>
+                </div>
+
+                <div class="news-card">
+                    <div class="news-card-title">AGENTS.md 在野投毒</div>
+                    <p class="news-card-text">Forever Security 抓到活样本：Downloads 里一个伪装成工程笔记的 AGENTS.md 被 Codex / Claude Code 当项目上下文读入，指示 Agent 改写自身配置、装 npm 恶意包（MALFEX 行动的 function-color）并准备外泄登录 token。实验室复现 Codex <strong>超 90%</strong>、Claude Code 约 <strong>50%</strong>。厂商无补丁——读工作目录指令属于"按设计工作"。</p>
+                </div>
+
+                <div class="article">
+                    <h3 class="article-title">MCP 工具服务器一天九连 CVE</h3>
+                    <div class="article-meta">📅 10月27日 · 来源：GitHub Security Advisory / NVD</div>
+                    <p class="article-text">ai-sdlc、DroidMind、ATXP、sf-mcp、esp-mcp、mcp-ffmpeg、Kali-GPT、nmap-mcp、hagent 九个组件同日发 OS 命令注入公告（CVE-2026-117558 至 117573）。模式完全一致：Agent 可调用的工具参数直接拼进 execSync / run_shell / CLI flags，没中和 $() 和反引号。一天九个，是写代码的习惯问题，不是孤立 bug。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据区域 -->
+        <section class="data-section">
+            <h2 class="data-title">本周关键数据</h2>
+            <div class="data-grid">
+                <div class="data-item">
+                    <div class="data-number">5180</div>
+                    <div class="data-label">Anthropic 已承诺的<br>未来算力支出（亿美元）</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">23%</div>
+                    <div class="data-label">上半年营收中<br>两个未具名客户占比</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">90%+</div>
+                    <div class="data-label">AGENTS.md 投毒<br>对 Codex 的复现成功率</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">26.1%</div>
+                    <div class="data-label">31,132 个公开 skill<br>含至少一个漏洞的比例</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 时间线 -->
+        <section class="timeline-section">
+            <h2 class="timeline-title">📅 本周事件时间线</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">10月26日 周一</div>
+                    <div class="timeline-content">
+                        • Anthropic 向 SEC 递交 S-1，代码 ANT，24 家承销商<br>
+                        • OpenAI 发布 GPT-6.1 Terra，价格约为 Astra 的 1/10<br>
+                        • AGENTS.md 在野提示注入被 Dark Reading 曝光<br>
+                        • OpenAI 撤回 Pro 额度削减，三档用量翻倍
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">10月27日 周二</div>
+                    <div class="timeline-content">
+                        • 9 个 MCP 工具服务器同日发 OS 命令注入公告<br>
+                        • AAIF 十个项目的治理细节与 skill 漏洞实证被复盘<br>
+                        • Anthropic 招股书细节流出：算力承诺 5180 亿美元
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">10月28日 周三</div>
+                    <div class="timeline-content">
+                        • Google DeepMind 发布 Gemini 4 Carbon，AA Index 59 分登顶<br>
+                        • 发放策略：先防御方，经 Fairwind 扩量，再进美国政府测试<br>
+                        • Nadella 在财报电话会点名 MXC 采纳情况<br>
+                        • Anthropic 取消编程面试，内部口号"hunger beats tenure"
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">10月29日 周四</div>
+                    <div class="timeline-content">
+                        • Factory 发布 Droid 1.0，程序化工具调用<br>
+                        • 豆包工作开放第三方模型（Kimi 3.1 Pro / GLM-5.3 / DeepSeek V4.1 Flash）<br>
+                        • 腾讯数字生态大会：Hy4 预告、Buddy One、Marvis Coding 管家<br>
+                        • Gemini 支持对话内直接生成编辑 PDF / 演示文稿 / 表格
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">10月30日 周五</div>
+                    <div class="timeline-content">
+                        • OpenAI / Google / Microsoft / Anthropic 共同支持 __usage_ai-training<br>
+                        • Claude Code 2.1.314 / 2.1.316：池化组预算、subagent 推理档位<br>
+                        • OpenCode 2.2.5、Antigravity 1.4.12、Devin 3.11.238 密集迭代
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">10月31日 - 11月1日 周六至周日</div>
+                    <div class="timeline-content">
+                        • Factory Droid 1.1.0 加企业侧公开审计 API<br>
+                        • Amp 支持云端 Mac 构建 iOS / Mac 应用<br>
+                        • XREAL AURA 开售，首款 Android XR 分体式眼镜
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 模型发放象限 -->
+        <section class="quadrant-section">
+            <h2 class="quadrant-title">📊 前沿模型：能力 vs 可获得性</h2>
+            <div class="quadrant-grid">
+                <div class="quadrant-cell">
+                    <span class="quadrant-label top-left">强 · 难拿</span>
+                    <span class="quadrant-item">Gemini 4 Carbon</span>
+                </div>
+                <div class="quadrant-cell">
+                    <span class="quadrant-label top-right">强 · 易得</span>
+                    <span class="quadrant-item blue">Claude Opus 5.5</span>
+                    <span class="quadrant-item blue">GPT-6 Astra</span>
+                    <span class="quadrant-item green">Kimi K3.1 Pro（11/4 放权重）</span>
+                </div>
+                <div class="quadrant-cell">
+                    <span class="quadrant-label bottom-left">弱 · 难拿</span>
+                    <span class="quadrant-item amber">Gemini 4 Argon（引入期）</span>
+                </div>
+                <div class="quadrant-cell">
+                    <span class="quadrant-label bottom-right">弱 · 易得</span>
+                    <span class="quadrant-item green">GPT-6.1 Terra</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 权限三层收口 -->
+        <section class="architecture-section">
+            <h2 class="architecture-title">🏗️ Agent 的权限被三层收口</h2>
+            <p class="architecture-note">上周是"平台准入"，这周下沉到"操作系统准入"。三层各管一段：谁能拿到能力、能在哪个场景用、能碰什么资源。</p>
+            <div class="architecture-diagram">
+                <div class="arch-box">
+                    <div class="arch-box-title">模型侧</div>
+                    <div class="arch-box-items">
+                        <div>Gemini 4 Carbon</div>
+                        <div>先给网络安全防御方</div>
+                        <div>经 Fairwind 扩量</div>
+                        <div>美国政府预发布测试</div>
+                        <div>开发者无时间表</div>
+                    </div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">
+                    <div class="arch-box-title">平台侧</div>
+                    <div class="arch-box-items">
+                        <div>豆包工作：三方模型池</div>
+                        <div>腾讯 Buddy One：统一积分</div>
+                        <div>银行封杀动钱</div>
+                        <div>零售商放行下单</div>
+                        <div>管理员按部门配权限</div>
+                    </div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">
+                    <div class="arch-box-title">OS 侧</div>
+                    <div class="arch-box-items">
+                        <div>Windows MXC（10/7 GA）</div>
+                        <div>策略在 Agent 外面</div>
+                        <div>进程 / 会话 / WSL / MicroVM</div>
+                        <div>enforcement / learning / permissive</div>
+                        <div>Claude Code 等在路上</div>
+                    </div>
+                </div>
+                <div class="arch-arrow">→</div>
+                <div class="arch-box">
+                    <div class="arch-box-title">结果</div>
+                    <div class="arch-box-items">
+                        <div>同一能力，四种权限</div>
+                        <div>越能打漏洞，发放越窄</div>
+                        <div>能动钱，不能看账</div>
+                        <div>Agent 不能做自己的安全权威</div>
+                        <div>防线在 Agent 之外</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 速览 -->
+        <section class="brief-section">
+            <h2 class="brief-title">📋 本周速览</h2>
+            <table class="brief-table">
+                <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>主体</th>
+                        <th>一句话</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10/24-27</td>
+                        <td>Kimi K3.1 Pro</td>
+                        <td>2.8T / 104B 激活、1M 上下文，权重 11 月 4 日前释出；AA Index 55 分（全球第 4、开源第一）；Terminal-Bench 4.0 65.7%，高于 GPT-6 Astra 的 58.2%、仅次 Opus 5.5 的 66.4%。主动从 RL 环境移除网络安全数据，内部漏洞发现利用 81.0%，未加防护对照版 90.5%（均自报）。Bloomberg：约 500 亿美元估值私募轮已完成，目标 2027 Q1 港股上市</td>
+                    </tr>
+                    <tr>
+                        <td>10/26</td>
+                        <td>OpenAI Pro 额度</td>
+                        <td>撤回原定对 $200 档砍约 50% 的计划；$100/$200/$500 三档 Work 与 Codex 用量翻倍，Business Premium 同步上调，另赠等额 API 信用额度</td>
+                    </tr>
+                    <tr>
+                        <td>10/27 起</td>
+                        <td>Dots 进短信</td>
+                        <td>手机短信应用可直接联系 Dots（需手机号验证），beta 限美国 Pro 用户，支持图片上传、位置共享、语音消息</td>
+                    </tr>
+                    <tr>
+                        <td>10/28</td>
+                        <td>Anthropic 招聘</td>
+                        <td>取消传统编程面试，理由是被 AI 基本解决、通过编程测试不再是有效信号；内部口号"hunger beats tenure"</td>
+                    </tr>
+                    <tr>
+                        <td>10/28-30</td>
+                        <td>Claude Duet 扩量</td>
+                        <td>先开美国 Max，再扩美国 Pro，其他国家无时间表；Claude 移动端支持多账号同设备、大屏布局、CarPlay 语音全面可用</td>
+                    </tr>
+                    <tr>
+                        <td>10/28-30</td>
+                        <td>Block Desa</td>
+                        <td>研究级语音模型，不用"语音转文字再转回"，直接在人对话音频上训练，停顿、打断、情绪节奏接近真人</td>
+                    </tr>
+                    <tr>
+                        <td>10/29</td>
+                        <td>Genie 4</td>
+                        <td>交互式世界模型，实时生成可探索环境，画面与音频强于 Genie 3</td>
+                    </tr>
+                    <tr>
+                        <td>10/29</td>
+                        <td>智元 Worken</td>
+                        <td>首个"物理 AI 价值"度量单位 Worken（有效智能工时 = 活跃机器人数 × 自主工作时长 × 产出效能比）；GO-3 Preview 登顶 RoboDojo / RoboTwin / RoboColiseum，年底全面开源</td>
+                    </tr>
+                    <tr>
+                        <td>10/30</td>
+                        <td>训练退出 token</td>
+                        <td>四家共同支持 robots.txt 里写一行 __usage_ai-training 跨家退出训练。但只是 Anthropic 员工的个人 Internet-Draft，不是标准、无强制力；时间表：Anthropic 已实现、OpenAI 未来数月、Microsoft 2027-02-01、Google 2027；只管训练不管抓取，不追溯已入库数据</td>
+                    </tr>
+                    <tr>
+                        <td>10/31</td>
+                        <td>Amp 云端 Mac</td>
+                        <td>让 Amp 在云端 Mac 上编译、测试、运行 iOS / Mac 应用，连折叠屏 iPhone Duo 布局都能查；同周支持在对话里直接画图表、时间线、可点击 mockup</td>
+                    </tr>
+                    <tr>
+                        <td>10/31</td>
+                        <td>XREAL AURA</td>
+                        <td>全球首款 Android XR 分体式空间计算眼镜，骁龙 Reality Elite + 自研 X1S，95g / 70° FOV / 1200P，起售 $1279</td>
+                    </tr>
+                    <tr>
+                        <td>—</td>
+                        <td>Ollie 关停</td>
+                        <td>主打隐私的 AI 助手初创公司停止运营，应用 11 月 6 日关闭</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 下周关注 -->
+        <section class="preview-section">
+            <h2 class="preview-title">🔮 下周关注</h2>
+            <div class="preview-list">
+                <div class="preview-item">
+                    <div class="preview-number">01</div>
+                    <div class="preview-text"><strong>Kimi K3.1 Pro 权重（11/4 前）</strong><br>开源第一落地后，第三方复现的降智幅度有多大，"移除网安训练数据"对通用编码有没有溢出影响</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">02</div>
+                    <div class="preview-text"><strong>Anthropic 定价（11/16 当周）</strong><br>按 1.5 万亿还是 2 万亿开，会直接决定整个 AI 板块的估值锚</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">03</div>
+                    <div class="preview-text"><strong>Gemini 4 Carbon 何时开放</strong><br>Google 至今没给日期。若拖过 11 月中，说明"能力分级配给"不是临时措施而是常态</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">04</div>
+                    <div class="preview-text"><strong>Agent Skills 安全指引</strong><br>AAIF 路线图承诺了，但截至 10/30 仍无版本化发布；AGENTS.md 在野攻击已把这个空缺变成现实风险</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">05</div>
+                    <div class="preview-text"><strong>9 个 MCP CVE 的修补覆盖率</strong><br>"参数直拼 shell"的写法在长尾 MCP 服务器里有多普遍，接下来两周的公告密度会给答案</div>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-number">06</div>
+                    <div class="preview-text"><strong>豆包工作的路由策略</strong><br>会不会给企业暴露"为什么这次派了 Kimi 而不是豆包"，是判断它是模型超市还是真调度层的关键</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 出处 -->
+        <section class="sources-section">
+            <h2 class="sources-title">📚 相关出处</h2>
+            <div class="sources-grid">
+                <div class="source-category">
+                    <div class="source-category-title">Gemini 4 Carbon</div>
+                    <a href="https://aiincontext.com/articles/gemini-4-carbon-tops-ai-benchmarks-with-guarded-security-rollout" class="source-link">Gemini 4 Carbon: Benchmarks and Security Results - AI in Context</a>
+                    <a href="https://aiineurope.co/news/gemini-4-carbon-google-deepmind-explainer" class="source-link">Why Google DeepMind Is Gating Its Newest Model - AI in Europe</a>
+                    <a href="https://saassentinel.com/news/google-gemini-4-carbon-claims-top-ai-benchmark-spot-two-weeks-after-argon" class="source-link">Carbon Claims Top AI Benchmark Spot - SaaS Sentinel</a>
+                    <a href="https://news.qq.com/rain/a/20261029A09KLZ00" class="source-link">谷歌发布 Gemini 4 Carbon：AA 分排名第一 - 腾讯新闻</a>
+                    <a href="https://www.blocktempo.com/google-gemini-4-carbon-cybersecurity-long-horizon" class="source-link">Gemini 4 Carbon 資安三基準全面領先 - 動區動趨</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">GPT-6.1 Terra</div>
+                    <a href="https://openai.com/products/release-notes/?category=codex" class="source-link">OpenAI Release Notes - GPT-6.1 Terra in Work, Codex, API</a>
+                    <a href="https://deploymentsafety.openai.com/gpt-6-1-terra" class="source-link">Addendum to GPT-6 Astra System Card: GPT-6.1 Terra</a>
+                    <a href="https://www.stcn.com/article/detail/4257970.html" class="source-link">OpenAI，新模型价格砍半 - 证券时报</a>
+                    <a href="https://baike.baidu.com/item/GPT-6.1/69408163" class="source-link">GPT-6.1 参数与评测细节 - 百度百科</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Anthropic IPO</div>
+                    <a href="http://www.chinaview.cn/northamerica/20261027/5a4c79f9eb704f9c850503824377324d/c.html" class="source-link">Anthropic files for IPO, reveals soaring revenue - 新华网</a>
+                    <a href="https://www.cnstock.com/commonDetail/816272" class="source-link">万亿美元估值待考：Anthropic 冲刺 IPO - 中国证券网</a>
+                    <a href="https://m.cnfin.com/yw-lb/zixun/20261027/4486751_1.html" class="source-link">Anthropic 递交 IPO：千亿算力订单 - 中国金融信息网</a>
+                    <a href="https://www.jingjiribao.cn/static/detail.jsp?id=693019" class="source-link">Anthropic 申请纳斯达克 IPO - 经济日报</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">AI Coding 与 Harness</div>
+                    <a href="https://aiinsiders.net/article/factory-says-the-wrapper-around-a-coding-ai-beats-the-ai" class="source-link">Factory 称中立 harness 打赢模型厂商自己的 - AI Insiders</a>
+                    <a href="https://wearethefrontier.org/world/2026/10/31/factory-releases-droid-1-0-coding-agent" class="source-link">Factory Releases Droid 1.0 - We Are The Frontier</a>
+                    <a href="https://toolhund.com/go/havoptic" class="source-link">AI Coding Tool Releases 每日时间线 - ToolHund</a>
+                    <a href="https://www.lilachbullock.com/codex-windows" class="source-link">Codex on Windows：三种沙箱与 MXC 要求</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">中国厂商</div>
+                    <a href="https://news.sig.ai/cn/article/cmvupitu8000chwkfnn9okbht" class="source-link">豆包工作加入多模型阵营 - 华尔街日报（经 SIG.AI）</a>
+                    <a href="https://www.cnstock.com/commonDetail/818053" class="source-link">腾讯混元 Hy4、Hy4 flash 即将发布 - 中国证券网</a>
+                    <a href="https://www.toutiao.com/article/7702281645470024192" class="source-link">腾讯数字生态大会：Hy4 / Buddy One / 智元 Worken - 今日头条</a>
+                    <a href="https://www.toutiao.com/article/7702059666108383785/" class="source-link">腾讯 Marvis 上线 Coding 管家 - 北京商报</a>
+                    <a href="https://my.oschina.net/u/9763067/blog/19784364" class="source-link">AI 日报 2026-10-30 - OSCHINA</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Agent 安全</div>
+                    <a href="https://agentic-threat-tracker.com/incident/in-the-wild-attack-abuses-ai-agents-trust-in-markdown/a9df774086114fb64ade3b766d2919ccdc8cd44e" class="source-link">In-the-Wild Attack Abuses AI Agents' Trust in Markdown - Dark Reading</a>
+                    <a href="https://aviatrix.ai/threat-research-center/malicious-agentsmd-downloads-folder-ai-coding-agent-malfex-npm-2026/" class="source-link">MALFEX AGENTS.md 投毒行动复盘 - Aviatrix</a>
+                    <a href="https://eyeon.ai/f/3303" class="source-link">MCP 工具服务器 OS 命令注入潮（9 个 CVE） - EyeOn</a>
+                    <a href="https://runtimeai.io/blog/2026-10-30-ai-security-incidents.html" class="source-link">10 月 30 日当周 AI 安全事件汇总 - RuntimeAI</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">Microsoft MXC</div>
+                    <a href="https://rottenwifi.com/microsoft-execution-containers-mxc-how-to-sandbox-ai-agents-with-policy-controls" class="source-link">MXC：策略化封装 AI Agent - RottenWiFi</a>
+                    <a href="https://appauxin.com/microsoft-execution-containers-windows-agents" class="source-link">MXC 给 Agent 上短绳（含 VentureBeat 演示） - AppAuxin</a>
+                    <a href="https://toknow.ai/posts/windows-11-agent-containment-surface-rtx-spark" class="source-link">Windows 11 拿到 Agent 沙箱 - ToKnow.ai</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">标准与协议</div>
+                    <a href="https://aiweekly.co/alerts/openai-google-microsoft-anthropic-back-shared-robotstxt-token-to-let-publishers" class="source-link">四家共用一个 robots.txt 退出 token - AI Weekly</a>
+                    <a href="https://atlabyte.com/en/news/openai-google-microsoft-and-anthropic-back-the-policy-token-standard-for-opting-out-of-ai-scraping" class="source-link">训练退出 token 标准获四家支持 - ATLABYTE</a>
+                    <a href="https://instadatanews.com/articles/2026-10-27-agentic-ai-foundation-adds-agent-skills-open-responses.html" class="source-link">AAIF 十项目与 skill 漏洞实证 - InstaDataNews</a>
+                    <a href="https://aiwiki.ai/wiki/agent_skills" class="source-link">Agent Skills 词条与治理现状 - AI Wiki</a>
+                </div>
+                <div class="source-category">
+                    <div class="source-category-title">其他动态</div>
+                    <a href="https://itstimeai.com.au/blog/ai-news-roundup-29-october-2026" class="source-link">AI News Roundup 28-29 Oct - Itstime AI</a>
+                    <a href="https://hellobro.ai/ai/v/2026-10-30/news-new-chatgpt-limits-imessage" class="source-link">10月30日 AI 新闻汇总 - HelloBro.ai</a>
+                    <a href="https://dailysynapse.com/news/interactive-tools-local-models-october-ai-launches" class="source-link">October AI launches 总览 - DailySynapse</a>
+                    <a href="https://www.chinadaily.com.cn/a/202610/27/WS6adff3c1e4b06d4aa0564e78.html" class="source-link">Moonshot AI launches upgraded Kimi model - China Daily</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="footer-brand">AI 周报速递</div>
+            <div>编辑：AI 自动生成 | 数据截止：2026年11月1日 12:00</div>
+            <div style="margin-top: 5px;">© 2026 AI城 · 专注AI领域深度报道</div>
+        </footer>
+    </div>
+</body>
+</html>
